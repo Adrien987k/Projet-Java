@@ -1,13 +1,13 @@
-package lemming.States;
+package States;
 
+import component.SpecialSide;
 import lemming.AbsState;
 import lemming.Lemming;
 
-public class Bomber extends AbsState {
+public class Blocker extends AbsState implements SpecialSide{
 
 	@Override
 	public void step(Lemming lemming) {
-		// TODO Auto-generated method stub
 		
 	}
 

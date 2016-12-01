@@ -1,8 +1,11 @@
 package lemming;
 
-import component.*;
+import States.State;
+
+import component.AbsComponent;
+import component.Coordinate;
+
 import factory.Factory;
-import lemming.States.State;
 
 public class Lemming extends AbsComponent  implements IControlPanel,IActionPanel{
 	private AbsState state;

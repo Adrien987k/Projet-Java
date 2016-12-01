@@ -2,7 +2,14 @@ package factory;
 
 import lemming.AbsState;
 import lemming.Lemming;
-import lemming.States.*;
+import States.Blocker;
+import States.Carpenter;
+import States.Climber;
+import States.Digger;
+import States.Parachutist;
+import States.State;
+import States.Tunneler;
+import States.Walker;
 
 public class Factory implements IFactory {
 	

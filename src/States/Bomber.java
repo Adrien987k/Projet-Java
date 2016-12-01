@@ -1,9 +1,10 @@
-package lemming.States;
+package States;
 
 import lemming.AbsState;
 import lemming.Lemming;
 
-public class Climber extends AbsState	{
+public class Bomber extends AbsState {
+
 	@Override
 	public void step(Lemming lemming) {
 		// TODO Auto-generated method stub
@@ -27,4 +28,5 @@ public class Climber extends AbsState	{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

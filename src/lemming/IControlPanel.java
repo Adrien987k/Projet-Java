@@ -1,6 +1,6 @@
 package lemming;
 
-import lemming.States.State;
+import States.State;
 
 public interface IControlPanel {
 	public int kill(int how);
