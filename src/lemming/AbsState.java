@@ -1,6 +1,7 @@
 package lemming;
 
-public abstract class AbsState {	
+public abstract class AbsState {
+	
 	public AbsState() {
 		
 	}

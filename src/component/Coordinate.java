@@ -1,6 +1,7 @@
 package component;
 
 public class Coordinate {
+	
 	private int x;
 	private int y;
 	
@@ -25,6 +26,10 @@ public class Coordinate {
 	}
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public boolean equals(Coordinate c) {
+		return (c.x == x)&&(c.y == y);
 	}
 	
 }

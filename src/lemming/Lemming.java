@@ -2,12 +2,12 @@ package lemming;
 
 import States.State;
 
-import component.AbsComponent;
+import component.Component;
 import component.Coordinate;
 
 import factory.Factory;
 
-public class Lemming extends AbsComponent  implements IControlPanel,IActionPanel{
+public class Lemming extends Component  implements IControlPanel,IActionPanel{
 	private AbsState state;
 	private Direction direction;
 	private int falling = 5;
@@ -17,7 +17,7 @@ public class Lemming extends AbsComponent  implements IControlPanel,IActionPanel
 		state = Factory.makeState(State.WALKER);
 	}
 	public Lemming(Coordinate coordinate) {
-		super(coordinate);
+		super(coordinate, PRIORITY_LEMMING_WEAK);
 		state = Factory.makeState(State.WALKER);
 	}
 	
