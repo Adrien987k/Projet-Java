@@ -3,14 +3,14 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import component.Component;
+import component.Coordinate;
 import view.AbsChange;
 import view.ChangeCase;
 import view.ChangeMemory;
+import view.ChangeType;
 import view.MyObservable;
 import view.MyObserver;
-
-import component.Component;
-import component.Coordinate;
 
 public class GameMap extends MyObservable implements MyObserver {
 	
@@ -51,9 +51,16 @@ public class GameMap extends MyObservable implements MyObserver {
 		
 	}
 	
-
-	public List<Component> getArea(Coordinate c){
+	private List<Component> getArea(Coordinate c){
 		return gridComponents[c.getX()][c.getY()];
+	}
+	
+	public List<ChangeType> priorityOrder(Coordinate c) {
+		List<ChangeType> list = new ArrayList<>();
+		for(Component component: getArea(c)) {
+			//triage des priorités pour chaque component de la case
+		}
+		return list;
 	}
 	
 	
