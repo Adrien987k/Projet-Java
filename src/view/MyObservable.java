@@ -15,7 +15,7 @@ public abstract class MyObservable {
 	    changes.add(c);
 	}
 	
-	protected void addAllChanges(List<AbsChange> changes){
+	protected void addAllChanges(List<? extends AbsChange> changes){
 		this.changes.addAll(changes);
 	}
 	

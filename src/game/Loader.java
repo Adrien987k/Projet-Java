@@ -33,7 +33,7 @@ public class Loader implements ILoader {
 		return result;
 	}
 	
-	public List<ArrayList<String>> loadGrid(String filePath) {
+	private List<ArrayList<String>> loadGrid(String filePath) {
 		Path path = Paths.get(filePath);
 		List<String> lines = null; 
 		try {
@@ -56,7 +56,7 @@ public class Loader implements ILoader {
 	
 	//TODO Cette méthode pourra être utiliser si le fichier contient plus 
 	//d'info que juste la grille.
-	public List<ArrayList<String>> loadGridLineByLine(String filePath) {
+	private List<ArrayList<String>> loadGridLineByLine(String filePath) {
 		Path path = Paths.get(filePath);
 		
 		try (BufferedReader reader = Files.newBufferedReader(path, 

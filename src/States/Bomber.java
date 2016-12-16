@@ -2,6 +2,7 @@ package States;
 
 import lemming.AbsState;
 import lemming.Lemming;
+import view.Type;
 
 public class Bomber extends AbsState {
 
@@ -29,4 +30,8 @@ public class Bomber extends AbsState {
 		
 	}
 
+	@Override
+	public Type getTypeByState() {
+		return Type.BOMBER;
+	}
 }

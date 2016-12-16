@@ -10,7 +10,7 @@ public abstract class AbsChange {
 		this.next = next;
 	}
 	
-	public Coordinate getNext(){
+	public Coordinate getCoordinate(){
 		return next;
 	}
 	

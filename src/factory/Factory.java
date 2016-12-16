@@ -1,7 +1,5 @@
 package factory;
 
-import lemming.AbsState;
-import lemming.Lemming;
 import States.Blocker;
 import States.Carpenter;
 import States.Climber;
@@ -10,11 +8,20 @@ import States.Parachutist;
 import States.State;
 import States.Tunneler;
 import States.Walker;
+import component.Component;
+import lemming.AbsState;
+import lemming.Lemming;
+import view.Type;
 
 public class Factory implements IFactory {
 	
 	public Factory() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Component make(Type t) {
+		return null;
+		
 	}
 	
 	public Lemming makeLemming() {
@@ -35,3 +42,13 @@ public class Factory implements IFactory {
 	}
 
 }
+
+
+/*
+	class Again {
+		List<Block>;
+		block current;
+		
+		Again(Block ... blocks)
+}
+*/

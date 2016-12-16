@@ -2,6 +2,7 @@ package States;
 
 import lemming.AbsState;
 import lemming.Lemming;
+import view.Type;
 
 public class Digger extends AbsState{
 	@Override
@@ -26,5 +27,10 @@ public class Digger extends AbsState{
 	public void destroy(Lemming lemming) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public Type getTypeByState() {
+		return Type.DIGGER;
 	}
 }

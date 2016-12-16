@@ -3,6 +3,7 @@ package States;
 import component.SpecialSide;
 import lemming.AbsState;
 import lemming.Lemming;
+import view.Type;
 
 public class Blocker extends AbsState implements SpecialSide{
 
@@ -27,6 +28,11 @@ public class Blocker extends AbsState implements SpecialSide{
 	public void destroy(Lemming lemming) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Type getTypeByState() {
+		return Type.BLOCKER;
 	}
 
 }

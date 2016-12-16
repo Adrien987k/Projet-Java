@@ -7,14 +7,14 @@ import component.Coordinate;
 
 public class ChangeGraphics extends AbsChange {
 	
-	private List<ChangeType> changeType;
+	private List<Type> changeType;
 
-	public ChangeGraphics(Coordinate next, List<ChangeType> changeType) {
+	public ChangeGraphics(Coordinate next, List<Type> changeType) {
 		super(next);
 		this.changeType = changeType;
 	}
 	
-	public List<ChangeType> getChangeType(){
+	public List<Type> getChangeType(){
 		return changeType;
 	}
 	
