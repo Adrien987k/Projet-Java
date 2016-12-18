@@ -1,33 +1,61 @@
 package game;
 
-import java.awt.GridBagConstraints;
 import java.util.ArrayList;
 import java.util.List;
 
-import component.Component;
-import component.Coordinate;
 import view.AbsChange;
 import view.ChangeCase;
 import view.ChangeMemory;
-import view.Type;
 import view.MyObservable;
 import view.MyObserver;
+import view.Type;
+import component.Component;
+import component.Coordinate;
+import factory.IFactory;
 
 public class GameMap extends MyObservable implements MyObserver {
 	
+	private IFactory factory;
 	private ArrayList<Component>[][] gridComponents;
+	private int speed;
+	private int nbLemmings;
+	private boolean running = false;
 	
-	public GameMap(){
-		
-		
-		
+	public GameMap(IFactory factory, Grid grid){
+		gridComponents = processGrid(grid.getData());
+		nbLemmings = grid.getNbLemmings();
+		speed = grid.getSpeed();
 	}
 	
-	public void run(int speed) {
-		init();
+	private ArrayList<Component>[][] processGrid(List<ArrayList<String>> data){
+		@SuppressWarnings("unchecked")
+		ArrayList<Component>[][] result = (ArrayList<Component>[][]) new ArrayList[data.size()][data.get(0).size()];
+		ArrayList<Component> temp;
 		
-		//TODO condition d'arrêt
-		while(true) {
+		for(int i = 0; i < result.length; i++){
+			for(int j = 0; j < result[0].length; j++){
+				temp = new ArrayList<>();
+				temp.add(factory.make(convertStringToType(data.get(i).get(j))));
+				result[i][j] = temp;
+			}
+		}
+		return result;
+	}
+	
+	private Type convertStringToType(String string){
+		/*TODO Gérer tous les component */
+		switch(string){
+			case "SD": return Type.SIMPLE_DESTRUCTIBLE;
+			case "SI": return Type.SIMPLE_INDESTRUCTIBLE;
+			default: return null;
+		}
+	}
+	
+	public void run(int defaultSpeed) {
+		init();
+		if(speed <= 0) speed = defaultSpeed;
+		running = true;
+		while(running) {
 			step();
 			try {
 				Thread.sleep((long) speed);

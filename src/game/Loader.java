@@ -11,29 +11,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import factory.IFactory;
+
 public class Loader implements ILoader {
 	
 	//On stoque les grids pour ne pas avoir a reloader les fichiers
-	private Map<String, List<ArrayList<String>>> grids = new HashMap<>();
-
-	public Loader(){
-		
+	private Map<String, Grid> grids = new HashMap<>();
+	private IFactory factory;
+	
+	public Loader(IFactory factory){
+		this.factory = factory;
 	}
 	
-	public Loader(String filePath){
+	public Loader(IFactory factory, String filePath){
+		this.factory = factory;
 		grids.put(filePath, loadGrid(filePath));
 	}
 	
 	public GameMap loadFile(String filePath){
-		GameMap result = new GameMap();
-		//TODO
 		if(!grids.containsKey(filePath)) grids.put(filePath, loadGrid(filePath));
-		List<ArrayList<String>> grid = grids.get(filePath);
+		Grid grid = grids.get(filePath);
 		//TODO
+		GameMap result = new GameMap(factory, grid);
 		return result;
 	}
 	
-	private List<ArrayList<String>> loadGrid(String filePath) {
+	/*private List<ArrayList<String>> loadGrid(String filePath) {
 		Path path = Paths.get(filePath);
 		List<String> lines = null; 
 		try {
@@ -52,25 +55,38 @@ public class Loader implements ILoader {
 			i++;
 		}
 		return grid;
-	}
+	}*/
 	
 	//TODO Cette méthode pourra être utiliser si le fichier contient plus 
 	//d'info que juste la grille.
-	private List<ArrayList<String>> loadGridLineByLine(String filePath) {
+	private Grid loadGrid(String filePath) {
 		Path path = Paths.get(filePath);
-		
+		int lineCount = 0;
+		List<ArrayList<String>> data = new ArrayList<>();
+		int nbLemmings = 0;
+		int speed = 0;
+		int i = 0;
 		try (BufferedReader reader = Files.newBufferedReader(path, 
 									StandardCharsets.UTF_8)){
 				String line = null;
 				while ((line = reader.readLine()) != null) {
-					
+					if(lineCount++ == 0) nbLemmings = Integer.parseInt(line);
+					else if(lineCount++ == 1) speed = Integer.parseInt(line);
+					else{
+						data.add(new ArrayList<String>());
+						String[] caracters;
+						caracters = line.split(" ");
+						for(String c : caracters){
+							data.get(i).add(c);
+						}
+						i++;
+					}
 				}
 		} catch(IOException ioe){
 			ioe.printStackTrace();
 		}
-		
-		//Juste pour pas avoir l'erreur
-		return new ArrayList<ArrayList<String>>();
+		Grid result = new Grid(data, nbLemmings, speed);
+		return result;
 	}
 
 }
