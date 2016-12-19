@@ -11,7 +11,7 @@ public class BasicView extends MyObservable implements Renderer {
 	private JFrame frame;
 	
 	public BasicView(int x, int y, Game game, int scale) {
-		frame = createBasicView(x,y,game,scale);
+		frame = createBasicView(x, y, game, scale);
 		game.registerObserver(this);
 	}
 	

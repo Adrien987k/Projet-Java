@@ -1,13 +1,27 @@
 package States;
 
+import block.InvertSide;
+import block.KillingSide;
+import block.SpecialSide;
 import lemming.AbsState;
 import lemming.Lemming;
 import view.Type;
 
 public class Walker extends AbsState {
+	
 	@Override
 	public void step(Lemming lemming) {
+		
 	}
+	
+	public void collision(InvertSide invertSide) {
+		
+	}
+	
+	public void collision(KillingSide killingSide) {
+		
+	}
+	
 
 	@Override
 	public void move(Lemming lemming) {
@@ -29,4 +43,5 @@ public class Walker extends AbsState {
 	public Type getTypeByState() {
 		return Type.WALKER;
 	}
+
 }

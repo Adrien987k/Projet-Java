@@ -22,6 +22,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	private boolean running = false;
 	
 	public GameMap(IFactory factory, Grid grid){
+		this.factory = factory;
 		gridComponents = processGrid(grid.getData());
 		nbLemmings = grid.getNbLemmings();
 		speed = grid.getSpeed();
@@ -35,7 +36,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		for(int i = 0; i < result.length; i++){
 			for(int j = 0; j < result[0].length; j++){
 				temp = new ArrayList<>();
-				temp.add(factory.make(convertStringToType(data.get(i).get(j))));
+				temp.add(factory.make(convertStringToType(data.get(i).get(j)), new Coordinate(i, j), this));
 				result[i][j] = temp;
 			}
 		}
@@ -43,10 +44,16 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private Type convertStringToType(String string){
-		/*TODO Gérer tous les component */
 		switch(string){
 			case "SD": return Type.SIMPLE_DESTRUCTIBLE;
 			case "SI": return Type.SIMPLE_INDESTRUCTIBLE;
+			case "B": return Type.BOMB;
+			case "A": return Type.AGAIN;
+			case "L": return Type.LAVA;
+			case "T": return Type.TP;
+			case "S": return Type.START;
+			case "E": return Type.END;
+			case "V": return Type.VOID;
 			default: return null;
 		}
 	}
@@ -68,7 +75,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	private void step() {
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
-				for(Component c:gridComponents[i][j])
+				for(Component c : gridComponents[i][j])
 					c.step();
 			}
 		}
@@ -81,7 +88,6 @@ public class GameMap extends MyObservable implements MyObserver {
 				this.addChange(new ChangeCase(new Coordinate(i,j)));
 			}
 		}
-		
 		notifyObserver();
 	}
 
@@ -106,6 +112,14 @@ public class GameMap extends MyObservable implements MyObserver {
 				this.addChange(new ChangeCase(last));
 		}
 		
+	}
+	
+	public int getGridHeight(){
+		return gridComponents.length;
+	}
+	
+	public int getGridWidth(){
+		return gridComponents[0].length;
 	}
 	
 	private List<Component> getArea(Coordinate c){

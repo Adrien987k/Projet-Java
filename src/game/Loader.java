@@ -66,21 +66,22 @@ public class Loader implements ILoader {
 		int nbLemmings = 0;
 		int speed = 0;
 		int i = 0;
+		String[] caracters;
 		try (BufferedReader reader = Files.newBufferedReader(path, 
 									StandardCharsets.UTF_8)){
 				String line = null;
 				while ((line = reader.readLine()) != null) {
-					if(lineCount++ == 0) nbLemmings = Integer.parseInt(line);
-					else if(lineCount++ == 1) speed = Integer.parseInt(line);
+					if(lineCount == 0) nbLemmings = Integer.parseInt(line);
+					else if(lineCount == 1) speed = Integer.parseInt(line);
 					else{
 						data.add(new ArrayList<String>());
-						String[] caracters;
 						caracters = line.split(" ");
 						for(String c : caracters){
 							data.get(i).add(c);
 						}
 						i++;
 					}
+					lineCount++;
 				}
 		} catch(IOException ioe){
 			ioe.printStackTrace();

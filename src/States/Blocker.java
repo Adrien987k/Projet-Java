@@ -1,11 +1,10 @@
 package States;
 
-import component.SpecialSide;
 import lemming.AbsState;
 import lemming.Lemming;
 import view.Type;
 
-public class Blocker extends AbsState implements SpecialSide{
+public class Blocker extends AbsState {
 
 	@Override
 	public void step(Lemming lemming) {

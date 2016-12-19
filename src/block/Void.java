@@ -1,13 +1,21 @@
 package block;
 
-import component.Coordinate;
+import game.GameMap;
+import lemming.Lemming;
 import view.Type;
+
+import component.Coordinate;
 
 public class Void extends AbsBlock {
 
-	public Void(Coordinate coordinate) {
-		super(coordinate,PRIORITY_BLOCK,Type.VOID);
-		// TODO Auto-generated constructor stub
+	public Void(Coordinate coordinate, GameMap gameMap) {
+		super(coordinate, PRIORITY_BLOCK, Type.VOID, gameMap);
+	}
+
+	@Override
+	public void collision(Lemming lemming) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

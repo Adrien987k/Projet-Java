@@ -1,12 +1,14 @@
 package block;
 
-import component.Coordinate;
+import game.GameMap;
 import view.Type;
+
+import component.Coordinate;
 
 public abstract class AbsDoor extends AbsBlock {
 
-	public AbsDoor(Coordinate coordinate, int priority, Type type) {
-		super(coordinate,priority,type);
+	public AbsDoor(Coordinate coordinate, int priority, Type type, GameMap gameMap) {
+		super(coordinate,priority,type,gameMap);
 	}
 
 }

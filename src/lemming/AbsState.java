@@ -1,5 +1,6 @@
 package lemming;
 
+import block.SpecialSide;
 import view.Type;
 
 public abstract class AbsState {

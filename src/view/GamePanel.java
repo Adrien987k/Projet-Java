@@ -29,6 +29,13 @@ public class GamePanel extends JComponent implements MyObserver{
 		color = new EnumMap<>(Type.class);
 		color.put(Type.SIMPLE_DESTRUCTIBLE, Color.LIGHT_GRAY);
 		color.put(Type.SIMPLE_INDESTRUCTIBLE, Color.BLACK);
+		color.put(Type.VOID, Color.WHITE);
+		color.put(Type.LAVA, Color.RED);
+		color.put(Type.BOMB, Color.ORANGE);
+		color.put(Type.TP, Color.BLUE);
+		color.put(Type.START, Color.GREEN);
+		color.put(Type.END, Color.GREEN);
+		color.put(Type.AGAIN, Color.YELLOW);
 	}
 
 	@Override
@@ -49,10 +56,14 @@ public class GamePanel extends JComponent implements MyObserver{
 			
 			for(Type t: types) {
 				g.setColor(color.get(t));
-				//TODO ajouter un truc avec scale
-				g.fillRect(cd.getX(), cd.getY(), cd.getX(), cd.getY());
+				g.fillRect(cd.getY() * scale, cd.getX() * scale, scale, scale);
 			}
+			
+			
 		}
+		
+		//g.setColor(Color.BLUE);
+		//g.fillRect(0, scale, scale, scale);
 		
 		g.dispose();
 		repaint();
