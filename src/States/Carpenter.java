@@ -5,6 +5,12 @@ import lemming.Lemming;
 import view.Type;
 
 public class Carpenter extends AbsState {
+	
+	public Carpenter(Lemming lemming) {
+		super(lemming);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void step(Lemming lemming) {
 		// TODO Auto-generated method stub

@@ -1,5 +1,7 @@
 package component;
 
+import lemming.Direction;
+
 public class Coordinate {
 	
 	private int x;
@@ -26,6 +28,10 @@ public class Coordinate {
 	}
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public Coordinate checkDirection(Direction direction){
+		return new Coordinate(x + direction.x, y + direction.y);
 	}
 	
 	public boolean equals(Coordinate c) {

@@ -6,6 +6,10 @@ import view.Type;
 
 public class Blocker extends AbsState {
 
+	public Blocker(Lemming lemming) {
+		super(lemming);
+	}
+
 	@Override
 	public void step(Lemming lemming) {
 		

@@ -122,7 +122,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		return gridComponents[0].length;
 	}
 	
-	private List<Component> getArea(Coordinate c){
+	public List<Component> getArea(Coordinate c){
 		return gridComponents[c.getX()][c.getY()];
 	}
 	

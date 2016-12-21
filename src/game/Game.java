@@ -2,35 +2,36 @@ package game;
 
 import java.util.List;
 
-import component.Coordinate;
-import factory.Factory;
-import factory.IFactory;
 import view.AbsChange;
 import view.BasicView;
 import view.ChangeGraphics;
-import view.Type;
 import view.MyObservable;
 import view.MyObserver;
-import view.Renderer;
+import view.View;
+
+import component.Coordinate;
+
+import factory.Factory;
+import factory.IFactory;
 
 public class Game extends MyObservable implements MyObserver {
 	
 	private ILoader loader;
-	private Renderer renderer;
+	private View view;
 	private GameMap gameMap;
 	private IFactory factory;
 	
 	private static final int SCALE = 100;
 	private static final int DEFAULT_SPEED = 25;
-	private static final int WIDTH = 5;
-	private static final int HEIGTH = 3;
+	/*private static final int DEFAULT_WIDTH = 10;
+	private static final int DEFAULT_HEIGTH = 10;*/
 	
 	public Game() {
 		factory = new Factory();
 		loader = new Loader(factory);
 		gameMap = loader.loadFile("test.txt");
 		gameMap.registerObserver(this);
-		renderer = new BasicView(100, 100, this, SCALE);
+		view = new BasicView(100, 100, this, SCALE);
 	}
 	
 	public void run() {
@@ -47,11 +48,11 @@ public class Game extends MyObservable implements MyObserver {
 	}
 
 	public int getWidth() {
-		return WIDTH;
+		return gameMap.getGridWidth();
 	}
 
 	public int getHeight() {
-		return HEIGTH;
+		return gameMap.getGridHeight();
 	}
 	
 }

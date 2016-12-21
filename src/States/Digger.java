@@ -5,6 +5,12 @@ import lemming.Lemming;
 import view.Type;
 
 public class Digger extends AbsState{
+	
+	public Digger(Lemming lemming) {
+		super(lemming);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void step(Lemming lemming) {
 		// TODO Auto-generated method stub

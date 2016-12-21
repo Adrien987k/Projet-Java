@@ -14,8 +14,11 @@ public class Void extends AbsBlock {
 
 	@Override
 	public void collision(Lemming lemming) {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean isVoid(){
+		return true;
 	}
 
 }

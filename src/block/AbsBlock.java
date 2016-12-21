@@ -17,4 +17,9 @@ public abstract class AbsBlock extends Component {
 	}
 	
 	public abstract void collision(Lemming lemming);
+	
+	public boolean isVoid(){
+		return false;
+	}
+	
 }

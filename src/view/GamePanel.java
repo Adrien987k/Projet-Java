@@ -12,9 +12,12 @@ import javax.swing.JComponent;
 import component.Coordinate;
 import game.Game;
 
-public class GamePanel extends JComponent implements MyObserver{
+public class GamePanel extends JComponent implements MyObserver, Renderer {
 	
+	private static final long serialVersionUID = 1L;
+
 	private BufferedImage img;
+	private Graphics g;
 	
 	private EnumMap<Type,Color> color;
 
@@ -44,30 +47,26 @@ public class GamePanel extends JComponent implements MyObserver{
 		g.drawImage(img, 0, 0, null);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(List<? extends AbsChange> changes) {
-		Graphics g = img.getGraphics();
-		
+		render((List<ChangeGraphics>) changes);
+	}
+	
+	public void render(List<ChangeGraphics> changes){
+		g = img.getGraphics();
 		Coordinate cd;
 		List<Type> types;
-		for(AbsChange c:changes) {
+		for(ChangeGraphics c : changes) {
 			cd = c.getCoordinate();
-			types = ( (ChangeGraphics) c).getChangeType();
+			types = c.getChangeType();
 			
-			for(Type t: types) {
+			for(Type t : types) {
 				g.setColor(color.get(t));
 				g.fillRect(cd.getY() * scale, cd.getX() * scale, scale, scale);
 			}
-			
-			
 		}
-		
-		//g.setColor(Color.BLUE);
-		//g.fillRect(0, scale, scale, scale);
-		
 		g.dispose();
 		repaint();
-		
 	}
-
 }

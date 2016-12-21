@@ -1,12 +1,13 @@
 package lemming;
 
-import block.SpecialSide;
 import view.Type;
 
 public abstract class AbsState {
 	
-	public AbsState() {
-		
+	protected Lemming lemming;
+	
+	public AbsState(Lemming lemming) {
+		this.lemming = lemming;
 	}
 	
 	public abstract void step(Lemming lemming);
@@ -14,4 +15,5 @@ public abstract class AbsState {
 	public abstract void construct(Lemming lemming);
 	public abstract void destroy(Lemming lemming);
 	public abstract Type getTypeByState();
+	
 }

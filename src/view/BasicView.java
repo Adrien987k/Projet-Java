@@ -7,17 +7,18 @@ import javax.swing.WindowConstants;
 
 import game.Game;
 
-public class BasicView extends MyObservable implements Renderer {
+public class BasicView extends MyObservable implements View {
+	
 	private JFrame frame;
+	private GamePanel gamePanel;
 	
 	public BasicView(int x, int y, Game game, int scale) {
 		frame = createBasicView(x, y, game, scale);
 		game.registerObserver(this);
 	}
 	
-	private JFrame createBasicView(int x,int y,Game game, int scale) {
-		GamePanel gamePanel;	
-		JFrame frame = new JFrame("Snake");
+	private JFrame createBasicView(int x, int y, Game game, int scale) {
+		frame = new JFrame("Game");
 		gamePanel = new GamePanel(game, scale);
 		registerObserver(gamePanel);
 		frame.add(gamePanel);
@@ -35,10 +36,6 @@ public class BasicView extends MyObservable implements Renderer {
 	public void update(List<? extends AbsChange> changes) {
 		addAllChanges(changes);
 		notifyObserver();
-	}
-
-	public void render(ChangeGraphics cg) {
-		
 	}
 
 }

@@ -20,7 +20,7 @@ public abstract class Component {
 		coordinate = new Coordinate();
 	}
 	
-	public Component(Coordinate coordinate, int priority, Type type, GameMap gameMap2) {
+	public Component(Coordinate coordinate, int priority, Type type, GameMap gameMap) {
 		this.coordinate = coordinate;
 		this.priority = priority;
 		this.type = type;
@@ -42,6 +42,7 @@ public abstract class Component {
 	public void setType(Type type) {
 		this.type = type;
 	}
+	
 	public Type getType() {
 		return type;
 	}
@@ -53,7 +54,8 @@ public abstract class Component {
 	public void setGameMap(GameMap gameMap){
 		this.gameMap = gameMap;
 	}
-	
+
 	public abstract void step();
+	public abstract boolean isVoid();
 	
 }

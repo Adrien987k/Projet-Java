@@ -6,6 +6,11 @@ import view.Type;
 
 public class Bomber extends AbsState {
 
+	public Bomber(Lemming lemming) {
+		super(lemming);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void step(Lemming lemming) {
 		// TODO Auto-generated method stub

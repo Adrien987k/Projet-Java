@@ -57,16 +57,16 @@ public class Factory implements IFactory {
 		}
 	}
 	
-	public static AbsState makeState(State state) {
+	public static AbsState makeState(State state, Lemming lemming) {
 		switch(state) {
-		case WALKER: return new Walker();
-		case BLOCKER: return new Blocker();
-		case CARPENTER: return new Carpenter();
-		case CLIMBER: return new Climber();
-		case DIGGER: return new Digger();
-		case PARACHUTIST: return new Parachutist();
-		case TUNNELER: return new Tunneler();
-		default: throw new IllegalArgumentException();
+			case WALKER: return new Walker(lemming);
+			case BLOCKER: return new Blocker(lemming);
+			case CARPENTER: return new Carpenter(lemming);
+			case CLIMBER: return new Climber(lemming);
+			case DIGGER: return new Digger(lemming);
+			case PARACHUTIST: return new Parachutist(lemming);
+			case TUNNELER: return new Tunneler(lemming);
+			default: throw new IllegalArgumentException();
 		}
 	}
 

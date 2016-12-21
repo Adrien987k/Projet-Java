@@ -1,27 +1,44 @@
 package States;
 
-import block.InvertSide;
-import block.KillingSide;
-import block.SpecialSide;
+import java.util.List;
+
 import lemming.AbsState;
+import lemming.Direction;
 import lemming.Lemming;
 import view.Type;
+import component.Component;
 
 public class Walker extends AbsState {
 	
+	//Utilité ???
+	public Walker(Lemming lemming) {
+		super(lemming);
+	}
+
 	@Override
 	public void step(Lemming lemming) {
 		
-	}
-	
-	public void collision(InvertSide invertSide) {
+		//TODO Verifier si le position est hors du plateau
 		
-	}
-	
-	public void collision(KillingSide killingSide) {
+		List<Component> down = lemming.checkSide(Direction.DOWN);
+		for(Component component : down){
+			if(component.isVoid()){
+				//TODO Le lemming tombe d'une case
+			}
+		}
+		//TODO implémenter isKilling is... ect
 		
+		/*List<Component> foward = lemming.checkSide(Direction.DOWN);
+		for(Component component : foward){
+			if(component.isKilling()){
+				//TODO Le lemming meure
+			} else if {
+				if(component.isInvert()){
+					//TODO Le lemming change de direction
+				}
+			}
+		}*/
 	}
-	
 
 	@Override
 	public void move(Lemming lemming) {
