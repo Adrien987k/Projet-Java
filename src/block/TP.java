@@ -16,5 +16,9 @@ public class TP extends AbsIndestructible {
 	public void collision(Lemming lemming) {
 		
 	}
+	
+	public boolean isInverting(){
+		return false;
+	}
 
 }

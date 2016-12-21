@@ -82,4 +82,8 @@ public class Lemming extends Component implements IControlPanel, IActionPanel{
 	public boolean isVoid(){
 		return false;
 	}
+	
+	public boolean isInverting(){
+		return state.isInverting();
+	}
 }

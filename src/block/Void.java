@@ -20,5 +20,9 @@ public class Void extends AbsBlock {
 	public boolean isVoid(){
 		return true;
 	}
+	
+	public boolean isInverting(){
+		return false;
+	}
 
 }

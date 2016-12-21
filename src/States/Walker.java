@@ -18,26 +18,23 @@ public class Walker extends AbsState {
 	@Override
 	public void step(Lemming lemming) {
 		
-		//TODO Verifier si le position est hors du plateau
-		
 		List<Component> down = lemming.checkSide(Direction.DOWN);
 		for(Component component : down){
 			if(component.isVoid()){
 				//TODO Le lemming tombe d'une case
 			}
 		}
-		//TODO implémenter isKilling is... ect
 		
-		/*List<Component> foward = lemming.checkSide(Direction.DOWN);
+		List<Component> foward = lemming.checkSide(lemming.getDirection());
 		for(Component component : foward){
 			if(component.isKilling()){
 				//TODO Le lemming meure
-			} else if {
-				if(component.isInvert()){
+			} else {
+				if(component.isInverting()){
 					//TODO Le lemming change de direction
 				}
 			}
-		}*/
+		}
 	}
 
 	@Override

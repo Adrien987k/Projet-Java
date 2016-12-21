@@ -16,4 +16,8 @@ public abstract class AbsState {
 	public abstract void destroy(Lemming lemming);
 	public abstract Type getTypeByState();
 	
+	public boolean isInverting(){
+		return false;
+	}
+	
 }

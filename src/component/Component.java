@@ -16,6 +16,8 @@ public abstract class Component {
 	private int priority;
 	private Type type;
 	
+	protected boolean isLethal = false;
+	
 	public Component() {
 		coordinate = new Coordinate();
 	}
@@ -54,8 +56,13 @@ public abstract class Component {
 	public void setGameMap(GameMap gameMap){
 		this.gameMap = gameMap;
 	}
+	
+	public boolean isKilling(){
+		return isLethal;
+	}
 
 	public abstract void step();
 	public abstract boolean isVoid();
+	public abstract boolean isInverting();
 	
 }

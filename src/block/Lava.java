@@ -8,14 +8,17 @@ import component.Coordinate;
 public class Lava extends AbsIndestructible {
 
 	public Lava(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate,PRIORITY_BLOCK,Type.LAVA, gameMap);
-		// TODO Auto-generated constructor stub
+		super(coordinate, PRIORITY_BLOCK, Type.LAVA, gameMap);
+		isLethal = true;
 	}
 
 	@Override
 	public void collision(Lemming lemming) {
-		// TODO Auto-generated method stub
-		
+
+	}
+	
+	public boolean isInverting(){
+		return false;
 	}
 
 }

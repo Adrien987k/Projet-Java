@@ -37,5 +37,9 @@ public class Blocker extends AbsState {
 	public Type getTypeByState() {
 		return Type.BLOCKER;
 	}
+	
+	public boolean isInverting(){
+		return true;
+	}
 
 }

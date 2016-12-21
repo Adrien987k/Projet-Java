@@ -122,14 +122,22 @@ public class GameMap extends MyObservable implements MyObserver {
 		return gridComponents[0].length;
 	}
 	
-	public List<Component> getArea(Coordinate c){
-		return gridComponents[c.getX()][c.getY()];
+	public List<Component> getArea(Coordinate coordinate){
+		if(isOut(coordinate)) return new ArrayList<Component>();
+		return gridComponents[coordinate.getX()][coordinate.getY()];
 	}
 	
-	public List<Type> priorityOrder(Coordinate c) {
+	public boolean isOut(Coordinate coordinate){
+		return (coordinate.getX() < 0) 
+		|| (coordinate.getX() > getGridWidth())
+		|| (coordinate.getY() < 0) 
+		|| (coordinate.getY() > getGridHeight());
+	}
+	
+	public List<Type> priorityOrder(Coordinate coordinate) {
 		List<Type> list = new ArrayList<>();
-		getArea(c).sort((e1,e2) -> e1.getPriority() - e2.getPriority());
-		for(Component component: getArea(c)) {
+		getArea(coordinate).sort((e1,e2) -> e1.getPriority() - e2.getPriority());
+		for(Component component: getArea(coordinate)) {
 			list.add(component.getType());
 		}
 		return list;
