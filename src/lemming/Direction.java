@@ -1,18 +1,38 @@
 package lemming;
 
-public enum Direction {
-	UP(0, -1), DOWN(0, 1), LEFT(-1, 0), RIGHT(1, 0);
+public class Direction {
+	public static final Direction UP = new Direction(-1, 0);
+	public static final Direction DOWN = new Direction(1, 0);
+	public static final Direction LEFT = new Direction(0, -1);
+	public static final Direction RIGHT = new Direction(0, 1);
+	
+	public static final Direction UP_RIGHT = new Direction(-1, 1);
+	public static final Direction UP_LEFT = new Direction(-1, -1);
+	public static final Direction DOWN_RIGHT = new Direction(1, 1);
+	public static final Direction DOWN_LEFT = new Direction(1, -1);
 
-	public int x;
-	public int y;
+	private int x;
+	private int y;
 
-	Direction(int x, int y) {
+	public Direction(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 
 	public void invert() {
 		x = -x;
 		y = -y;
+	}
+	
+	public Direction checkAdd(Direction direction){
+		return new Direction(x + direction.x, y + direction.y);
 	}
 }

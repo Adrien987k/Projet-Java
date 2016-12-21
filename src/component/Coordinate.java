@@ -31,7 +31,7 @@ public class Coordinate {
 	}
 	
 	public Coordinate checkDirection(Direction direction){
-		return new Coordinate(x + direction.x, y + direction.y);
+		return new Coordinate(x + direction.getX(), y + direction.getY());
 	}
 	
 	public boolean equals(Coordinate c) {

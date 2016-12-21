@@ -26,15 +26,29 @@ public class Walker extends AbsState {
 		}
 		
 		List<Component> foward = lemming.checkSide(lemming.getDirection());
-		for(Component component : foward){
-			if(component.isKilling()){
+		List<Component> diagonal = lemming.checkSide(lemming.getDirection().checkAdd(Direction.UP));
+		boolean diagIsVoid = true;
+		boolean fowardIsNotVoid = false;
+		for(Component dcomponent : diagonal){
+			if(!dcomponent.isVoid()) diagIsVoid = false;
+		}
+		for(Component fcomponent : foward){
+			if(!fcomponent.isVoid()) fowardIsNotVoid = true;
+		}
+		if(diagIsVoid && fowardIsNotVoid){
+			//TODO Le lemming monte d'une case
+			return;
+		}
+		for(Component fcomponent : foward){
+			if(fcomponent.isKilling()){
 				//TODO Le lemming meure
-			} else {
-				if(component.isInverting()){
-					//TODO Le lemming change de direction
-				}
+				return;
+			} else if(fcomponent.isInverting()){
+				lemming.getDirection().invert();
+				return;
 			}
 		}
+	
 	}
 
 	@Override
