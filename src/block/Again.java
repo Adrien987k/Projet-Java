@@ -8,7 +8,7 @@ import component.Coordinate;
 public class Again extends AbsDestructible {
 
 	public Again(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate,PRIORITY_BLOCK,Type.AGAIN,gameMap);
+		super(coordinate, PRIORITY_BLOCK, Type.AGAIN, gameMap);
 		
 	}
 

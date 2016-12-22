@@ -43,7 +43,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		return result;
 	}
 	
-	private Type convertStringToType(String string){
+	/*private Type convertStringToType(String string){
 		switch(string){
 			case "SD": return Type.SIMPLE_DESTRUCTIBLE;
 			case "SI": return Type.SIMPLE_INDESTRUCTIBLE;
@@ -56,6 +56,13 @@ public class GameMap extends MyObservable implements MyObserver {
 			case "V": return Type.VOID;
 			default: return null;
 		}
+	}*/
+	
+	private Type convertStringToType(String string){
+		for(Type t : Type.values()){
+			if(t.getFileEncoding().equals(string)) return t;
+		}
+		throw new IllegalArgumentException("Encoding non reconnu");
 	}
 	
 	public void run(int defaultSpeed) {
@@ -129,9 +136,9 @@ public class GameMap extends MyObservable implements MyObserver {
 	
 	public boolean isOut(Coordinate coordinate){
 		return (coordinate.getX() < 0) 
-		|| (coordinate.getX() > getGridWidth())
+		|| (coordinate.getX() > getGridHeight())
 		|| (coordinate.getY() < 0) 
-		|| (coordinate.getY() > getGridHeight());
+		|| (coordinate.getY() > getGridWidth());
 	}
 	
 	public List<Type> priorityOrder(Coordinate coordinate) {

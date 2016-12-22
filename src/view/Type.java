@@ -1,22 +1,32 @@
 package view;
 
 public enum Type {
-	LEMMING,
-	WALKER,
-	BLOCKER,
-	TUNNELER,
-	DIGGER,
-	PARACHUTIST,
-	CARPENTER,
-	BOMBER,
-	CLIMBER,
-	SIMPLE_DESTRUCTIBLE,
-	BOMB,
-	AGAIN,
-	SIMPLE_INDESTRUCTIBLE,
-	LAVA,
-	TP,
-	START,
-	END,
-	VOID;
+	LEMMING("LL"),
+	WALKER("LW"),
+	BLOCKER("LBL"),
+	TUNNELER("LT"),
+	DIGGER("LD"),
+	PARACHUTIST("LP"),
+	CARPENTER("LCA"),
+	BOMBER("LB"),
+	CLIMBER("LC"),
+	SIMPLE_DESTRUCTIBLE("SD"),
+	BOMB("B"),
+	AGAIN("A"),
+	SIMPLE_INDESTRUCTIBLE("SI"),
+	LAVA("L"),
+	TP("T"),
+	START("S"),
+	END("E"),
+	VOID("V");
+	
+	private String fileEncoding;
+	
+	Type(String fileEncoding){
+		this.fileEncoding = fileEncoding;
+	}
+	
+	public String getFileEncoding(){
+		return fileEncoding;
+	}
 }

@@ -31,7 +31,6 @@ public class Loader implements ILoader {
 	public GameMap loadFile(String filePath){
 		if(!grids.containsKey(filePath)) grids.put(filePath, loadGrid(filePath));
 		Grid grid = grids.get(filePath);
-		//TODO
 		GameMap result = new GameMap(factory, grid);
 		return result;
 	}
