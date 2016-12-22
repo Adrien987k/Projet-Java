@@ -2,6 +2,7 @@ package block;
 
 import game.GameMap;
 import lemming.Lemming;
+import view.ChangeMemory;
 import view.Type;
 import component.Component;
 import component.Coordinate;
@@ -19,6 +20,14 @@ public abstract class AbsBlock extends Component {
 	public abstract void collision(Lemming lemming);
 	
 	public boolean isVoid(){
+		return false;
+	}
+	
+	public void killLemming(Lemming lemming){
+		
+	}
+	
+	public boolean isDestructible(){
 		return false;
 	}
 	

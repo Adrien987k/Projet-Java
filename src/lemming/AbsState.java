@@ -2,7 +2,7 @@ package lemming;
 
 import view.Type;
 
-public abstract class AbsState {
+public abstract class AbsState implements IActionPanel {
 	
 	protected Lemming lemming;
 	
@@ -10,10 +10,10 @@ public abstract class AbsState {
 		this.lemming = lemming;
 	}
 	
-	public abstract void step(Lemming lemming);
-	public abstract void move(Lemming lemming);
-	public abstract void construct(Lemming lemming);
-	public abstract void destroy(Lemming lemming);
+	public abstract void step();
+	public abstract void move();
+	public abstract void construct();
+	public abstract void destroy();
 	public abstract Type getTypeByState();
 	
 	public boolean isInverting(){

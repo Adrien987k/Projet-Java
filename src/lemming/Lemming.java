@@ -9,36 +9,59 @@ import component.Coordinate;
 import factory.Factory;
 import game.GameMap;
 
-public class Lemming extends Component implements IControlPanel, IActionPanel{
+public class Lemming extends Component implements IControlPanel {
+	
+	public static final int DEFAULT_FALLING = 5;
 	
 	private AbsState state;
-	private Direction direction;
-	private int falling = 5;
+	private Direction realDirection;
+	private Direction desiredDirection;
+	private int falling = DEFAULT_FALLING ;
+	private boolean free = false;
 	
-	public Lemming() {
+	/*public Lemming() {
 		super();
 		state = Factory.makeState(State.WALKER, this);
 	}
 	public Lemming(Coordinate coordinate) {
 		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, null);
 		state = Factory.makeState(State.WALKER, this);
-	}
+	}*/
+	
 	public Lemming(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
 		state = Factory.makeState(State.WALKER, this);
+		
 	}
 	
-	public Direction getDirection() {
-		return direction;
-	}
-	public void setDirection(Direction direction) {
-		this.direction = direction;
+	public Direction getRealDirection() {
+		return realDirection;
 	}
 	
-	@Override
-	public int kill(int how) {
-		return 0;
+	public void setRealDirection(Direction realDirection) {
+		this.realDirection = realDirection;
 	}
+	
+	public Direction getDesiredDirection() {
+		return desiredDirection;
+	}
+	
+	public void setDesiredDirection(Direction desiredDirection) {
+		this.desiredDirection = desiredDirection;
+	}
+	
+	public void decFalling(){
+		falling--;
+	}
+	
+	public int getFalling(){
+		return falling;
+	}
+	
+	public void resetFalling(){
+		falling = DEFAULT_FALLING;
+	}
+	
 	@Override
 	public void changeState(State state) {
 		this.state = Factory.makeState(state, this);
@@ -49,26 +72,16 @@ public class Lemming extends Component implements IControlPanel, IActionPanel{
 		return state;
 	}
 	
+	public boolean isFree(){
+		return free;
+	}
+	
+	public void setFree(){
+		free = true;
+	}
+	
 	public void step() {
-		state.step(this);
-	}
-
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void construct() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
+		state.step();
 	}
 	
 	public List<Component> checkSide(Direction direction){
@@ -80,10 +93,27 @@ public class Lemming extends Component implements IControlPanel, IActionPanel{
 	}
 	
 	public boolean isVoid(){
-		return false;
+		return true;
 	}
 	
 	public boolean isInverting(){
 		return state.isInverting();
+	}
+	
+	public void killLemming(Lemming lemming){
+		
+	}
+	
+	public boolean isDestructible(){
+		return true;
+	}
+	
+	public void destroy(){
+		super.destroy();
+		if(free){
+			getGameMap().incNbFreeLemming();
+		} else {
+			getGameMap().incNbDeadLemming();
+		}
 	}
 }

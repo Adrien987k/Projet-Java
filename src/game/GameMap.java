@@ -21,6 +21,9 @@ public class GameMap extends MyObservable implements MyObserver {
 	private int nbLemmings;
 	private boolean running = false;
 	
+	private int nbFreeLemming = 0;
+	private int nbDeadLemming = 0;
+	
 	public GameMap(IFactory factory, Grid grid){
 		this.factory = factory;
 		gridComponents = processGrid(grid.getData());
@@ -42,21 +45,6 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 		return result;
 	}
-	
-	/*private Type convertStringToType(String string){
-		switch(string){
-			case "SD": return Type.SIMPLE_DESTRUCTIBLE;
-			case "SI": return Type.SIMPLE_INDESTRUCTIBLE;
-			case "B": return Type.BOMB;
-			case "A": return Type.AGAIN;
-			case "L": return Type.LAVA;
-			case "T": return Type.TP;
-			case "S": return Type.START;
-			case "E": return Type.END;
-			case "V": return Type.VOID;
-			default: return null;
-		}
-	}*/
 	
 	private Type convertStringToType(String string){
 		for(Type t : Type.values()){
@@ -97,6 +85,10 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 		notifyObserver();
 	}
+	
+	public void addChangeMemory(ChangeMemory changeMemory){
+		addChange(changeMemory);
+	}
 
 	@Override
 	public void update(List<? extends AbsChange> changes) {
@@ -119,6 +111,18 @@ public class GameMap extends MyObservable implements MyObserver {
 				this.addChange(new ChangeCase(last));
 		}
 		
+	}
+	
+	public IFactory getFactory(){
+		return factory;
+	}
+	
+	public void incNbFreeLemming(){
+		nbFreeLemming++;
+	}
+	
+	public void incNbDeadLemming(){
+		nbDeadLemming++;
 	}
 	
 	public int getGridHeight(){

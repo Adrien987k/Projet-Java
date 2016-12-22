@@ -1,6 +1,8 @@
 package component;
 
 import game.GameMap;
+import lemming.Lemming;
+import view.ChangeMemory;
 import view.Type;
 
 public abstract class Component {
@@ -59,10 +61,20 @@ public abstract class Component {
 	
 	public boolean isKilling(){
 		return isLethal;
+	}	
+	
+	public void destroy(){
+		getGameMap().addChangeMemory(new ChangeMemory(
+										getCoordinate(),
+										this,
+										getGameMap().getFactory().make(Type.VOID, getCoordinate(), getGameMap())
+									 ));
 	}
-
+	
 	public abstract void step();
 	public abstract boolean isVoid();
 	public abstract boolean isInverting();
+	public abstract void killLemming(Lemming lemming);
+	public abstract boolean isDestructible();
 	
 }

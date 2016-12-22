@@ -20,5 +20,9 @@ public class Lava extends AbsIndestructible {
 	public boolean isInverting(){
 		return false;
 	}
+	
+	public void killLemming(Lemming lemming){
+		lemming.destroy();
+	}
 
 }

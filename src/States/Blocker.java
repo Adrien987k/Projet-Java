@@ -11,24 +11,24 @@ public class Blocker extends AbsState {
 	}
 
 	@Override
-	public void step(Lemming lemming) {
+	public void step() {
 		
 	}
 
 	@Override
-	public void move(Lemming lemming) {
+	public void move() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void construct(Lemming lemming) {
+	public void construct() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void destroy(Lemming lemming) {
+	public void destroy() {
 		// TODO Auto-generated method stub
 		
 	}

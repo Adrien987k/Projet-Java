@@ -14,8 +14,12 @@ public class End extends AbsDoor {
 
 	@Override
 	public void collision(Lemming lemming) {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public void killLemming(Lemming lemming){
+		lemming.setFree();
+		lemming.destroy();
 	}
 
 }
