@@ -8,7 +8,7 @@ public class ChangeMemory extends AbsChange{
 	private Component componentNext;
 	private Component component;
 	
-	public ChangeMemory(Coordinate next, Component component,Component componentNext){
+	public ChangeMemory(Coordinate next, Component component, Component componentNext){
 		super(next);
 		this.component = component;
 		this.componentNext = componentNext;

@@ -17,18 +17,20 @@ public abstract class AbsState implements IActionPanel {
 	public boolean fall(){
 		List<Component> down = lemming.checkSide(Direction.DOWN);
 		boolean canFall = true;
+		boolean dieIfFalling = false;
 		for(Component component : down){
-			if(!component.isVoid()){
+			if(!component.isVoid() && !component.isKilling()){
 				canFall = false;
 			}
+			if(!component.isKilling()) dieIfFalling = true; 
 		}
-		if(canFall){
+		if(canFall && !dieIfFalling){
 			lemming.setRealDirection(Direction.DOWN);
 			lemming.decFalling();
 			move();
 			return true;
 		}
-		if(lemming.getFalling() <= 0){
+		if(lemming.getFalling() <= 0 || dieIfFalling){
 			lemming.destroy();
 			return true;
 		}
@@ -69,12 +71,7 @@ public abstract class AbsState implements IActionPanel {
 	}
 	
 	public void move() {
-		lemming.getGameMap().addChangeMemory(
-										new ChangeMemory(
-												lemming.getCoordinate().checkDirection(lemming.getRealDirection()), 
-												lemming
-										)
-											);
+		lemming.getGameMap().change(lemming.getCoordinate().checkDirection(lemming.getRealDirection()), lemming);
 	}
 	
 	public abstract void step();

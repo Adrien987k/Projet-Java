@@ -14,5 +14,9 @@ public abstract class AbsDestructible extends AbsObstacle {
 	public boolean isDestructible(){
 		return true;
 	}
+	
+	public boolean canBeMined(){
+		return true;
+	}
 
 }

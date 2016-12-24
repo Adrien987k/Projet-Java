@@ -8,30 +8,25 @@ public class Carpenter extends AbsState {
 	
 	public Carpenter(Lemming lemming) {
 		super(lemming);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void construct() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 	

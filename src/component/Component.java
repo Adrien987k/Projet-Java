@@ -64,11 +64,10 @@ public abstract class Component {
 	}	
 	
 	public void destroy(){
-		getGameMap().addChangeMemory(new ChangeMemory(
-										getCoordinate(),
-										this,
-										getGameMap().getFactory().make(Type.VOID, getCoordinate(), getGameMap())
-									 ));
+		getGameMap().change(getCoordinate(),
+							this, 
+							getGameMap().getFactory().make(Type.VOID, getCoordinate(), getGameMap())
+							);
 	}
 	
 	public abstract void step();
@@ -76,5 +75,6 @@ public abstract class Component {
 	public abstract boolean isInverting();
 	public abstract void killLemming(Lemming lemming);
 	public abstract boolean isDestructible();
+	public abstract boolean canBeMined();
 	
 }

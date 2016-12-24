@@ -108,6 +108,10 @@ public class Lemming extends Component implements IControlPanel {
 		return true;
 	}
 	
+	public boolean canBeMined(){
+		return false;
+	}
+	
 	public void destroy(){
 		super.destroy();
 		if(free){

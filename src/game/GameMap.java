@@ -86,8 +86,12 @@ public class GameMap extends MyObservable implements MyObserver {
 		notifyObserver();
 	}
 	
-	public void addChangeMemory(ChangeMemory changeMemory){
-		addChange(changeMemory);
+	public void change(Coordinate coordinate, Component component){
+		addChange(new ChangeMemory(coordinate, component, component));
+	}
+	
+	public void change(Coordinate coordinate, Component component, Component componentNext){
+		addChange(new ChangeMemory(coordinate, component, componentNext));
 	}
 
 	@Override

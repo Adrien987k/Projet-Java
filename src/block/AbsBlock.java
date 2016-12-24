@@ -30,4 +30,8 @@ public abstract class AbsBlock extends Component {
 		return false;
 	}
 	
+	public boolean canBeMined(){
+		return false;
+	}
+	
 }
