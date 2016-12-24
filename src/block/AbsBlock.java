@@ -2,7 +2,6 @@ package block;
 
 import game.GameMap;
 import lemming.Lemming;
-import view.ChangeMemory;
 import view.Type;
 import component.Component;
 import component.Coordinate;

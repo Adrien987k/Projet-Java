@@ -1,37 +1,59 @@
 package States;
 
+import java.util.List;
+
+import component.Component;
+
 import lemming.AbsState;
+import lemming.Direction;
 import lemming.Lemming;
 import view.Type;
 
 public class Parachutist extends AbsState {
 	
+	private boolean hasAlreadyFell = false;
+	
 	public Parachutist(Lemming lemming) {
 		super(lemming);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
-		
+		boolean hasMoved = false;
+		hasMoved = fall();
+		if(!hasMoved) walk();
 	}
-
+	
 	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	public boolean fall(){
+		List<Component> down = lemming.checkSide(Direction.DOWN);
+		boolean canFall = true;
+		for(Component component : down){
+			if(!component.isVoid()){
+				canFall = false;
+			}
+		}
+		if(canFall){
+			if(!hasAlreadyFell){
+				lemming.setRealDirection(Direction.DOWN);
+				lemming.decFalling();
+				hasAlreadyFell = true;
+				move();
+			} else {
+				hasAlreadyFell = false;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void construct() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 	

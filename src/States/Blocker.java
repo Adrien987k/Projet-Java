@@ -12,24 +12,21 @@ public class Blocker extends AbsState {
 
 	@Override
 	public void step() {
-		
+		fall();
 	}
-
+	
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void construct() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 
