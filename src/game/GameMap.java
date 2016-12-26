@@ -19,8 +19,13 @@ public class GameMap extends MyObservable implements MyObserver {
 	private ArrayList<Component>[][] gridComponents;
 	private int speed;
 	private int nbLemmings;
+	private List<Coordinate> starts;
 	private boolean running = false;
+	private int cursorStart;
 	
+	//TODO Communiquer ces donnée pour l'affichage
+	// Utiliser une structure data a communiquer ???
+	private int nbRemainingLemming;
 	private int nbFreeLemming = 0;
 	private int nbDeadLemming = 0;
 	
@@ -28,6 +33,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		this.factory = factory;
 		gridComponents = processGrid(grid.getData());
 		nbLemmings = grid.getNbLemmings();
+		nbRemainingLemming = nbLemmings;
 		speed = grid.getSpeed();
 	}
 	
@@ -68,6 +74,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private void step() {
+		if(nbRemainingLemming >= 0) generateLemming();
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
 				for(Component c : gridComponents[i][j])
@@ -80,10 +87,20 @@ public class GameMap extends MyObservable implements MyObserver {
 	private void init() {
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
-				this.addChange(new ChangeCase(new Coordinate(i,j)));
+				this.addChange(new ChangeCase(new Coordinate(i, j)));
+				if(gridComponents[i][j].get(0).getType() == Type.START){
+					starts.add(new Coordinate(i, j));
+				}
 			}
 		}
 		notifyObserver();
+	}
+	
+	private void generateLemming(){
+		factory.make(Type.LEMMING, starts.get(cursorStart), this);
+		cursorStart++;
+		if(cursorStart == starts.size()) cursorStart = 0;
+		nbRemainingLemming--;
 	}
 	
 	/* Ajoute un component à la coordionnée donnée*/
@@ -108,25 +125,25 @@ public class GameMap extends MyObservable implements MyObserver {
 
 	@Override
 	public void update(List<? extends AbsChange> changes) {
-		for(AbsChange c : changes){
-			Coordinate last = ((ChangeMemory) c).getComponent().getCoordinate();
-			Coordinate next = c.getCoordinate();
-			
-			Component component = ((ChangeMemory) c).getComponent();
-			Component componentNext = ((ChangeMemory) c).getComponentNext();
-			
-			List<Component> lastArea = getArea(last);
-			lastArea.remove(component);
-			
-			List<Component> nextArea = getArea(next);
-			nextArea.add(componentNext);
-			componentNext.setCoordinate(next);
-			
-			this.addChange(new ChangeCase(next));
-			if(!next.equals(last))
+		@SuppressWarnings("unchecked")
+		ArrayList<ChangeMemory> Mchanges= (ArrayList<ChangeMemory>) changes;
+		for(ChangeMemory c : Mchanges){
+			if(c.getComponent() != null){
+				Coordinate last = c.getComponent().getCoordinate();
+				Component component = c.getComponent();
+				List<Component> lastArea = getArea(last);
+				lastArea.remove(component);
 				this.addChange(new ChangeCase(last));
+			}
+			if(c.getComponentNext() != null){
+				Coordinate next = c.getCoordinate();
+				Component componentNext = c.getComponentNext();
+				List<Component> nextArea = getArea(next);
+				nextArea.add(componentNext);
+				componentNext.setCoordinate(next);
+				this.addChange(new ChangeCase(next));				
+			}
 		}
-		
 	}
 	
 	public IFactory getFactory(){
