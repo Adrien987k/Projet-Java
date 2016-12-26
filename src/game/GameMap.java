@@ -86,12 +86,24 @@ public class GameMap extends MyObservable implements MyObserver {
 		notifyObserver();
 	}
 	
-	public void change(Coordinate coordinate, Component component){
+	/* Ajoute un component à la coordionnée donnée*/
+	public void add(Coordinate coordinate, Component component){
+		addChange(new ChangeMemory(coordinate, null, component));
+	}
+	
+	/* Retire le component */
+	public void remove(Component component){
+		addChange(new ChangeMemory(component.getCoordinate(), component, null));
+	}
+	
+	/* Déplace un component à la coordonnée donnée */
+	public void move(Coordinate coordinate, Component component){
 		addChange(new ChangeMemory(coordinate, component, component));
 	}
 	
-	public void change(Coordinate coordinate, Component component, Component componentNext){
-		addChange(new ChangeMemory(coordinate, component, componentNext));
+	/* Transforme un component en un autre */
+	public void change(Component component, Component componentNext){
+		addChange(new ChangeMemory(component.getCoordinate(), component, componentNext));
 	}
 
 	@Override

@@ -52,16 +52,6 @@ public class Parachutist extends AbsState {
 		}
 		return false;
 	}
-
-	@Override
-	public void construct() {
-		
-	}
-
-	@Override
-	public void destroy() {
-		
-	}
 	
 	@Override
 	public Type getTypeByState() {

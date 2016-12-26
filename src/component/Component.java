@@ -64,10 +64,7 @@ public abstract class Component {
 	}	
 	
 	public void destroy(){
-		getGameMap().change(getCoordinate(),
-							this, 
-							getGameMap().getFactory().make(Type.VOID, getCoordinate(), getGameMap())
-							);
+		gameMap.change(this, gameMap.getFactory().make(Type.VOID, getCoordinate(), gameMap));
 	}
 	
 	public abstract void step();

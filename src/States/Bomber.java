@@ -32,16 +32,6 @@ public class Bomber extends AbsState {
 		hasMoved = fall();
 		if(!hasMoved) walk();
 	}
-
-	@Override
-	public void construct() {
-		
-	}
-
-	@Override
-	public void destroy() {
-		
-	}
 	
 	public void boom(){
 		List<Component> area;

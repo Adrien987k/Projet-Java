@@ -16,16 +16,6 @@ public class Walker extends AbsState {
 		hasMoved = fall();
 		if(!hasMoved) walk();
 	}
-
-	@Override
-	public void construct() {
-		
-	}
-
-	@Override
-	public void destroy() {
-		
-	}
 	
 	@Override
 	public Type getTypeByState() {

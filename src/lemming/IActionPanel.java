@@ -1,5 +1,6 @@
 package lemming;
 
+@Deprecated
 public interface IActionPanel {
 	
 	public void move();

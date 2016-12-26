@@ -6,7 +6,7 @@ import component.Component;
 import view.ChangeMemory;
 import view.Type;
 
-public abstract class AbsState implements IActionPanel {
+public abstract class AbsState {
 	
 	protected Lemming lemming;
 	
@@ -71,12 +71,10 @@ public abstract class AbsState implements IActionPanel {
 	}
 	
 	public void move() {
-		lemming.getGameMap().change(lemming.getCoordinate().checkDirection(lemming.getRealDirection()), lemming);
+		lemming.getGameMap().move(lemming.getCoordinate().checkDirection(lemming.getRealDirection()), lemming);
 	}
 	
 	public abstract void step();
-	public abstract void construct();
-	public abstract void destroy();
 	public abstract Type getTypeByState();
 	
 	public boolean isInverting(){

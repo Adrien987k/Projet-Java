@@ -21,16 +21,6 @@ public class Blocker extends AbsState {
 	}
 
 	@Override
-	public void construct() {
-		
-	}
-
-	@Override
-	public void destroy() {
-		
-	}
-
-	@Override
 	public Type getTypeByState() {
 		return Type.BLOCKER;
 	}
