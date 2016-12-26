@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import lemming.Lemming;
 import view.AbsChange;
 import view.ChangeCase;
 import view.ChangeMemory;
@@ -15,13 +16,16 @@ import factory.IFactory;
 
 public class GameMap extends MyObservable implements MyObserver {
 	
+	public static final int LEMMING_GENERATION_RATE = 10;
+	
 	private IFactory factory;
 	private ArrayList<Component>[][] gridComponents;
 	private int speed;
 	private int nbLemmings;
-	private List<Coordinate> starts;
+	private List<Coordinate> starts = new ArrayList<>();
 	private boolean running = false;
-	private int cursorStart;
+	private int cursorStart = 0;
+	private int cursorGeneration = 0;
 	
 	//TODO Communiquer ces donnée pour l'affichage
 	// Utiliser une structure data a communiquer ???
@@ -35,6 +39,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		nbLemmings = grid.getNbLemmings();
 		nbRemainingLemming = nbLemmings;
 		speed = grid.getSpeed();
+		registerObserver(this);
 	}
 	
 	private ArrayList<Component>[][] processGrid(List<ArrayList<String>> data){
@@ -74,11 +79,16 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private void step() {
-		if(nbRemainingLemming >= 0) generateLemming();
+		cursorGeneration++;
+		if(cursorGeneration == LEMMING_GENERATION_RATE && nbRemainingLemming > 0){
+			generateLemming();
+			cursorGeneration = 0;
+		}
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
-				for(Component c : gridComponents[i][j])
+				for(Component c : gridComponents[i][j]){
 					c.step();
+				}
 			}
 		}
 		notifyObserver();
@@ -97,7 +107,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private void generateLemming(){
-		factory.make(Type.LEMMING, starts.get(cursorStart), this);
+		add(starts.get(cursorStart), factory.make(Type.LEMMING, starts.get(cursorStart), this));
 		cursorStart++;
 		if(cursorStart == starts.size()) cursorStart = 0;
 		nbRemainingLemming--;
@@ -125,9 +135,13 @@ public class GameMap extends MyObservable implements MyObserver {
 
 	@Override
 	public void update(List<? extends AbsChange> changes) {
+		ArrayList<ChangeMemory> list = new ArrayList<>();
+		for(AbsChange c : changes){
+			if(c instanceof ChangeMemory) list.add((ChangeMemory)c);
+		}
 		@SuppressWarnings("unchecked")
-		ArrayList<ChangeMemory> Mchanges= (ArrayList<ChangeMemory>) changes;
-		for(ChangeMemory c : Mchanges){
+		ArrayList<ChangeMemory> Mchanges = (ArrayList<ChangeMemory>) changes;
+		for(ChangeMemory c : list){
 			if(c.getComponent() != null){
 				Coordinate last = c.getComponent().getCoordinate();
 				Component component = c.getComponent();

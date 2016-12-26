@@ -39,6 +39,8 @@ public class GamePanel extends JComponent implements MyObserver, Renderer {
 		color.put(Type.START, Color.GREEN);
 		color.put(Type.END, Color.GREEN);
 		color.put(Type.AGAIN, Color.YELLOW);
+		
+		color.put(Type.WALKER, Color.CYAN);
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class Lemming extends Component implements IControlPanel {
 	public Lemming(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
 		state = Factory.makeState(State.WALKER, this);
-		
+		desiredDirection = Direction.RIGHT;
 	}
 	
 	public Direction getRealDirection() {

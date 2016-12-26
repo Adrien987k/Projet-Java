@@ -22,7 +22,7 @@ public abstract class AbsState {
 			if(!component.isVoid() && !component.isKilling()){
 				canFall = false;
 			}
-			if(!component.isKilling()) dieIfFalling = true; 
+			if(component.isKilling()) dieIfFalling = true; 
 		}
 		if(canFall && !dieIfFalling){
 			lemming.setRealDirection(Direction.DOWN);

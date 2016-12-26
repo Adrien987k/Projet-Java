@@ -40,7 +40,7 @@ public class Game extends MyObservable implements MyObserver {
 	
 	@Override
 	public void update(List<? extends AbsChange> changes) {
-		for(AbsChange c: changes) {
+		for(AbsChange c : changes) {
 			Coordinate here = c.getCoordinate();
 			addChange(new ChangeGraphics(here, gameMap.priorityOrder(here)));
 		}

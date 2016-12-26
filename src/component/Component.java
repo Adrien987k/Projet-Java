@@ -63,6 +63,7 @@ public abstract class Component {
 		return isLethal;
 	}	
 	
+	//TODO Si c'est un lemming juste le retirer
 	public void destroy(){
 		gameMap.change(this, gameMap.getFactory().make(Type.VOID, getCoordinate(), gameMap));
 	}
