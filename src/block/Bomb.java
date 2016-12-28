@@ -4,7 +4,6 @@ import game.GameMap;
 
 import java.util.List;
 
-import lemming.Lemming;
 import view.Type;
 
 import component.Component;

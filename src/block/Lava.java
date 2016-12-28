@@ -11,11 +11,6 @@ public class Lava extends AbsIndestructible {
 		super(coordinate, PRIORITY_BLOCK, Type.LAVA, gameMap);
 		isLethal = true;
 	}
-
-	@Override
-	public void collision(Lemming lemming) {
-		
-	}
 	
 	public boolean isInverting(){
 		return false;

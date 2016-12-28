@@ -19,8 +19,8 @@ public class Parachutist extends AbsState {
 
 	@Override
 	public void step() {
-		boolean hasMoved = false;
-		hasMoved = fall();
+		boolean hasMoved = collision();
+		if(!hasMoved) hasMoved = fall();
 		if(!hasMoved) walk();
 	}
 	

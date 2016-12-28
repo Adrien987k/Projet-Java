@@ -12,8 +12,9 @@ public class End extends AbsDoor {
 	}
 
 	@Override
-	public void collision(Lemming lemming) {
+	public boolean collision(Lemming lemming) {
 		killLemming(lemming);
+		return true;
 	}
 	
 	@Override

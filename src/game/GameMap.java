@@ -3,15 +3,17 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
-import lemming.Lemming;
 import view.AbsChange;
 import view.ChangeCase;
 import view.ChangeMemory;
 import view.MyObservable;
 import view.MyObserver;
 import view.Type;
+import block.TP;
+
 import component.Component;
 import component.Coordinate;
+
 import factory.IFactory;
 
 public class GameMap extends MyObservable implements MyObserver {
@@ -95,11 +97,27 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private void init() {
+		TP teleport1 = null;
+		TP teleport2 = null;
+		boolean cursorTp = false;
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
 				this.addChange(new ChangeCase(new Coordinate(i, j)));
+				//Collect coordinates of start
 				if(gridComponents[i][j].get(0).getType() == Type.START){
 					starts.add(new Coordinate(i, j));
+				}
+				//Link teleporters between them
+				if(gridComponents[i][j].get(0).getType() == Type.TP){
+					if(!cursorTp) {
+						teleport1 = (TP) gridComponents[i][j].get(0);
+						cursorTp = true;
+					} else {
+						teleport2 = (TP) gridComponents[i][j].get(0);
+						teleport1.setDestination(teleport2);
+						teleport2.setDestination(teleport1);
+						cursorTp = false;
+					}
 				}
 			}
 		}

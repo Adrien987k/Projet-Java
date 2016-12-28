@@ -23,8 +23,8 @@ public class Digger extends AbsState{
 
 	@Override
 	public void step() {
-		boolean hasMoved;
-		dig();
+		boolean hasMoved = collision();
+		if(!hasMoved) hasMoved = dig();
 		hasMoved = fall();
 		if(!hasMoved) walk();
 		if(nbBlockToDig == 0){

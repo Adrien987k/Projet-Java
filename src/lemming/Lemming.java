@@ -92,8 +92,8 @@ public class Lemming extends Component implements IControlPanel {
 		return getGameMap().getArea(getCoordinate());
 	}
 	
-	public void collision(Lemming lemming){
-		
+	public boolean collision(Lemming lemming){
+		return false;
 	}
 	
 	public boolean isVoid(){

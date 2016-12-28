@@ -17,7 +17,8 @@ public class Climber extends AbsState	{
 
 	@Override
 	public void step() {
-		boolean hasMoved = fall();
+		boolean hasMoved = collision();
+		if(!hasMoved) hasMoved = fall();
 		if(!hasMoved) walk();
 	}
 	

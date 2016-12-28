@@ -65,7 +65,7 @@ public abstract class Component {
 		
 	public abstract void step();
 	public abstract void destroy();
-	public abstract void collision(Lemming lemming);
+	public abstract boolean collision(Lemming lemming);
 	public abstract boolean isVoid();
 	public abstract boolean isInverting();
 	public abstract void killLemming(Lemming lemming);

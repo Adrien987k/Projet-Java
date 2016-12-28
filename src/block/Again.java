@@ -1,6 +1,5 @@
 package block;
 
-import lemming.Lemming;
 import game.GameMap;
 import view.Type;
 import component.Coordinate;
