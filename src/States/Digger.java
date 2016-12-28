@@ -1,8 +1,5 @@
 package States;
 
-import factory.Factory;
-import game.GameMap;
-
 import java.util.List;
 
 import lemming.AbsState;

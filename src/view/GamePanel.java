@@ -55,6 +55,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer {
 		render((List<ChangeGraphics>) changes);
 	}
 	
+	@Override
 	public void render(List<ChangeGraphics> changes){
 		g = img.getGraphics();
 		Coordinate cd;

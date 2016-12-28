@@ -2,7 +2,6 @@ package component;
 
 import game.GameMap;
 import lemming.Lemming;
-import view.ChangeMemory;
 import view.Type;
 
 public abstract class Component {

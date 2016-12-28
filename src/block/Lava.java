@@ -12,10 +12,12 @@ public class Lava extends AbsIndestructible {
 		isLethal = true;
 	}
 	
+	@Override
 	public boolean isInverting(){
 		return false;
 	}
 	
+	@Override
 	public void killLemming(Lemming lemming){
 		lemming.destroy();
 	}

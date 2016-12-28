@@ -80,6 +80,7 @@ public class Lemming extends Component implements IControlPanel {
 		free = true;
 	}
 	
+	@Override
 	public void step() {
 		state.step();
 	}
@@ -92,34 +93,42 @@ public class Lemming extends Component implements IControlPanel {
 		return getGameMap().getArea(getCoordinate());
 	}
 	
+	@Override
 	public boolean collision(Lemming lemming){
 		return false;
 	}
 	
+	@Override
 	public boolean isVoid(){
 		return true;
 	}
 	
+	@Override
 	public boolean isInverting(){
 		return state.isInverting();
 	}
 	
+	@Override
 	public void killLemming(Lemming lemming){
 		
 	}
 	
+	@Override
 	public boolean isDestructible(){
 		return true;
 	}
 	
+	@Override
 	public boolean canBeMined(){
 		return false;
 	}
 	
+	@Override
 	public boolean canBeSkipped(){
 		return true;
 	}
 	
+	@Override
 	public void destroy(){
 		getGameMap().remove(this);
 		if(free){

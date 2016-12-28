@@ -28,6 +28,7 @@ public class Loader implements ILoader {
 		grids.put(filePath, loadGrid(filePath));
 	}
 	
+	@Override
 	public GameMap loadFile(String filePath){
 		if(!grids.containsKey(filePath)) grids.put(filePath, loadGrid(filePath));
 		Grid grid = grids.get(filePath);

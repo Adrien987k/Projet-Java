@@ -46,7 +46,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	
 	private ArrayList<Component>[][] processGrid(List<ArrayList<String>> data){
 		@SuppressWarnings("unchecked")
-		ArrayList<Component>[][] result = (ArrayList<Component>[][]) new ArrayList[data.size()][data.get(0).size()];
+		ArrayList<Component>[][] result = new ArrayList[data.size()][data.get(0).size()];
 		ArrayList<Component> temp;
 		
 		for(int i = 0; i < result.length; i++){
@@ -73,7 +73,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		while(running) {
 			step();
 			try {
-				Thread.sleep((long) speed);
+				Thread.sleep(speed);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -199,12 +199,12 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	public List<Component> getArea(Coordinate coordinate){
-		if(isOut(coordinate)) return new ArrayList<Component>();
+		if(isOut(coordinate)) return new ArrayList<>();
 		return gridComponents[coordinate.getX()][coordinate.getY()];
 	}
 	
 	public boolean isOut(Coordinate coordinate){
-		return (coordinate.getX() < 0) 
+		return (coordinate.getX() < 0)
 		|| (coordinate.getX() >= getGridHeight())
 		|| (coordinate.getY() < 0) 
 		|| (coordinate.getY() >= getGridWidth());

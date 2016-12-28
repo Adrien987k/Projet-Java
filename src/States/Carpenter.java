@@ -5,7 +5,6 @@ import game.GameMap;
 import java.util.List;
 
 import lemming.AbsState;
-import lemming.Direction;
 import lemming.Lemming;
 import view.Type;
 import component.Component;
