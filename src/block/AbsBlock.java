@@ -16,7 +16,14 @@ public abstract class AbsBlock extends Component {
 		
 	}
 	
-	public abstract void collision(Lemming lemming);
+	public void destroy(){
+		GameMap gameMap = getGameMap();
+		gameMap.change(this, gameMap.getFactory().make(Type.VOID, getCoordinate(), gameMap));
+	}
+	
+	public void collision(Lemming lemming){
+		
+	}
 	
 	public boolean isVoid(){
 		return false;
@@ -32,6 +39,10 @@ public abstract class AbsBlock extends Component {
 	
 	public boolean canBeMined(){
 		return false;
+	}
+	
+	public boolean canBeSkipped(){
+		return true;
 	}
 	
 }

@@ -43,10 +43,7 @@ public class Digger extends AbsState{
 		}
 		if(componentToMine != null){
 			nbBlockToDig--;
-			GameMap gameMap = lemming.getGameMap();
-			gameMap.change(componentToMine,
-							gameMap.getFactory().make(Type.VOID, componentToMine.getCoordinate(), gameMap)
-						   );
+			componentToMine.destroy();
 			return true;
 		}
 		return false;

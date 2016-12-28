@@ -48,6 +48,7 @@ public abstract class AbsState {
 		}
 		for(Component fcomponent : foward){
 			if(!fcomponent.isVoid()) fowardIsNotVoid = true;
+			if(!fcomponent.canBeSkipped()) diagIsVoid = false;
 		}
 		if(diagIsVoid && fowardIsNotVoid){
 			lemming.setRealDirection(lemming.getDesiredDirection().checkAdd(Direction.UP));

@@ -92,6 +92,10 @@ public class Lemming extends Component implements IControlPanel {
 		return getGameMap().getArea(getCoordinate());
 	}
 	
+	public void collision(Lemming lemming){
+		
+	}
+	
 	public boolean isVoid(){
 		return true;
 	}
@@ -112,8 +116,12 @@ public class Lemming extends Component implements IControlPanel {
 		return false;
 	}
 	
+	public boolean canBeSkipped(){
+		return true;
+	}
+	
 	public void destroy(){
-		super.destroy();
+		getGameMap().remove(this);
 		if(free){
 			getGameMap().incNbFreeLemming();
 		} else {

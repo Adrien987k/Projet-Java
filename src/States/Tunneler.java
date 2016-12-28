@@ -40,10 +40,7 @@ public class Tunneler extends AbsState {
 			}
 		}
 		if(componentToMine != null){
-			GameMap gameMap = lemming.getGameMap();
-			gameMap.change(componentToMine,
-							gameMap.getFactory().make(Type.VOID, componentToMine.getCoordinate(), gameMap)
-						   );
+			componentToMine.destroy();
 			return true;
 		}
 		return false;

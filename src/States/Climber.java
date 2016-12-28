@@ -30,7 +30,7 @@ public class Climber extends AbsState	{
 				fcomponent.killLemming(lemming);
 				return true;
 			}
-			if(!fcomponent.isVoid()){
+			if(!fcomponent.isVoid() || !fcomponent.canBeSkipped()){
 				canGoUp = false;
 			}
 		}

@@ -3,7 +3,6 @@ package block;
 import game.GameMap;
 import lemming.Lemming;
 import view.Type;
-
 import component.Coordinate;
 
 public class TP extends AbsIndestructible {
@@ -17,6 +16,12 @@ public class TP extends AbsIndestructible {
 		
 	}
 	
+	@Override
+	public boolean canBeSkipped(){
+		return false;
+	}
+	
+	@Override
 	public boolean isInverting(){
 		return false;
 	}

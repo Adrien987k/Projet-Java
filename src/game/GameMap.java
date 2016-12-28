@@ -187,9 +187,9 @@ public class GameMap extends MyObservable implements MyObserver {
 	
 	public boolean isOut(Coordinate coordinate){
 		return (coordinate.getX() < 0) 
-		|| (coordinate.getX() > getGridHeight())
+		|| (coordinate.getX() >= getGridHeight())
 		|| (coordinate.getY() < 0) 
-		|| (coordinate.getY() > getGridWidth());
+		|| (coordinate.getY() >= getGridWidth());
 	}
 	
 	public List<Type> priorityOrder(Coordinate coordinate) {

@@ -14,7 +14,7 @@ public class Lava extends AbsIndestructible {
 
 	@Override
 	public void collision(Lemming lemming) {
-
+		
 	}
 	
 	public boolean isInverting(){

@@ -13,9 +13,9 @@ public class Again extends AbsDestructible {
 	}
 
 	@Override
-	public void collision(Lemming lemming) {
-		// TODO Auto-generated method stub
-		
+	public void destroy(){
+		super.destroy();
+		//TODO Ajouter des blocs sur la Map
 	}
 
 }
