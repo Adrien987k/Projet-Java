@@ -14,7 +14,7 @@ public class ActionButton extends JButton implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	private static final Color DEFAULT_COLOR = Color.WHITE;
 	
-	private InformationAgent informationAgent = new InformationAgent();
+	private Agent informationAgent = new Agent();
 	private ActionType actionType;
 	  
 	  /*pour rajouter un logo différent pour chque bouton*/
@@ -39,7 +39,7 @@ public class ActionButton extends JButton implements MouseListener {
 		return actionType;
 	}
 
-	public InformationAgent getAgent() {
+	public Agent getAgent() {
 		return informationAgent;
 	}
 	@Override

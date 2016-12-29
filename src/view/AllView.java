@@ -1,7 +1,5 @@
 package view;
 
-import java.util.List;
-
 import javax.swing.JFrame;
 
 public abstract class AllView extends MyObservable implements View {
@@ -16,7 +14,10 @@ public abstract class AllView extends MyObservable implements View {
 	public void switchToDefaultAction() {
 		
 	}
-	public InformationAgent getAgent() {
+	public InformationPanel getInformationPanel() {
+		return null;
+	}
+	public GamePanel getGamePanel() {
 		return null;
 	}
 }

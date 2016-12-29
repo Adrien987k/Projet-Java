@@ -6,8 +6,12 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 public class ActionBar extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private AllView view;
-	private InformationAgent agent = new InformationAgent();
+	private Agent actionAgent = new Agent();
 	public ActionBar(AllView view) {
 		setLayout(new GridLayout(2,6));
 		this.view = view;
@@ -32,7 +36,7 @@ public class ActionBar extends JPanel {
 		actionBar.addButton(ActionType.KILL_LEMMING, view);
 		actionBar.addButton(ActionType.PAUSE, view);
 		
-		view.getFrame().add(actionBar, BorderLayout.SOUTH);
+		actionBar.getView().getFrame().add(actionBar, BorderLayout.SOUTH);
 		return actionBar;
 	}
 	
@@ -40,11 +44,14 @@ public class ActionBar extends JPanel {
 		ActionButton button = new ActionButton(actionType);
 		button.addActionListener(new ButtonListener(view,button));
 		add(button);
-		button.getAgent().registerObserver(agent);
+		button.getAgent().registerObserver(actionAgent);
 	}
 
-	public InformationAgent getAgent() {
-		return agent;
+	public AllView getView() {
+		return view;
+	}
+	public Agent getAgent() {
+		return actionAgent;
 	}
 	
 }

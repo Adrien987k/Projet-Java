@@ -9,7 +9,7 @@ import component.Coordinate;
 import factory.Factory;
 import game.GameMap;
 
-public class Lemming extends Component implements IControlPanel {
+public class Lemming extends Component {
 	
 	public static final int DEFAULT_FALLING = 5;
 	
@@ -21,7 +21,7 @@ public class Lemming extends Component implements IControlPanel {
 	
 	public Lemming(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
-		state = Factory.makeState(State.DIGGER, this);
+		state = Factory.makeState(State.WALKER, this);
 		desiredDirection = Direction.RIGHT;
 	}
 	
@@ -53,7 +53,13 @@ public class Lemming extends Component implements IControlPanel {
 		falling = DEFAULT_FALLING;
 	}
 	
-	@Override
+	 @Override
+	 public boolean changeStateIf(State state) {
+		 System.out.println("changeStateIf");
+		 changeState(state);
+		 return true;
+	 }
+	
 	public void changeState(State state) {
 		this.state = Factory.makeState(state, this);
 		setType(this.state.getTypeByState());

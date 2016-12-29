@@ -3,7 +3,7 @@ package view;
 import component.Component;
 import component.Coordinate;
 
-public class ChangeMemory extends AbsChange{
+public class ChangeMemory extends AbsMemoryChange{
 
 	private Component componentNext;
 	private Component component;

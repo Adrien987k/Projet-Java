@@ -1,5 +1,6 @@
 package component;
 
+import States.State;
 import game.GameMap;
 import lemming.Lemming;
 import view.Type;
@@ -61,7 +62,11 @@ public abstract class Component {
 	public boolean isKilling(){
 		return isLethal;
 	}	
-		
+	
+	public boolean changeStateIf(State state) {
+		return false;
+	}
+	
 	public abstract void step();
 	public abstract void destroy();
 	public abstract boolean collision(Lemming lemming);
@@ -71,5 +76,6 @@ public abstract class Component {
 	public abstract boolean isDestructible();
 	public abstract boolean canBeMined();
 	public abstract boolean canBeSkipped();
+	
 	
 }

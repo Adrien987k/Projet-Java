@@ -13,15 +13,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InformationPanel extends JPanel implements MyObserver {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel actionDescription;
 	private JLabel deadLemmings;
 	private JLabel freeLemmings;
+	private JLabel remainingLemmings;
 	private JButton testButton;
 	private AllView view;
 	
+	private Agent descriptionAgent = new Agent();
+	private Agent dataAgent = new Agent() {
+		@Override
+		public void update(List<? extends AbsChange> changes) {
+			for(AbsChange change: changes) {
+				setDeadLemmings(((ChangeData) change).getNbDeadLemmings());
+				setFreeLemmings(((ChangeData) change).getNbFreeLemmings());
+				setRemainingLemmings(((ChangeData) change).getNbRemainingLemmings());
+			}
+		}
+	};
+	
 	private int nbDeadLemmings = 0;
 	private int nbFreeLemmings = 0;
+	private int nbRemainingLemmings = 0;
 	
+
 	public static final int DEFAULT_WIDTH = 300;
 	public static final int DEFAULT_LENGTH = 500;
 	
@@ -35,7 +54,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 	
 	public static InformationPanel createDefaultInformationPanel(AllView view ) {
 		InformationPanel informationPanel = new InformationPanel(view);
-		informationPanel.setLayout(new GridLayout(4,1));
+		informationPanel.setLayout(new GridLayout(5,1));
 		
 		
 		informationPanel.testButton = new JButton("Test");
@@ -44,6 +63,8 @@ public class InformationPanel extends JPanel implements MyObserver {
 		informationPanel.add(informationPanel.deadLemmings,BorderLayout.CENTER);
 		informationPanel.freeLemmings = new JLabel("Free lemmings: " + Integer.toString(informationPanel.nbFreeLemmings));
 		informationPanel.add(informationPanel.freeLemmings);
+		informationPanel.remainingLemmings = new JLabel("Remaining lemmings: " + Integer.toString(informationPanel.nbFreeLemmings));
+		informationPanel.add(informationPanel.remainingLemmings);
 		informationPanel.actionDescription = new JLabel("Nothing.");
 		informationPanel.add(informationPanel.actionDescription,BorderLayout.SOUTH);
 		
@@ -72,17 +93,31 @@ public class InformationPanel extends JPanel implements MyObserver {
 	public JLabel getDeadLemmings() {
 		return deadLemmings;
 	}
-	public void setDeadLemmings(JLabel deadLemmings) {
-		this.deadLemmings = deadLemmings;
+	public void setDeadLemmings(int deadLemmings) {
+		this.deadLemmings.setText(Integer.toString(deadLemmings));
 	}
 
 	public JLabel getFreeLemmings() {
 		return freeLemmings;
 	}
-	public void setFreeLemmings(JLabel freeLemmings) {
-		this.freeLemmings = freeLemmings;
+	public void setFreeLemmings(int freeLemmings) {
+		this.freeLemmings.setText(Integer.toString(freeLemmings));
+	}
+	
+	public JLabel getRemainingLemmings() {
+		return remainingLemmings;
+	}
+	public void setRemainingLemmings(int remainingLemmings) {
+		this.remainingLemmings.setText(Integer.toString(remainingLemmings)); 
 	}
 
+	public Agent getDescriptionAgent() {
+		return descriptionAgent;
+	}
+
+	public Agent getDataAgent() {
+		return dataAgent;
+	}
 
 	@Override
 	public void update(List<? extends AbsChange> changes) {

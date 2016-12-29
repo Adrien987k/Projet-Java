@@ -5,7 +5,7 @@ import java.util.List;
 
 import component.Coordinate;
 
-public class ChangeGraphics extends AbsChange {
+public class ChangeGraphics extends AbsMemoryChange {
 	
 	private List<Type> changeType;
 

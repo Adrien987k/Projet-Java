@@ -20,12 +20,15 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 
 	private BufferedImage img;
 	private Graphics g;
-	
+	private AllView view;
 	private EnumMap<Type,Color> color;
 
 	private int scale;
 
-	public GamePanel(Game game, int scale) {
+	private Agent mouseAgent = new Agent();
+	
+	public GamePanel(Game game, int scale, AllView view) {
+		this.view = view;
 		this.scale = scale;
 		int width = game.getWidth() * scale;
 		int height = game.getHeight() * scale;
@@ -42,9 +45,19 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		color.put(Type.END, Color.GREEN);
 		color.put(Type.AGAIN, Color.YELLOW);
 		color.put(Type.WALKER, Color.CYAN);
+		color.put(Type.BLOCKER,new Color(70,130,180));
+		color.put(Type.CARPENTER, new Color(244,164,96));
+		color.put(Type.CLIMBER,new Color(124,252,0));
+		color.put(Type.DIGGER, new Color(210,105,42));
+		color.put(Type.PARACHUTIST, new Color(0,0,128));
+		color.put(Type.TUNNELER, new Color(105,105,105));
 		addMouseListener(this);
 	}
 
+	public AllView getView() {
+		return view;
+	}
+		
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -77,13 +90,15 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("x: " + e.getX()/scale + " y: "+ e.getY()/scale);
+		System.out.println("x: " + e.getY()/scale + " y: "+ e.getX()/scale);
 		
+		getMouseAgent().addChangeToAgent(new ChangeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale),getView().getCurrentAction().getState()));
+		getMouseAgent().notifyObserver();
+		getView().switchToDefaultAction();
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -103,5 +118,9 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Agent getMouseAgent() {
+		return mouseAgent;
 	}
 }

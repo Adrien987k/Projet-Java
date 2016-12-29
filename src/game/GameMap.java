@@ -3,18 +3,20 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import States.State;
+import block.TP;
+import component.Component;
+import component.Coordinate;
+import factory.IFactory;
 import view.AbsChange;
+import view.Agent;
 import view.ChangeCase;
+import view.ChangeData;
 import view.ChangeMemory;
+import view.ChangeStateHere;
 import view.MyObservable;
 import view.MyObserver;
 import view.Type;
-import block.TP;
-
-import component.Component;
-import component.Coordinate;
-
-import factory.IFactory;
 
 public class GameMap extends MyObservable implements MyObserver {
 	
@@ -28,9 +30,17 @@ public class GameMap extends MyObservable implements MyObserver {
 	private boolean running = false;
 	private int cursorStart = 0;
 	private int cursorGeneration = 0;
+	private Agent caseAgent = new Agent();
+	private Agent dataAgent = new Agent();
+	private Agent mouseAgent = new Agent() {
+		@Override
+		public void update(List<? extends AbsChange> changes) {
+			for(AbsChange c: changes) {
+				changeStateHere(((ChangeStateHere) c).getCoordinate(), ((ChangeStateHere) c).getState());
+			}
+		}
+	};
 	
-	//TODO Communiquer ces donnée pour l'affichage
-	// Utiliser une structure data a communiquer ???
 	private int nbRemainingLemming;
 	private int nbFreeLemming = 0;
 	private int nbDeadLemming = 0;
@@ -71,7 +81,10 @@ public class GameMap extends MyObservable implements MyObserver {
 		if(speed <= 0) speed = defaultSpeed;
 		running = true;
 		while(running) {
+
+			notifyEveryone();
 			step();
+			notifyEveryone();
 			try {
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
@@ -81,6 +94,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private void step() {
+		
 		cursorGeneration++;
 		if(cursorGeneration == LEMMING_GENERATION_RATE && nbRemainingLemming > 0){
 			generateLemming();
@@ -93,7 +107,11 @@ public class GameMap extends MyObservable implements MyObserver {
 				}
 			}
 		}
-		notifyObserver();
+		getDataAgent().addChangeToAgent(createDataChange());
+
+		notifyEveryone();
+		
+
 	}
 	
 	private void init() {
@@ -102,7 +120,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		boolean cursorTp = false;
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
-				this.addChange(new ChangeCase(new Coordinate(i, j)));
+				getCaseAgent().addChangeToAgent(new ChangeCase(new Coordinate(i, j)));
 				//Collect coordinates of start
 				if(gridComponents[i][j].get(0).getType() == Type.START){
 					starts.add(new Coordinate(i, j));
@@ -121,7 +139,8 @@ public class GameMap extends MyObservable implements MyObserver {
 				}
 			}
 		}
-		notifyObserver();
+		getDataAgent().addChangeToAgent(createDataChange());
+		notifyEveryone();
 	}
 	
 	private void generateLemming(){
@@ -153,19 +172,15 @@ public class GameMap extends MyObservable implements MyObserver {
 
 	@Override
 	public void update(List<? extends AbsChange> changes) {
-		ArrayList<ChangeMemory> list = new ArrayList<>();
-		for(AbsChange c : changes){
-			if(c instanceof ChangeMemory) list.add((ChangeMemory)c);
-		}
 		@SuppressWarnings("unchecked")
 		ArrayList<ChangeMemory> Mchanges = (ArrayList<ChangeMemory>) changes;
-		for(ChangeMemory c : list){
+		for(ChangeMemory c : Mchanges){
 			if(c.getComponent() != null){
 				Coordinate last = c.getComponent().getCoordinate();
 				Component component = c.getComponent();
 				List<Component> lastArea = getArea(last);
 				lastArea.remove(component);
-				this.addChange(new ChangeCase(last));
+				getCaseAgent().addChangeToAgent(new ChangeCase(last));
 			}
 			if(c.getComponentNext() != null){
 				Coordinate next = c.getCoordinate();
@@ -173,7 +188,7 @@ public class GameMap extends MyObservable implements MyObserver {
 				List<Component> nextArea = getArea(next);
 				nextArea.add(componentNext);
 				componentNext.setCoordinate(next);
-				this.addChange(new ChangeCase(next));				
+				getCaseAgent().addChangeToAgent(new ChangeCase(next));				
 			}
 		}
 	}
@@ -219,6 +234,49 @@ public class GameMap extends MyObservable implements MyObserver {
 		return list;
 	}
 	
+	public void notifyEveryone() {
+		notifyAgents();
+		notifyObserver();
+	}
+	
+	public void notifyAgents() {
+		getCaseAgent().notifyObserver();
+		getDataAgent().notifyObserver();
+	}
+	
+	public Agent getCaseAgent() {
+		return caseAgent;
+	}
+	public Agent getDataAgent() {
+		return dataAgent;
+	}
+	public Agent getMouseAgent() {
+		return mouseAgent;
+	}
+	
+	public AbsChange createDataChange() {
+		return new ChangeData(getNbDeadLemming(),getNbFreeLemming(),getNbRemainingLemming());
+	}
+
+	public int getNbRemainingLemming() {
+		return nbRemainingLemming;
+	}
+
+	public int getNbFreeLemming() {
+		return nbFreeLemming;
+	}
+
+	public int getNbDeadLemming() {
+		return nbDeadLemming;
+	}
+	
+	private boolean changeStateHere(Coordinate c,State state) {
+		List<Component> area = getArea(c);
+		for(Component component: area) {
+			component.changeStateIf(state);
+		}
+		return false;
+	}
 	
 	
 }

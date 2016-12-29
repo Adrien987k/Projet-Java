@@ -7,16 +7,17 @@ import component.Coordinate;
 import factory.Factory;
 import factory.IFactory;
 import view.AbsChange;
+import view.AbsMemoryChange;
 import view.AdvancedView;
+import view.AllView;
 import view.ChangeGraphics;
 import view.MyObservable;
 import view.MyObserver;
-import view.View;
 
 public class Game extends MyObservable implements MyObserver {
 	
 	private ILoader loader;
-	private View view;
+	private AllView view;
 	private GameMap gameMap;
 	private IFactory factory;
 	
@@ -26,9 +27,13 @@ public class Game extends MyObservable implements MyObserver {
 	public Game() {
 		factory = new Factory();
 		loader = new Loader(factory);
+		
 		gameMap = loader.loadFile("test.txt");
-		gameMap.registerObserver(this);
+		gameMap.getCaseAgent().registerObserver(this);
+		
 		view = new AdvancedView(100, 100, this, SCALE);
+		gameMap.getDataAgent().registerObserver(getView().getInformationPanel().getDataAgent());
+		getView().getGamePanel().getMouseAgent().registerObserver(gameMap.getMouseAgent());
 	}
 	
 	public void run() {
@@ -40,7 +45,8 @@ public class Game extends MyObservable implements MyObserver {
 		List<Coordinate> coordinates = new ArrayList<>();
 		boolean alreadyExist = false;
 		for(AbsChange c : changes) {
-			Coordinate here = c.getCoordinate();
+			alreadyExist = false;
+			Coordinate here = ( (AbsMemoryChange) c).getCoordinate();
 			for(Coordinate d : coordinates){
 				if(c.equals(d)) alreadyExist = true;
 			}
@@ -56,6 +62,10 @@ public class Game extends MyObservable implements MyObserver {
 
 	public int getHeight() {
 		return gameMap.getGridHeight();
+	}
+	
+	public AllView getView() {
+		return view;
 	}
 	
 }

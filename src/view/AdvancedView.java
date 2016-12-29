@@ -11,21 +11,10 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-import javax.crypto.SecretKeyFactorySpi;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import game.Game;
@@ -39,7 +28,7 @@ public class AdvancedView extends AllView {
 	private ActionBar actionBar;
 	private InformationPanel informationPanel;
 	private ActionType currentAction;
-	private InformationAgent informationAgent = new InformationAgent();
+	
 	
 	public AdvancedView(int x, int y, Game game, int scale) {
 		frame = createAdvancedView(x, y, game, scale);
@@ -48,7 +37,7 @@ public class AdvancedView extends AllView {
 	
 	private JFrame createAdvancedView(int x, int y, Game game, int scale) {
 		frame = new JFrame("Game " + 0);
-		gamePanel = new GamePanel(game, scale);
+		gamePanel = new GamePanel(game, scale,this);
 		registerObserver(gamePanel);
 		frame.add(gamePanel, BorderLayout.CENTER);
 		
@@ -71,8 +60,8 @@ public class AdvancedView extends AllView {
 	}
 	
 	public void establishConnexions() {
-		actionBar.getAgent().registerObserver(informationAgent);
-		informationAgent.registerObserver(informationPanel);
+		actionBar.getAgent().registerObserver(getInformationPanel().getDescriptionAgent());
+		getInformationPanel().getDescriptionAgent().registerObserver(informationPanel);
 	}
 	
 	/* Créer un bouton effectuant l'action donnée en paramètre */
@@ -93,17 +82,23 @@ public class AdvancedView extends AllView {
 	public JFrame getFrame() {
 		return frame;
 	}
+	@Override
+	public InformationPanel getInformationPanel() {
+		return informationPanel;
+	}
+	@Override
+	public GamePanel getGamePanel() {
+		return gamePanel;
+	}
 	/* A chaque fois qu'une action est bien faite,
 	 * on remet l'action actuelle par défaut.
 	 */
 	@Override
 	public void switchToDefaultAction() {
 		setCurrentAction(DEFAULT_ACTION);
+		informationPanel.getActionDescription().setText(ActionType.NONE.getDescription());
 	}                    
-	@Override
-	public InformationAgent getAgent() {
-		return informationAgent;
-	}
+
 	@Override
 	public void update(List<? extends AbsChange> changes) {
 		addAllChanges(changes);

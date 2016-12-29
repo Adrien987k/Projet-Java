@@ -19,7 +19,7 @@ public class BasicView extends AllView {
 	
 	private JFrame createBasicView(int x, int y, Game game, int scale) {
 		frame = new JFrame("Game");
-		gamePanel = new GamePanel(game, scale);
+		gamePanel = new GamePanel(game, scale,this);
 		registerObserver(gamePanel);
 		frame.add(gamePanel);
 		frame.pack();
