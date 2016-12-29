@@ -17,7 +17,7 @@ public class Tunneler extends AbsState {
 	public void step() {
 		boolean hasDug;
 		boolean hasMoved = collision();
-		if(!hasMoved) hasMoved = fall();
+		if(!hasMoved) hasMoved |= fall();
 		if(!hasMoved){
 			hasDug = dig();
 			if(hasDug){				

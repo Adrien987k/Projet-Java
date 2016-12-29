@@ -35,7 +35,7 @@ public class Coordinate {
 	}
 	
 	public boolean equals(Coordinate c) {
-		return (c.x == x)&&(c.y == y);
+		return (c.x == x) && (c.y == y);
 	}
 	
 }
