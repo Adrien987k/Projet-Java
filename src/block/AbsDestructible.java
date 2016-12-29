@@ -11,10 +11,12 @@ public abstract class AbsDestructible extends AbsObstacle {
 		super(coordinate, priority, type, gameMap);
 	}
 	
+	@Override
 	public boolean isDestructible(){
 		return true;
 	}
 	
+	@Override
 	public boolean canBeMined(){
 		return true;
 	}

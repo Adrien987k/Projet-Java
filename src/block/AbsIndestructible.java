@@ -10,5 +10,10 @@ public abstract class AbsIndestructible extends AbsObstacle {
 	public AbsIndestructible(Coordinate coordinate, int priority, Type type, GameMap gameMap) {
 		super(coordinate, priority, type, gameMap);
 	}
+	
+	@Override
+	public void destroy(){
+		
+	}
 
 }

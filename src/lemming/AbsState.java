@@ -3,7 +3,6 @@ package lemming;
 import java.util.List;
 
 import component.Component;
-import view.ChangeMemory;
 import view.Type;
 
 public abstract class AbsState {
@@ -12,6 +11,15 @@ public abstract class AbsState {
 	
 	public AbsState(Lemming lemming) {
 		this.lemming = lemming;
+	}
+	
+	public boolean collision(){
+		List<Component> here = lemming.getGameMap().getArea(lemming.getCoordinate());
+		boolean hasMoved = false;
+		for(Component hcomponent : here){
+			hasMoved |= hcomponent.collision(lemming);
+		}
+		return hasMoved;
 	}
 	
 	public boolean fall(){
@@ -48,6 +56,7 @@ public abstract class AbsState {
 		}
 		for(Component fcomponent : foward){
 			if(!fcomponent.isVoid()) fowardIsNotVoid = true;
+			if(!fcomponent.canBeSkipped()) diagIsVoid = false;
 		}
 		if(diagIsVoid && fowardIsNotVoid){
 			lemming.setRealDirection(lemming.getDesiredDirection().checkAdd(Direction.UP));

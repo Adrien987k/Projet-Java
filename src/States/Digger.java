@@ -1,8 +1,5 @@
 package States;
 
-import factory.Factory;
-import game.GameMap;
-
 import java.util.List;
 
 import lemming.AbsState;
@@ -23,8 +20,8 @@ public class Digger extends AbsState{
 
 	@Override
 	public void step() {
-		boolean hasMoved;
-		dig();
+		boolean hasMoved = collision();
+		if(!hasMoved) hasMoved = dig();
 		hasMoved = fall();
 		if(!hasMoved) walk();
 		if(nbBlockToDig == 0){
@@ -43,10 +40,7 @@ public class Digger extends AbsState{
 		}
 		if(componentToMine != null){
 			nbBlockToDig--;
-			GameMap gameMap = lemming.getGameMap();
-			gameMap.change(componentToMine,
-							gameMap.getFactory().make(Type.VOID, componentToMine.getCoordinate(), gameMap)
-						   );
+			componentToMine.destroy();
 			return true;
 		}
 		return false;

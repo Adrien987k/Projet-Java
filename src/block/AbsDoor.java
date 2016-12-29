@@ -11,6 +11,7 @@ public abstract class AbsDoor extends AbsBlock {
 		super(coordinate,priority,type,gameMap);
 	}
 	
+	@Override
 	public boolean isInverting(){
 		return false;
 	}

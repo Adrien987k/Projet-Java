@@ -29,7 +29,8 @@ public class Bomber extends AbsState {
 			return;
 		}
 		boolean hasMoved;
-		hasMoved = fall();
+		hasMoved = collision();
+		if(!hasMoved) hasMoved = fall();
 		if(!hasMoved) walk();
 	}
 	

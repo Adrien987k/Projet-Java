@@ -2,7 +2,6 @@ package component;
 
 import game.GameMap;
 import lemming.Lemming;
-import view.ChangeMemory;
 import view.Type;
 
 public abstract class Component {
@@ -62,17 +61,15 @@ public abstract class Component {
 	public boolean isKilling(){
 		return isLethal;
 	}	
-	
-	//TODO Si c'est un lemming juste le retirer
-	public void destroy(){
-		gameMap.change(this, gameMap.getFactory().make(Type.VOID, getCoordinate(), gameMap));
-	}
-	
+		
 	public abstract void step();
+	public abstract void destroy();
+	public abstract boolean collision(Lemming lemming);
 	public abstract boolean isVoid();
 	public abstract boolean isInverting();
 	public abstract void killLemming(Lemming lemming);
 	public abstract boolean isDestructible();
 	public abstract boolean canBeMined();
+	public abstract boolean canBeSkipped();
 	
 }

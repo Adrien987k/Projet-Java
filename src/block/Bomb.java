@@ -4,7 +4,6 @@ import game.GameMap;
 
 import java.util.List;
 
-import lemming.Lemming;
 import view.Type;
 
 import component.Component;
@@ -15,10 +14,11 @@ public class Bomb extends AbsDestructible {
 	public Bomb(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_BLOCK, Type.BOMB, gameMap);
 	}
-
+	
 	@Override
-	public void collision(Lemming lemming) {
-		
+	public void destroy(){
+		super.destroy();
+		boom();
 	}
 	
 	public void boom(){

@@ -31,6 +31,7 @@ public class Factory implements IFactory {
 		
 	}
 	
+	@Override
 	public Component make(Type t, Coordinate coord, GameMap gameMap) {
 		switch(t){
 			case LEMMING: return makeLemming(coord, gameMap);

@@ -1,12 +1,9 @@
 package States;
 
-import game.GameMap;
-
 import java.util.List;
 
 import component.Component;
 import lemming.AbsState;
-import lemming.Direction;
 import lemming.Lemming;
 import view.Type;
 
@@ -18,9 +15,9 @@ public class Tunneler extends AbsState {
 
 	@Override
 	public void step() {
-		boolean hasMoved;
 		boolean hasDug;
-		hasMoved = fall();
+		boolean hasMoved = collision();
+		if(!hasMoved) hasMoved = fall();
 		if(!hasMoved){
 			hasDug = dig();
 			if(hasDug){				
@@ -40,10 +37,7 @@ public class Tunneler extends AbsState {
 			}
 		}
 		if(componentToMine != null){
-			GameMap gameMap = lemming.getGameMap();
-			gameMap.change(componentToMine,
-							gameMap.getFactory().make(Type.VOID, componentToMine.getCoordinate(), gameMap)
-						   );
+			componentToMine.destroy();
 			return true;
 		}
 		return false;

@@ -12,8 +12,8 @@ public class Walker extends AbsState {
 
 	@Override
 	public void step() {
-		boolean hasMoved;
-		hasMoved = fall();
+		boolean hasMoved = collision();
+		if(!hasMoved) hasMoved = fall();
 		if(!hasMoved) walk();
 	}
 	

@@ -25,6 +25,7 @@ public class Blocker extends AbsState {
 		return Type.BLOCKER;
 	}
 	
+	@Override
 	public boolean isInverting(){
 		return true;
 	}
