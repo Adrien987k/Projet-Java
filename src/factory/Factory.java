@@ -72,13 +72,3 @@ public class Factory implements IFactory {
 	}
 
 }
-
-
-/*
-	class Again {
-		List<Block>;
-		block current;
-		
-		Again(Block ... blocks)
-}
-*/

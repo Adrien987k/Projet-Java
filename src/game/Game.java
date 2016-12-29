@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import component.Coordinate;
@@ -21,8 +22,6 @@ public class Game extends MyObservable implements MyObserver {
 	
 	private static final int SCALE = 100;
 	private static final int DEFAULT_SPEED = 25;
-	/*private static final int DEFAULT_WIDTH = 10;
-	private static final int DEFAULT_HEIGTH = 10;*/
 	
 	public Game() {
 		factory = new Factory();
@@ -38,9 +37,15 @@ public class Game extends MyObservable implements MyObserver {
 	
 	@Override
 	public void update(List<? extends AbsChange> changes) {
+		List<Coordinate> coordinates = new ArrayList<>();
+		boolean alreadyExist = false;
 		for(AbsChange c : changes) {
 			Coordinate here = c.getCoordinate();
-			addChange(new ChangeGraphics(here, gameMap.priorityOrder(here)));
+			for(Coordinate d : coordinates){
+				if(c.equals(d)) alreadyExist = true;
+			}
+			if(!alreadyExist) 
+				addChange(new ChangeGraphics(here, gameMap.priorityOrder(here)));
 		}
 		notifyObserver();
 	}

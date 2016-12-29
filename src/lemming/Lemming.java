@@ -19,18 +19,9 @@ public class Lemming extends Component implements IControlPanel {
 	private int falling = DEFAULT_FALLING ;
 	private boolean free = false;
 	
-	/*public Lemming() {
-		super();
-		state = Factory.makeState(State.WALKER, this);
-	}
-	public Lemming(Coordinate coordinate) {
-		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, null);
-		state = Factory.makeState(State.WALKER, this);
-	}*/
-	
 	public Lemming(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
-		state = Factory.makeState(State.WALKER, this);
+		state = Factory.makeState(State.DIGGER, this);
 		desiredDirection = Direction.RIGHT;
 	}
 	

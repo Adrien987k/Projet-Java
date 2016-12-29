@@ -8,7 +8,7 @@ import lemming.Lemming;
 import view.Type;
 import component.Component;
 
-public class Digger extends AbsState{
+public class Digger extends AbsState {
 	
 	public static final int NB_BLOCK_TO_DIG = 5;
 	
@@ -21,8 +21,8 @@ public class Digger extends AbsState{
 	@Override
 	public void step() {
 		boolean hasMoved = collision();
-		if(!hasMoved) hasMoved = dig();
-		hasMoved = fall();
+		if(!hasMoved) hasMoved |= dig();
+		if(!hasMoved) hasMoved |= fall();
 		if(!hasMoved) walk();
 		if(nbBlockToDig == 0){
 			lemming.changeState(State.WALKER);
@@ -39,8 +39,8 @@ public class Digger extends AbsState{
 			}
 		}
 		if(componentToMine != null){
-			nbBlockToDig--;
 			componentToMine.destroy();
+			nbBlockToDig--;
 			return true;
 		}
 		return false;
