@@ -7,7 +7,7 @@ import javax.swing.WindowConstants;
 
 import game.Game;
 
-public class BasicView extends MyObservable implements View {
+public class BasicView extends AllView {
 	
 	private JFrame frame;
 	private GamePanel gamePanel;

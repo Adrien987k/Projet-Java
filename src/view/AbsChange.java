@@ -2,7 +2,7 @@ package view;
 
 import component.Coordinate;
 
-public abstract class AbsChange {
+public abstract class AbsChange extends NewAbsChange{
 
 	protected Coordinate next;
 

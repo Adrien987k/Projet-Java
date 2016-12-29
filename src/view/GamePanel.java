@@ -3,6 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.EnumMap;
 import java.util.List;
@@ -12,7 +14,7 @@ import javax.swing.JComponent;
 import component.Coordinate;
 import game.Game;
 
-public class GamePanel extends JComponent implements MyObserver, Renderer {
+public class GamePanel extends JComponent implements MyObserver, Renderer, MouseListener {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -39,8 +41,8 @@ public class GamePanel extends JComponent implements MyObserver, Renderer {
 		color.put(Type.START, Color.GREEN);
 		color.put(Type.END, Color.GREEN);
 		color.put(Type.AGAIN, Color.YELLOW);
-		
 		color.put(Type.WALKER, Color.CYAN);
+		addMouseListener(this);
 	}
 
 	@Override
@@ -70,5 +72,35 @@ public class GamePanel extends JComponent implements MyObserver, Renderer {
 		}
 		g.dispose();
 		repaint();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("x: " + e.getX()/scale + " y: "+ e.getY()/scale);
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

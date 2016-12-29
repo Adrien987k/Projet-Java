@@ -2,17 +2,15 @@ package game;
 
 import java.util.List;
 
+import component.Coordinate;
+import factory.Factory;
+import factory.IFactory;
 import view.AbsChange;
-import view.BasicView;
+import view.AdvancedView;
 import view.ChangeGraphics;
 import view.MyObservable;
 import view.MyObserver;
 import view.View;
-
-import component.Coordinate;
-
-import factory.Factory;
-import factory.IFactory;
 
 public class Game extends MyObservable implements MyObserver {
 	
@@ -31,7 +29,7 @@ public class Game extends MyObservable implements MyObserver {
 		loader = new Loader(factory);
 		gameMap = loader.loadFile("test.txt");
 		gameMap.registerObserver(this);
-		view = new BasicView(100, 100, this, SCALE);
+		view = new AdvancedView(100, 100, this, SCALE);
 	}
 	
 	public void run() {
