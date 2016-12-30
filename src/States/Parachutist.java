@@ -26,14 +26,14 @@ public class Parachutist extends AbsState {
 	
 	@Override
 	public boolean fall(){
-		List<Component> down = lemming.checkSide(Direction.DOWN);
+		List<Component> down = lemming.checkSide(Direction.DOWN());
 		boolean canFall = true;
-		boolean dieIfFalling = true;
+		boolean dieIfFalling = false;
 		for(Component component : down){
 			if(!component.isVoid() && !component.isKilling()){
 				canFall = false;
 			}
-			if(component.isKilling()) dieIfFalling = true; 
+			if(component.isKilling()) dieIfFalling = true;
 		}
 		if(canFall){
 			if(!hasAlreadyFell){
@@ -41,7 +41,7 @@ public class Parachutist extends AbsState {
 					lemming.destroy();
 					return true;
 				}
-				lemming.setRealDirection(Direction.DOWN);
+				lemming.setRealDirection(Direction.DOWN());
 				lemming.decFalling();
 				hasAlreadyFell = true;
 				move();

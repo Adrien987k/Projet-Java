@@ -31,7 +31,7 @@ public class Digger extends AbsState {
 	}
 	
 	public boolean dig(){
-		List<Component> down = lemming.checkSide(Direction.DOWN);
+		List<Component> down = lemming.checkSide(Direction.DOWN());
 		Component componentToMine = null;
 		for(Component component : down){
 			if(component.canBeMined()){

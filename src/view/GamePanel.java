@@ -94,7 +94,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		
 		getMouseAgent().addChangeToAgent(new ChangeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale),getView().getCurrentAction().getState()));
 		getMouseAgent().notifyObserver();
-		getView().switchToDefaultAction();
+		//getView().switchToDefaultAction();
 	}
 
 	@Override

@@ -25,18 +25,35 @@ public class Climber extends AbsState	{
 	@Override
 	public boolean walk(){
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
-		boolean canGoUp = true;
+		List<Component> diagonal = lemming.checkSide(lemming.getDesiredDirection().checkAdd(Direction.UP()));
+		boolean diagIsVoid = true;
+		boolean fowardIsNotVoid = false;
+		for(Component dcomponent : diagonal){
+			if(!dcomponent.isVoid()) diagIsVoid = false;
+		}
+		for(Component fcomponent : foward){
+			if(!fcomponent.isVoid()) fowardIsNotVoid = true;
+			if(!fcomponent.canBeSkipped()) diagIsVoid = false;
+		}
+		if(diagIsVoid && fowardIsNotVoid){
+			lemming.setRealDirection(lemming.getDesiredDirection().checkAdd(Direction.UP()));
+			move();
+			return true;
+		}
+		boolean canGoUp = false;
 		for(Component fcomponent : foward){
 			if(fcomponent.isKilling()){
 				fcomponent.killLemming(lemming);
 				return true;
 			}
-			if(!fcomponent.isVoid() || !fcomponent.canBeSkipped()){
+			if(!fcomponent.isVoid()) canGoUp = true;
+			if(!fcomponent.canBeSkipped()) {
 				canGoUp = false;
+				continue;
 			}
 		}
 		if(canGoUp){
-			lemming.setRealDirection(Direction.UP);
+			lemming.setRealDirection(Direction.UP());
 			move();
 			return true;
 		}
@@ -47,7 +64,7 @@ public class Climber extends AbsState	{
 	
 	@Override
 	public boolean fall(){
-		List<Component> down = lemming.checkSide(Direction.DOWN);
+		List<Component> down = lemming.checkSide(Direction.DOWN());
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
 		boolean fowardIsVoid = true;
 		for(Component fcomponent : foward){
@@ -59,10 +76,10 @@ public class Climber extends AbsState	{
 			if(!component.isVoid() && !component.isKilling()){
 				canFall = false;
 			}
-			if(!component.isKilling()) dieIfFalling = true; 
+			if(component.isKilling()) dieIfFalling = true; 
 		}
-		if(canFall && !dieIfFalling && !fowardIsVoid){
-			lemming.setRealDirection(Direction.DOWN);
+		if(canFall && !dieIfFalling && fowardIsVoid){
+			lemming.setRealDirection(Direction.DOWN());
 			lemming.decFalling();
 			move();
 			return true;

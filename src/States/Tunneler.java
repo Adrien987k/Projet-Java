@@ -9,23 +9,20 @@ import view.Type;
 
 public class Tunneler extends AbsState {
 	
+	private boolean hasDug = false;
+	
 	public Tunneler(Lemming lemming) {
 		super(lemming);
 	}
 
 	@Override
 	public void step() {
-		boolean hasDug;
+		boolean hasWalked = false;
 		boolean hasMoved = collision();
 		if(!hasMoved) hasMoved |= fall();
-		if(!hasMoved){
-			hasDug = dig();
-			if(hasDug){				
-				walk();
-			} else {
-				lemming.changeState(State.WALKER);
-			}
-		}
+		if(!hasMoved) hasMoved |= dig();
+		if(!hasMoved) hasWalked =  walk();
+		if(hasWalked && hasDug) lemming.changeState(State.WALKER);
 	}
 	
 	public boolean dig(){
@@ -38,6 +35,7 @@ public class Tunneler extends AbsState {
 		}
 		if(componentToMine != null){
 			componentToMine.destroy();
+			hasDug = true;
 			return true;
 		}
 		return false;
