@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
+import States.State;
 import component.Coordinate;
 import game.Game;
 
@@ -91,9 +92,11 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("x: " + e.getY()/scale + " y: "+ e.getX()/scale);
-		
-		getMouseAgent().addChangeToAgent(new ChangeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale),getView().getCurrentAction().getState()));
-		getMouseAgent().notifyObserver();
+		State currentState = getView().getCurrentAction().getState();
+		if(currentState != null){
+			getMouseAgent().addChangeToAgent(new ChangeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale), currentState));
+			getMouseAgent().notifyObserver();
+		}	
 		//getView().switchToDefaultAction();
 	}
 

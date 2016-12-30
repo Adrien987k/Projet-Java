@@ -16,6 +16,7 @@ public class Bomber extends AbsState {
 	public static final int NB_STEPS_BEFORE_BOOM = 3;
 	
 	private int nbStepsBeforeBoom = NB_STEPS_BEFORE_BOOM;
+	private boolean hasBeenDestroy = false;
 
 	public Bomber(Lemming lemming) {
 		super(lemming);
@@ -24,7 +25,8 @@ public class Bomber extends AbsState {
 	@Override
 	public void step() {
 		nbStepsBeforeBoom--;
-		if(nbStepsBeforeBoom == 0){
+		if(nbStepsBeforeBoom == 0 && !hasBeenDestroy){
+			hasBeenDestroy = true;
 			boom();
 			return;
 		}
