@@ -1,8 +1,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -27,31 +27,31 @@ public class ActionBar extends JPanel {
 	 */
 	public static ActionBar createDefaultActionBar(AllView view) {
 		ActionBar actionBar = new ActionBar(view);
-		actionBar.setLayout(new GridLayout(2,7));
+		actionBar.setLayout(new GridLayout(2,7));		
 		
 		ActionButton button;
-		actionBar.addButton(ActionType.SET_BLOCKER, view);
-		actionBar.addButton(ActionType.SET_CARPENTER, view);
-		actionBar.addButton(ActionType.SET_CLIMBER, view);
-		actionBar.addButton(ActionType.SET_DIGGER, view);
-		actionBar.addButton(ActionType.SET_PARACHUTIST, view);
-		actionBar.addButton(ActionType.SET_CLIMBER, view);
-		actionBar.addButton(ActionType.SET_TUNNELER, view);
-		actionBar.addButton(ActionType.SET_BOMBER, view);
+		actionBar.addButton(ActionType.SET_BLOCKER, view,"blocker.jpg");
+		actionBar.addButton(ActionType.SET_CARPENTER, view,"carpenter.jpg");
+		actionBar.addButton(ActionType.SET_DIGGER, view,"digger.jpg");
+		actionBar.addButton(ActionType.SET_PARACHUTIST, view,"parachutist.jpg");
+		actionBar.addButton(ActionType.SET_TUNNELER, view,"tunneler.jpg");
+		actionBar.addButton(ActionType.SET_BOMBER, view,"bomber.jpg");
+		//TODO bouton maudit
+		actionBar.addButton(ActionType.SET_CLIMBER, view,"climber.jpg");
 		
-		button = new ActionButton(ActionType.ADD_LEMMING);
+		button = new ActionButton(ActionType.ADD_LEMMING,"addLemming.jpg");
 		button.addActionListener(new ButtonListener(view,button));
 		actionBar.add(button);
 		button.getInformationAgent().registerObserver(actionBar.getActionAgent());
 		button.getAddLemmingAgent().registerObserver(actionBar.getAddLemmingAgent());
 		
-		button = new ActionButton(ActionType.KILL_LEMMING);
+		button = new ActionButton(ActionType.KILL_LEMMING,"armaggedon.jpg");
 		button.addActionListener(new ButtonListener(view,button));
 		actionBar.add(button);
 		button.getInformationAgent().registerObserver(actionBar.getActionAgent());
 		button.getGenocideAgent().registerObserver(actionBar.getGenocideAgent());
 		
-		button = new ActionButton(ActionType.PAUSE);
+		button = new ActionButton(ActionType.PAUSE,"pause.jpg");
 		button.addActionListener(new ButtonListener(view,button));
 		actionBar.add(button);
 		button.getInformationAgent().registerObserver(actionBar.getActionAgent());
@@ -61,8 +61,15 @@ public class ActionBar extends JPanel {
 		return actionBar;
 	}
 	
+	@Deprecated
 	public void addButton(ActionType actionType, AllView view) {
 		ActionButton button = new ActionButton(actionType);
+		button.addActionListener(new ButtonListener(view,button));
+		add(button);
+		button.getInformationAgent().registerObserver(actionAgent);
+	}
+	public void addButton(ActionType actionType, AllView view, String imagePath) {
+		ActionButton button = new ActionButton(actionType,imagePath);
 		button.addActionListener(new ButtonListener(view,button));
 		add(button);
 		button.getInformationAgent().registerObserver(actionAgent);

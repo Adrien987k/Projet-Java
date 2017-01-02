@@ -32,7 +32,7 @@ public class Game extends MyObservable implements MyObserver {
 		gameMap = loader.loadFile("test.txt");
 		gameMap.getCaseAgent().registerObserver(this);
 		
-		view = new AdvancedView(100, 100, this, SCALE);
+		view = new AdvancedView(50, 50, this, SCALE);
 		gameMap.getDataAgent().registerObserver(getView().getInformationPanel().getDataAgent());
 		getView().getGamePanel().getMouseAgent().registerObserver(gameMap.getMouseAgent());
 		getView().getActionBar().getTimeAgent().registerObserver(gameMap.getTimeAgent());

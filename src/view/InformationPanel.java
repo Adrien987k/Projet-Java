@@ -63,7 +63,6 @@ public class InformationPanel extends JPanel implements MyObserver {
 		informationPanel.remainingLemmings = new JLabel("Remaining lemmings: " + Integer.toString(informationPanel.nbFreeLemmings));
 		informationPanel.add(informationPanel.remainingLemmings);
 		informationPanel.actionDescription = new JLabel("Nothing.");
-		//informationPanel.actionDescription.setL
 		informationPanel.add(informationPanel.actionDescription,BorderLayout.SOUTH);
 		
 		informationPanel.getButton().addActionListener(new ActionListener() {
