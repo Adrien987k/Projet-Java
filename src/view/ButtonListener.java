@@ -12,10 +12,16 @@ class ButtonListener implements ActionListener {
 		this.view = view;
 		this.actionButton = actionButton;
 	}
+
+	public ActionButton getActionButton() {
+		return actionButton;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		view.setCurrentAction(actionButton.getActionType());
+		getActionButton().notifiyAgents();
 		System.out.println(actionButton.getActionTitle());
 	}
+	
 }

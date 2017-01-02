@@ -63,6 +63,8 @@ public abstract class Component {
 		return isLethal;
 	}	
 	
+	public abstract void kill();
+	
 	public boolean changeStateIf(State state) {
 		return false;
 	}
@@ -75,7 +77,7 @@ public abstract class Component {
 	public abstract void killLemming(Lemming lemming);
 	public abstract boolean isDestructible();
 	public abstract boolean canBeMined();
-	public abstract boolean canBeSkipped();
+	public abstract boolean canBeSkipped();	
 	
 	
 }

@@ -13,6 +13,11 @@ public abstract class AbsBlock extends Component {
 	}
 	
 	@Override
+	public void kill() {
+		
+	}
+	
+	@Override
 	public void step() {
 		
 	}

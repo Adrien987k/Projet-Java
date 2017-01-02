@@ -20,4 +20,7 @@ public abstract class AllView extends MyObservable implements View {
 	public GamePanel getGamePanel() {
 		return null;
 	}
+	public ActionBar getActionBar() {
+		return null;
+	}
 }

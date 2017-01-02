@@ -134,4 +134,9 @@ public class Lemming extends Component {
 			getGameMap().incNbDeadLemming();
 		}
 	}
+	
+	@Override
+	public void kill() {
+		destroy();
+	}
 }

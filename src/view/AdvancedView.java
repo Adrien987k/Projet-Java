@@ -32,7 +32,7 @@ public class AdvancedView extends AllView {
 	
 	public AdvancedView(int x, int y, Game game, int scale) {
 		frame = createAdvancedView(x, y, game, scale);
-		game.registerObserver(this);
+		establishConnexions(game);
 	}
 	
 	private JFrame createAdvancedView(int x, int y, Game game, int scale) {
@@ -45,7 +45,6 @@ public class AdvancedView extends AllView {
 		frame.add(actionBar,BorderLayout.SOUTH);
 		informationPanel = InformationPanel.createDefaultInformationPanel(this);
 		frame.add(informationPanel,BorderLayout.EAST);
-		establishConnexions();
 		
 		switchToDefaultAction();
 		frame.setMinimumSize(new Dimension(game.getWidth() + informationPanel.getWidth(),
@@ -59,9 +58,12 @@ public class AdvancedView extends AllView {
 		return frame;
 	}
 	
-	public void establishConnexions() {
-		actionBar.getAgent().registerObserver(getInformationPanel().getDescriptionAgent());
+	public void establishConnexions(Game game) {
+		game.registerObserver(this);
+		
+		actionBar.getActionAgent().registerObserver(getInformationPanel().getDescriptionAgent());
 		getInformationPanel().getDescriptionAgent().registerObserver(informationPanel);
+	
 	}
 	
 	/* Créer un bouton effectuant l'action donnée en paramètre */
@@ -89,6 +91,10 @@ public class AdvancedView extends AllView {
 	@Override
 	public GamePanel getGamePanel() {
 		return gamePanel;
+	}
+	@Override
+	public ActionBar getActionBar() {
+		return actionBar;
 	}
 	/* A chaque fois qu'une action est bien faite,
 	 * on remet l'action actuelle par défaut.

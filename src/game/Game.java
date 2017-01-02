@@ -9,6 +9,7 @@ import factory.IFactory;
 import view.AbsChange;
 import view.AbsMemoryChange;
 import view.AdvancedView;
+import view.Agent;
 import view.AllView;
 import view.ChangeGraphics;
 import view.MyObservable;
@@ -34,6 +35,9 @@ public class Game extends MyObservable implements MyObserver {
 		view = new AdvancedView(100, 100, this, SCALE);
 		gameMap.getDataAgent().registerObserver(getView().getInformationPanel().getDataAgent());
 		getView().getGamePanel().getMouseAgent().registerObserver(gameMap.getMouseAgent());
+		getView().getActionBar().getTimeAgent().registerObserver(gameMap.getTimeAgent());
+		getView().getActionBar().getAddLemmingAgent().registerObserver(gameMap.getAddLemmingAgent());
+		getView().getActionBar().getGenocideAgent().registerObserver(gameMap.getGenocideAgent());
 	}
 	
 	public void run() {
@@ -67,5 +71,6 @@ public class Game extends MyObservable implements MyObserver {
 	public AllView getView() {
 		return view;
 	}
+	
 	
 }

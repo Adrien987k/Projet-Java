@@ -8,6 +8,7 @@ import block.TP;
 import component.Component;
 import component.Coordinate;
 import factory.IFactory;
+import lemming.Lemming;
 import view.AbsChange;
 import view.Agent;
 import view.ChangeCase;
@@ -22,8 +23,10 @@ public class GameMap extends MyObservable implements MyObserver {
 	
 	public static final int LEMMING_GENERATION_RATE = 10;
 	
+	private boolean isFreeze = false;		
 	private IFactory factory;
 	private ArrayList<Component>[][] gridComponents;
+	private int currentSpeed;
 	private int speed;
 	private int nbLemmings;
 	private List<Coordinate> starts = new ArrayList<>();
@@ -38,6 +41,25 @@ public class GameMap extends MyObservable implements MyObserver {
 			for(AbsChange c: changes) {
 				changeStateHere(((ChangeStateHere) c).getCoordinate(), ((ChangeStateHere) c).getState());
 			}
+		}
+	};
+	private Agent timeAgent = new Agent() {
+		@Override
+		public void update(List<? extends AbsChange> changes) {
+			pause();
+		}
+	};
+	private Agent genocideAgent = new Agent() {
+		@Override
+		public void update(List<? extends AbsChange> changes) {
+			killAllLemmings();
+		}
+	};
+	private Agent addLemmingAgent = new Agent() {       
+		@Override
+		public void update(List<? extends AbsChange> changes) {
+			if(getNbRemainingLemming() > 0)
+					generateLemming();
 		}
 	};
 	
@@ -76,17 +98,31 @@ public class GameMap extends MyObservable implements MyObserver {
 		throw new IllegalArgumentException("Encoding non reconnu");
 	}
 	
+	public void pause() {
+		setIsFreeze(!getIsFreeze());
+	}
+	
+	public boolean getIsFreeze() {
+		return isFreeze;
+	}
+	public void setIsFreeze(boolean isFreeze) {
+		this.isFreeze = isFreeze;
+	}
+	
 	public void run(int defaultSpeed) {
 		init();
 		if(speed <= 0) speed = defaultSpeed;
+		currentSpeed = speed;
 		running = true;
 		while(running) {
-
 			notifyEveryone();
 			step();
 			notifyEveryone();
 			try {
-				Thread.sleep(speed);
+				while(getIsFreeze()) {
+					Thread.sleep(currentSpeed);
+				}
+				Thread.sleep(currentSpeed);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -253,6 +289,15 @@ public class GameMap extends MyObservable implements MyObserver {
 	public Agent getMouseAgent() {
 		return mouseAgent;
 	}
+	public Agent getTimeAgent() {
+		return timeAgent;
+	}
+	public Agent getAddLemmingAgent() {
+		return addLemmingAgent;
+	}
+	public Agent getGenocideAgent() {
+		return genocideAgent;
+	}
 	
 	public AbsChange createDataChange() {
 		return new ChangeData(getNbDeadLemming(),getNbFreeLemming(),getNbRemainingLemming());
@@ -270,6 +315,16 @@ public class GameMap extends MyObservable implements MyObserver {
 		return nbDeadLemming;
 	}
 	
+	private void killAllLemmings() {
+		for(int i = 0; i < gridComponents.length; i++) {
+			for(int j = 0; j < gridComponents[0].length; j++) {
+				for(Component c : gridComponents[i][j]){
+					c.kill();
+				}
+			}
+		}
+	}
+	
 	private boolean changeStateHere(Coordinate c,State state) {
 		List<Component> area = getArea(c);
 		for(Component component: area) {
@@ -277,6 +332,8 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 		return false;
 	}
+
+	
 	
 	
 }

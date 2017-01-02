@@ -46,16 +46,13 @@ public class InformationPanel extends JPanel implements MyObserver {
 	
 	public InformationPanel(AllView view) {
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_LENGTH));
-		
 		this.view = view;
-		
 	}
 	
 	
 	public static InformationPanel createDefaultInformationPanel(AllView view ) {
 		InformationPanel informationPanel = new InformationPanel(view);
-		informationPanel.setLayout(new GridLayout(5,1));
-		
+		informationPanel.setLayout(new GridLayout(10,1));
 		
 		informationPanel.testButton = new JButton("Test");
 		informationPanel.add(informationPanel.testButton, BorderLayout.NORTH);
@@ -66,6 +63,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 		informationPanel.remainingLemmings = new JLabel("Remaining lemmings: " + Integer.toString(informationPanel.nbFreeLemmings));
 		informationPanel.add(informationPanel.remainingLemmings);
 		informationPanel.actionDescription = new JLabel("Nothing.");
+		//informationPanel.actionDescription.setL
 		informationPanel.add(informationPanel.actionDescription,BorderLayout.SOUTH);
 		
 		informationPanel.getButton().addActionListener(new ActionListener() {
@@ -94,21 +92,21 @@ public class InformationPanel extends JPanel implements MyObserver {
 		return deadLemmings;
 	}
 	public void setDeadLemmings(int deadLemmings) {
-		this.deadLemmings.setText(Integer.toString(deadLemmings));
+		this.deadLemmings.setText("Lemmings dead: " + Integer.toString(deadLemmings));
 	}
 
 	public JLabel getFreeLemmings() {
 		return freeLemmings;
 	}
 	public void setFreeLemmings(int freeLemmings) {
-		this.freeLemmings.setText(Integer.toString(freeLemmings));
+		this.freeLemmings.setText("Lemmings free: " + Integer.toString(freeLemmings));
 	}
 	
 	public JLabel getRemainingLemmings() {
 		return remainingLemmings;
 	}
 	public void setRemainingLemmings(int remainingLemmings) {
-		this.remainingLemmings.setText(Integer.toString(remainingLemmings)); 
+		this.remainingLemmings.setText("Lemmings remmaining: " + Integer.toString(remainingLemmings)); 
 	}
 
 	public Agent getDescriptionAgent() {
@@ -118,12 +116,35 @@ public class InformationPanel extends JPanel implements MyObserver {
 	public Agent getDataAgent() {
 		return dataAgent;
 	}
+	
+	
+	public int getNbDeadLemmings() {
+		return nbDeadLemmings;
+	}
+	public void setNbDeadLemmings(int nbDeadLemmings) {
+		this.nbDeadLemmings = nbDeadLemmings;
+	}
+
+	public int getNbFreeLemmings() {
+		return nbFreeLemmings;
+	}
+	public void setNbFreeLemmings(int nbFreeLemmings) {
+		this.nbFreeLemmings = nbFreeLemmings;
+	}
+	
+	public int getNbRemainingLemmings() {
+		return nbRemainingLemmings;
+	}
+	public void setNbRemainingLemmings(int nbRemainingLemmings) {
+		this.nbRemainingLemmings = nbRemainingLemmings;
+	}
 
 	@Override
 	public void update(List<? extends AbsChange> changes) {
 		for(AbsChange change:changes) {
-			getActionDescription().setText(((ChangeDescription) change).getActionType().getDescription());
+			getActionDescription().setText(((ChangeAction) change).getActionType().getDescription());
 		}
 	}
+	
 
 }

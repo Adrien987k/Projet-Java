@@ -1,10 +1,10 @@
 package view;
 
-public class ChangeDescription extends AbsGraphicsChange {
+public class ChangeAction extends AbsGraphicsChange {
 
 	private ActionType actionType;
 	
-	public ChangeDescription(ActionType actionType) {
+	public ChangeAction(ActionType actionType) {
 		this.actionType = actionType;
 	}
 	
