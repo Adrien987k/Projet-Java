@@ -328,7 +328,8 @@ public class GameMap extends MyObservable implements MyObserver {
 	private boolean changeStateHere(Coordinate c,State state) {
 		List<Component> area = getArea(c);
 		for(Component component: area) {
-			component.changeStateIf(state);
+			if(component.changeStateIf(state))
+				return true;
 		}
 		return false;
 	}

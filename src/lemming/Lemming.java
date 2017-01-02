@@ -16,13 +16,13 @@ public class Lemming extends Component {
 	private AbsState state;
 	private Direction realDirection;
 	private Direction desiredDirection;
-	private int falling = DEFAULT_FALLING ;
+	private int falling = DEFAULT_FALLING;
 	private boolean free = false;
 	
 	public Lemming(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
 		state = Factory.makeState(State.WALKER, this);
-		desiredDirection = Direction.RIGHT;
+		desiredDirection = Direction.RIGHT();
 	}
 	
 	public Direction getRealDirection() {

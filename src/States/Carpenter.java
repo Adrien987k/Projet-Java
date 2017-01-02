@@ -24,13 +24,11 @@ public class Carpenter extends AbsState {
 	public void step() {
 		boolean hasMoved = collision();
 		if(!hasMoved) hasMoved |= fall();
-		if(!hasMoved){
-			build();
-			walk();
-			if(nbBlockToBuild == 0){
-				lemming.changeState(State.WALKER);
-				return;
-			}
+		if(!hasMoved) hasMoved |= build();
+		if(!hasMoved) hasMoved |= walk();
+		if(nbBlockToBuild == 0){
+			lemming.changeState(State.WALKER);
+			return;
 		}
 	}
 	

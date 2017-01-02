@@ -11,7 +11,7 @@ import States.State;
  */
 public enum ActionType {
 	NONE("None","<html> No action selected"),
-	SET_BOMBER("Set Blocker","<html> The selected lemming walks 3 steps before exploding, it will destroy everything destructible within 2 cases.</html> ",new Color(130,130,180),State.BOMBER),
+	SET_BOMBER("Set Bomber","<html> The selected lemming walks 3 steps before exploding, it will destroy everything destructible within 2 cases.</html> ",new Color(130,130,180),State.BOMBER),
 	SET_BLOCKER("Set Blocker","<html> The selected lemming stops, then each lemming trying to cross him will do a half turn.",new Color(70,130,180),State.BLOCKER),
 	SET_CARPENTER("Set Carpenter", "<html> The selected lemming builds a stair one case up, during 5 steps.",new Color(244,164,96),State.CARPENTER),
 	SET_CLIMBER("Set Climber", "<html> The selected lemming climbs any vertical obstacle until the top, no matter the height.",new Color(124,252,0),State.CLIMBER),

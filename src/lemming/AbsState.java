@@ -23,7 +23,7 @@ public abstract class AbsState {
 	}
 	
 	public boolean fall(){
-		List<Component> down = lemming.checkSide(Direction.DOWN);
+		List<Component> down = lemming.checkSide(Direction.DOWN());
 		boolean canFall = true;
 		boolean dieIfFalling = false;
 		for(Component component : down){
@@ -33,7 +33,7 @@ public abstract class AbsState {
 			if(component.isKilling()) dieIfFalling = true; 
 		}
 		if(canFall && !dieIfFalling){
-			lemming.setRealDirection(Direction.DOWN);
+			lemming.setRealDirection(Direction.DOWN());
 			lemming.decFalling();
 			move();
 			return true;
@@ -48,7 +48,7 @@ public abstract class AbsState {
 	
 	public boolean walk(){
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
-		List<Component> diagonal = lemming.checkSide(lemming.getDesiredDirection().checkAdd(Direction.UP));
+		List<Component> diagonal = lemming.checkSide(lemming.getDesiredDirection().checkAdd(Direction.UP()));
 		boolean diagIsVoid = true;
 		boolean fowardIsNotVoid = false;
 		for(Component dcomponent : diagonal){
@@ -59,7 +59,7 @@ public abstract class AbsState {
 			if(!fcomponent.canBeSkipped()) diagIsVoid = false;
 		}
 		if(diagIsVoid && fowardIsNotVoid){
-			lemming.setRealDirection(lemming.getDesiredDirection().checkAdd(Direction.UP));
+			lemming.setRealDirection(lemming.getDesiredDirection().checkAdd(Direction.UP()));
 			move();
 			return true;
 		}

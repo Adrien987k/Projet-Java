@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
+import States.State;
 import component.Coordinate;
 import game.Game;
 
@@ -46,6 +47,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		color.put(Type.AGAIN, Color.YELLOW);
 		color.put(Type.WALKER, Color.CYAN);
 		color.put(Type.BLOCKER,new Color(70,130,180));
+		color.put(Type.BLOCKER,new Color(130,130,180));
 		color.put(Type.CARPENTER, new Color(244,164,96));
 		color.put(Type.CLIMBER,new Color(124,252,0));
 		color.put(Type.DIGGER, new Color(210,105,42));
@@ -91,10 +93,12 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("x: " + e.getY()/scale + " y: "+ e.getX()/scale);
-		
-		getMouseAgent().addChangeToAgent(new ChangeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale),getView().getCurrentAction().getState()));
-		getMouseAgent().notifyObserver();
-		getView().switchToDefaultAction();
+		State currentState = getView().getCurrentAction().getState();
+		if(currentState != null){
+			getMouseAgent().addChangeToAgent(new ChangeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale), currentState));
+			getMouseAgent().notifyObserver();
+		}	
+		//getView().switchToDefaultAction();
 	}
 
 	@Override

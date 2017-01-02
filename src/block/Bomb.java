@@ -10,6 +10,8 @@ import component.Component;
 import component.Coordinate;
 
 public class Bomb extends AbsDestructible {
+	
+	private boolean hasBeenDestroy = false;
 
 	public Bomb(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_BLOCK, Type.BOMB, gameMap);
@@ -18,7 +20,10 @@ public class Bomb extends AbsDestructible {
 	@Override
 	public void destroy(){
 		super.destroy();
-		boom();
+		if(!hasBeenDestroy) {
+			hasBeenDestroy = true;
+			boom();
+		}
 	}
 	
 	public void boom(){

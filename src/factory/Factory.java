@@ -5,6 +5,7 @@ import lemming.AbsState;
 import lemming.Lemming;
 import view.Type;
 import States.Blocker;
+import States.Bomber;
 import States.Carpenter;
 import States.Climber;
 import States.Digger;
@@ -67,6 +68,7 @@ public class Factory implements IFactory {
 			case DIGGER: return new Digger(lemming);
 			case PARACHUTIST: return new Parachutist(lemming);
 			case TUNNELER: return new Tunneler(lemming);
+			case BOMBER: return new Bomber(lemming);
 			default: throw new IllegalArgumentException();
 		}
 	}
