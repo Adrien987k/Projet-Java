@@ -36,7 +36,7 @@ public class AdvancedView extends AllView {
 	}
 	
 	private JFrame createAdvancedView(int x, int y, Game game, int scale) {
-		frame = new JFrame("Game " + 0);
+		frame = new JFrame("Lemmings");
 		gamePanel = new GamePanel(game, scale,this);
 		registerObserver(gamePanel);
 		frame.add(gamePanel, BorderLayout.CENTER);

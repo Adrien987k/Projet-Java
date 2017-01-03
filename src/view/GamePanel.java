@@ -23,6 +23,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	private Graphics g;
 	private AllView view;
 	private EnumMap<Type,Color> color;
+	private EnumMap<Type,Texture> texture;
 
 	private int scale;
 
@@ -35,6 +36,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		int height = game.getHeight() * scale;
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		setPreferredSize(new Dimension(width, height));
+		
 		color = new EnumMap<>(Type.class);
 		color.put(Type.SIMPLE_DESTRUCTIBLE, Color.LIGHT_GRAY);
 		color.put(Type.SIMPLE_INDESTRUCTIBLE, Color.BLACK);
@@ -53,6 +55,12 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		color.put(Type.DIGGER, new Color(210,105,42));
 		color.put(Type.PARACHUTIST, new Color(0,0,128));
 		color.put(Type.TUNNELER, new Color(105,105,105));
+		
+		texture = new EnumMap<>(Type.class);
+		texture.put(Type.SIMPLE_DESTRUCTIBLE,Texture.SD);
+		texture.put(Type.SIMPLE_INDESTRUCTIBLE,Texture.SI);
+		texture.put(Type.AGAIN,Texture.AGAIN);
+		texture.put(Type.START,Texture.START);
 		addMouseListener(this);
 	}
 
@@ -82,8 +90,18 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 			types = c.getChangeType();
 			
 			for(Type t : types) {
-				g.setColor(color.get(t));
-				g.fillRect(cd.getY() * scale, cd.getX() * scale, scale, scale);
+				if(t == Type.SIMPLE_DESTRUCTIBLE)
+					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
+				else if(t == Type.SIMPLE_INDESTRUCTIBLE)
+					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
+				else if(t == Type.AGAIN)
+					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
+				else if(t == Type.START)
+					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
+				else {
+					g.setColor(color.get(t));
+					g.fillRect(cd.getY() * scale, cd.getX() * scale, scale, scale);
+				}
 			}
 		}
 		g.dispose();
