@@ -6,6 +6,7 @@ import java.util.List;
 
 import lemming.AbsState;
 import lemming.Lemming;
+import lemming.Priority;
 import view.Type;
 import component.Component;
 import component.Coordinate;
@@ -54,4 +55,10 @@ public class Carpenter extends AbsState {
 	public Type getTypeByState() {
 		return Type.CARPENTER;
 	}
+	
+	@Override
+	public Priority getPriority(){
+		return Priority.PRIORITY_LEMMING_HIGH;
+	}
+	
 }

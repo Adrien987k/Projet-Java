@@ -93,6 +93,7 @@ public abstract class AbsState {
 	
 	public abstract void step();
 	public abstract Type getTypeByState();
+	public abstract Priority getPriority();
 	
 	public boolean isInverting(){
 		return false;

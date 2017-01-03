@@ -6,6 +6,7 @@ import java.util.List;
 
 import lemming.AbsState;
 import lemming.Lemming;
+import lemming.Priority;
 import view.Type;
 
 import component.Component;
@@ -55,4 +56,10 @@ public class Bomber extends AbsState {
 	public Type getTypeByState() {
 		return Type.BOMBER;
 	}
+	
+	@Override
+	public Priority getPriority(){
+		return Priority.PRIORITY_LEMMING_HIGH;
+	}
+	
 }

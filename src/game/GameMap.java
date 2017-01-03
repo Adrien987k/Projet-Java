@@ -206,6 +206,11 @@ public class GameMap extends MyObservable implements MyObserver {
 	public void update(List<? extends AbsChange> changes) {
 		@SuppressWarnings("unchecked")
 		ArrayList<ChangeMemory> Mchanges = (ArrayList<ChangeMemory>) changes;
+		//On trie les changements en mettant les suppresions en premier.
+		Mchanges.sort((c1, c2) -> {
+			if(c1.getComponentNext() == null && c2.getComponentNext() != null) return 1;
+			else return -1;
+					});
 		for(ChangeMemory c : Mchanges){
 			if(c.getComponent() != null){
 				Coordinate last = c.getComponent().getCoordinate();
@@ -259,7 +264,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	
 	public List<Type> priorityOrder(Coordinate coordinate) {
 		List<Type> list = new ArrayList<>();
-		getArea(coordinate).sort((e1,e2) -> e1.getPriority() - e2.getPriority());
+		getArea(coordinate).sort((e1,e2) -> e1.getPriority().getValue() - e2.getPriority().getValue());
 		for(Component component: getArea(coordinate)) {
 			list.add(component.getType());
 		}

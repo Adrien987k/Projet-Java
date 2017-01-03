@@ -7,6 +7,7 @@ import component.Component;
 import lemming.AbsState;
 import lemming.Direction;
 import lemming.Lemming;
+import lemming.Priority;
 import view.Type;
 
 public class Climber extends AbsState	{
@@ -80,4 +81,10 @@ public class Climber extends AbsState	{
 	public Type getTypeByState() {
 		return Type.CLIMBER;
 	}
+	
+	@Override
+	public Priority getPriority(){
+		return Priority.PRIORITY_LEMMING_HIGH;
+	}
+	
 }

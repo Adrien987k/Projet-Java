@@ -1,14 +1,13 @@
 package block;
 
-import game.GameMap;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import lemming.Lemming;
-import view.Type;
-
 import component.Coordinate;
+import game.GameMap;
+import lemming.Lemming;
+import lemming.Priority;
+import view.Type;
 
 public class TP extends AbsIndestructible {
 	
@@ -16,7 +15,7 @@ public class TP extends AbsIndestructible {
 	private Map<Lemming, Boolean> hasAlreadyTeleportMap = new HashMap<>();
 
 	public TP(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate, PRIORITY_BLOCK, Type.TP, gameMap);
+		super(coordinate, Priority.PRIORITY_BLOCK, Type.TP, gameMap);
 	}
 	
 	public void setDestination(TP destination){

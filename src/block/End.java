@@ -1,14 +1,15 @@
 package block;
 
-import lemming.Lemming;
-import game.GameMap;
-import view.Type;
 import component.Coordinate;
+import game.GameMap;
+import lemming.Lemming;
+import lemming.Priority;
+import view.Type;
 
 public class End extends AbsDoor {
 
 	public End(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate, PRIORITY_BLOCK, Type.END, gameMap);
+		super(coordinate, Priority.PRIORITY_BLOCK, Type.END, gameMap);
 	}
 
 	@Override

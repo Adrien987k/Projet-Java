@@ -1,20 +1,19 @@
 package block;
 
-import game.GameMap;
-
 import java.util.List;
-
-import view.Type;
 
 import component.Component;
 import component.Coordinate;
+import game.GameMap;
+import lemming.Priority;
+import view.Type;
 
 public class Bomb extends AbsDestructible {
 	
 	private boolean hasBeenDestroy = false;
 
 	public Bomb(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate, PRIORITY_BLOCK, Type.BOMB, gameMap);
+		super(coordinate, Priority.PRIORITY_BLOCK, Type.BOMB, gameMap);
 	}
 	
 	@Override
