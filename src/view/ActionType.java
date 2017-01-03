@@ -29,6 +29,7 @@ public enum ActionType {
 	
 	public static final Color DEFAULT_COLOR = Color.WHITE;
 	
+	@Deprecated
 	private ActionType(String title, String description) {
 		this.title = title;
 		this.description = description;
@@ -36,6 +37,7 @@ public enum ActionType {
 		state = null;
 	}
 	
+	@Deprecated
 	private ActionType(String title, String description, Color color) {
 		this.title = title;
 		this.description = description;

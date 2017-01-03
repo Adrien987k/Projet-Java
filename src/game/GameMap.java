@@ -8,7 +8,6 @@ import block.TP;
 import component.Component;
 import component.Coordinate;
 import factory.IFactory;
-import lemming.Lemming;
 import view.AbsChange;
 import view.Agent;
 import view.ChangeCase;
@@ -85,7 +84,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		for(int i = 0; i < result.length; i++){
 			for(int j = 0; j < result[0].length; j++){
 				temp = new ArrayList<>();
-				temp.add(factory.make(convertStringToType(data.get(i).get(j)), new Coordinate(i, j), this));
+					temp.add(factory.make(convertStringToType(data.get(i).get(j)), new Coordinate(i, j), this));
 				result[i][j] = temp;
 			}
 		}
