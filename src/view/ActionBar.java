@@ -30,28 +30,28 @@ public class ActionBar extends JPanel {
 		actionBar.setLayout(new GridLayout(2,7));		
 		
 		ActionButton button;
-		actionBar.addButton(ActionType.SET_BLOCKER, view,"blocker.jpg");
-		actionBar.addButton(ActionType.SET_CARPENTER, view,"carpenter.jpg");
-		actionBar.addButton(ActionType.SET_DIGGER, view,"digger.jpg");
-		actionBar.addButton(ActionType.SET_PARACHUTIST, view,"parachutist.jpg");
-		actionBar.addButton(ActionType.SET_TUNNELER, view,"tunneler.jpg");
-		actionBar.addButton(ActionType.SET_BOMBER, view,"bomber.jpg");
+		actionBar.addButton(ActionType.SET_BLOCKER, view,"data\\img\\blocker.jpg");
+		actionBar.addButton(ActionType.SET_CARPENTER, view,"data\\img\\carpenter.jpg");
+		actionBar.addButton(ActionType.SET_DIGGER, view,"data\\img\\digger.jpg");
+		actionBar.addButton(ActionType.SET_PARACHUTIST, view,"data\\img\\parachutist.jpg");
+		actionBar.addButton(ActionType.SET_TUNNELER, view,"data\\img\\tunneler.jpg");
+		actionBar.addButton(ActionType.SET_BOMBER, view,"data\\img\\bomber.jpg");
 		//TODO bouton maudit
-		actionBar.addButton(ActionType.SET_CLIMBER, view,"climber.jpg");
+		actionBar.addButton(ActionType.SET_CLIMBER, view,"data\\img\\climber.jpg");
 		
-		button = new ActionButton(ActionType.ADD_LEMMING,"addLemming.jpg");
+		button = new ActionButton(ActionType.ADD_LEMMING,"data\\img\\addLemming.jpg");
 		button.addActionListener(new ButtonListener(view,button));
 		actionBar.add(button);
 		button.getInformationAgent().registerObserver(actionBar.getActionAgent());
 		button.getAddLemmingAgent().registerObserver(actionBar.getAddLemmingAgent());
 		
-		button = new ActionButton(ActionType.KILL_LEMMING,"armaggedon.jpg");
+		button = new ActionButton(ActionType.KILL_LEMMING,"data\\img\\armaggedon.jpg");
 		button.addActionListener(new ButtonListener(view,button));
 		actionBar.add(button);
 		button.getInformationAgent().registerObserver(actionBar.getActionAgent());
 		button.getGenocideAgent().registerObserver(actionBar.getGenocideAgent());
 		
-		button = new ActionButton(ActionType.PAUSE,"pause.jpg");
+		button = new ActionButton(ActionType.PAUSE,"data\\img\\pause.jpg");
 		button.addActionListener(new ButtonListener(view,button));
 		actionBar.add(button);
 		button.getInformationAgent().registerObserver(actionBar.getActionAgent());

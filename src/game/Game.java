@@ -29,7 +29,7 @@ public class Game extends MyObservable implements MyObserver {
 		factory = new Factory();
 		loader = new Loader(factory);
 		
-		gameMap = loader.loadFile("test.txt");
+		gameMap = loader.loadFile("data\\level\\test.txt");
 		gameMap.getCaseAgent().registerObserver(this);
 		
 		view = new AdvancedView(50, 50, this, SCALE);
