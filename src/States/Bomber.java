@@ -15,6 +15,7 @@ import component.Coordinate;
 public class Bomber extends AbsState {
 	
 	public static final int NB_STEPS_BEFORE_BOOM = 3;
+	public static final int BOMBER_EXPLOSION_RANGE = 2;
 	
 	private int nbStepsBeforeBoom = NB_STEPS_BEFORE_BOOM;
 	private boolean hasBeenDestroy = false;
@@ -42,8 +43,8 @@ public class Bomber extends AbsState {
 		int posX = lemming.getCoordinate().getX();
 		int posY = lemming.getCoordinate().getY();
 		GameMap gameMap = lemming.getGameMap();
-		for(int i = -2; i < 3; i++){
-			for(int j = -2; j < 3; j++){
+		for(int i = -BOMBER_EXPLOSION_RANGE; i <= BOMBER_EXPLOSION_RANGE; i++){
+			for(int j = -BOMBER_EXPLOSION_RANGE; j <= BOMBER_EXPLOSION_RANGE; j++){
 				area = gameMap.getArea(new Coordinate(posX + i, posY + j));
 				for(Component component : area){
 					if(component.isDestructible()) component.destroy();

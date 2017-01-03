@@ -10,6 +10,8 @@ import view.Type;
 
 public class Bomb extends AbsDestructible {
 	
+	public static final int BOMB_EXPLOSION_RANGE = 2;
+	
 	private boolean hasBeenDestroy = false;
 
 	public Bomb(Coordinate coordinate, GameMap gameMap) {
@@ -30,8 +32,8 @@ public class Bomb extends AbsDestructible {
 		int posX = getCoordinate().getX();
 		int posY = getCoordinate().getY();
 		GameMap gameMap = getGameMap();
-		for(int i = -2; i < 3; i++){
-			for(int j = -2; j < 3; j++){
+		for(int i = -BOMB_EXPLOSION_RANGE; i <= BOMB_EXPLOSION_RANGE; i++){
+			for(int j = -BOMB_EXPLOSION_RANGE; j <= BOMB_EXPLOSION_RANGE; j++){
 				area = gameMap.getArea(new Coordinate(posX + i, posY + j));
 				for(Component component : area){
 					if(component.isDestructible()) component.destroy();

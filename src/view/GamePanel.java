@@ -49,7 +49,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		color.put(Type.AGAIN, Color.YELLOW);
 		color.put(Type.WALKER, Color.CYAN);
 		color.put(Type.BLOCKER,new Color(70,130,180));
-		color.put(Type.BLOCKER,new Color(130,130,180));
+		color.put(Type.BOMBER,new Color(130,130,180));
 		color.put(Type.CARPENTER, new Color(244,164,96));
 		color.put(Type.CLIMBER,new Color(124,252,0));
 		color.put(Type.DIGGER, new Color(210,105,42));
