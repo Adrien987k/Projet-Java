@@ -26,6 +26,7 @@ public class Carpenter extends AbsState {
 		if(!hasMoved) hasMoved |= fall();
 		if(!hasMoved) hasMoved |= build();
 		if(!hasMoved) hasMoved |= walk();
+		if(lemming.getHasJustInvert()) nbBlockToBuild = 0;
 		if(nbBlockToBuild == 0){
 			lemming.changeState(State.WALKER);
 			return;

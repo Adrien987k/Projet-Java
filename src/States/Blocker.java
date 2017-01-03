@@ -1,6 +1,7 @@
 package States;
 
 import lemming.AbsState;
+import lemming.Direction;
 import lemming.Lemming;
 import view.Type;
 
@@ -16,7 +17,7 @@ public class Blocker extends AbsState {
 	}
 	
 	@Override
-	public void move() {
+	public void move(Direction realDirection) {
 		
 	}
 

@@ -18,6 +18,7 @@ public class Lemming extends Component {
 	private Direction desiredDirection;
 	private int falling = DEFAULT_FALLING;
 	private boolean free = false;
+	private boolean hasJustInvert = false;
 	
 	public Lemming(Coordinate coordinate, GameMap gameMap) {
 		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
@@ -77,8 +78,18 @@ public class Lemming extends Component {
 		free = true;
 	}
 	
+	public void invertDirection(){
+		getDesiredDirection().invert();
+		hasJustInvert = true;
+	}
+	
+	public boolean getHasJustInvert(){
+		return hasJustInvert;
+	}
+	
 	@Override
 	public void step() {
+		hasJustInvert = false;
 		state.step();
 	}
 	

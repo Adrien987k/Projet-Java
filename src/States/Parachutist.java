@@ -41,10 +41,9 @@ public class Parachutist extends AbsState {
 					lemming.destroy();
 					return true;
 				}
-				lemming.setRealDirection(Direction.DOWN());
 				lemming.decFalling();
 				hasAlreadyFell = true;
-				move();
+				move(Direction.DOWN());
 			} else {
 				hasAlreadyFell = false;
 			}

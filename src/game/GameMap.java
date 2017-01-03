@@ -22,6 +22,7 @@ import view.Type;
 public class GameMap extends MyObservable implements MyObserver {
 	
 	public static final int LEMMING_GENERATION_RATE = 10;
+	public static final int NOTIFY_RATE = 1;
 	
 	private boolean isFreeze = false;		
 	private IFactory factory;
@@ -115,9 +116,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		currentSpeed = speed;
 		running = true;
 		while(running) {
-			notifyEveryone();
 			step();
-			notifyEveryone();
 			try {
 				while(getIsFreeze()) {
 					Thread.sleep(currentSpeed);
@@ -130,7 +129,6 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private void step() {
-		
 		cursorGeneration++;
 		if(cursorGeneration == LEMMING_GENERATION_RATE && nbRemainingLemming > 0){
 			generateLemming();
@@ -144,10 +142,9 @@ public class GameMap extends MyObservable implements MyObserver {
 			}
 		}
 		getDataAgent().addChangeToAgent(createDataChange());
-
-		notifyEveryone();
-		
-
+		for(int i = 0; i < NOTIFY_RATE; i++){			
+			notifyEveryone();
+		}
 	}
 	
 	private void init() {
@@ -271,8 +268,8 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	public void notifyEveryone() {
-		notifyAgents();
 		notifyObserver();
+		notifyAgents();
 	}
 	
 	public void notifyAgents() {
