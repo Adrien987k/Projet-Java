@@ -15,11 +15,22 @@ class ButtonListener implements ActionListener {
 		return actionButton;
 	}
 	
+	public AllView getView() {
+		return view;
+	}
+	
+	public void instantEffect() {
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		view.setCurrentAction(actionButton.getActionType());
-		//getActionButton().notifiyAgents();
-		System.out.println(actionButton.getActionTitle());
+		if(getView().getLastActionButtonSelected() != null)
+			getView().getLastActionButtonSelected().isLast(false);
+		getView().setLastActionButtonSelected(getActionButton());
+		getView().setLastActionSelected(getActionButton().getActionType());
+		getActionButton().isLast(true);
+		instantEffect();
 	}
 	
 }

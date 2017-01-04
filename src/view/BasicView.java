@@ -39,13 +39,7 @@ public class BasicView extends AllView {
 	}
 
 	@Override
-	public void setCurrentAction(ActionType actionType) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ActionType getCurrentAction() {
+	public ActionType getLastActionSelected() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -84,6 +78,24 @@ public class BasicView extends AllView {
 	public Game getGame() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setLastActionButtonSelected(ActionButton lastActionButtonSelected) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ActionButton getLastActionButtonSelected() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLastActionSelected(ActionType actionType) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

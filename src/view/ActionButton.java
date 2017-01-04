@@ -17,7 +17,6 @@ public class ActionButton extends JButton implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("unused")
 	private static final Color DEFAULT_COLOR = Color.WHITE;
 	public static final int X = 100;
 	public static final int Y = 100;
@@ -26,8 +25,8 @@ public class ActionButton extends JButton implements MouseListener {
 	
 
 	private ActionType actionType;
-	
-	  private ImageIcon icon;
+	private Color currentColor = DEFAULT_COLOR;
+	private ImageIcon icon;
 
 	  @Deprecated
 	  public ActionButton(ActionType actionType){
@@ -58,6 +57,7 @@ public class ActionButton extends JButton implements MouseListener {
 		    this.actionBar = actionBar;
 		    this.actionType	= actionType;
 		    setPreferredSize(new Dimension(X,Y));
+		    setBackground(DEFAULT_COLOR);
 		    try {
 		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
 		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
@@ -85,6 +85,12 @@ public class ActionButton extends JButton implements MouseListener {
 		return actionBar;
 	}
 	
+	public Color getCurrentColor() {
+		return currentColor;
+	}
+	public Color setCurrentColor(Color color) {
+		return this.currentColor = color;
+	}	
 	@Override
 	public void mouseClicked(MouseEvent e) {}
 
@@ -92,12 +98,12 @@ public class ActionButton extends JButton implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		AllView view = getActionBar().getView();
 		view.getInformationPanel().getActionDescription().setText(getActionType().getDescription());
-		//TODO mettre en surbrillance
+		setBackground(getCurrentColor().darker());
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		//TODO enlever la surbrillance
+		setBackground(getCurrentColor());
 	}
 
 	@Override
@@ -105,4 +111,10 @@ public class ActionButton extends JButton implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {}
+	
+	public void isLast(boolean isLast) {
+		if(isLast) setCurrentColor(Color.YELLOW);
+		else setCurrentColor(DEFAULT_COLOR);
+		setBackground(getCurrentColor());
+	}
 }

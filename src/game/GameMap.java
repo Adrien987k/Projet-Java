@@ -125,7 +125,9 @@ public class GameMap extends MyObservable implements MyObserver {
 		if(speed <= 0) speed = defaultSpeed;
 		currentSpeed = speed;
 		while(running) {
+			notifyEveryone();
 			step();
+			notifyEveryone();
 			updateRunning();
 			try {
 				while(getIsFreeze()) {
