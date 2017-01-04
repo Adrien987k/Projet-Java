@@ -23,6 +23,7 @@ public class AdvancedView extends AllView {
 	
 	private static final ActionType DEFAULT_ACTION = ActionType.NONE;
 
+	private Game game;
 	private JFrame frame;
 	private GamePanel gamePanel;
 	private ActionBar actionBar;
@@ -32,6 +33,7 @@ public class AdvancedView extends AllView {
 	
 	public AdvancedView(int x, int y, Game game, int scale) {
 		frame = createAdvancedView(x, y, game, scale);
+		this.game = game;
 		establishConnexions(game);
 	}
 	
@@ -58,15 +60,17 @@ public class AdvancedView extends AllView {
 		return frame;
 	}
 	
+	
 	public void establishConnexions(Game game) {
 		game.registerObserver(this);
 		
-		actionBar.getActionAgent().registerObserver(getInformationPanel().getDescriptionAgent());
-		getInformationPanel().getDescriptionAgent().registerObserver(informationPanel);
+		//actionBar.getDescriptionAgent().registerObserver(getInformationPanel().getDescriptionAgent());
+		//getInformationPanel().getDescriptionAgent().registerObserver(informationPanel);
 	
 	}
 	
 	/* Créer un bouton effectuant l'action donnée en paramètre */
+	@Deprecated
 	public ActionButton createActionButton(ActionType actionType) {
 		ActionButton button = new ActionButton(actionType);
 		button.addActionListener(new ButtonListener(this,button));
@@ -95,6 +99,10 @@ public class AdvancedView extends AllView {
 	@Override
 	public ActionBar getActionBar() {
 		return actionBar;
+	}
+	@Override
+	public Game getGame() {
+		return game;
 	}
 	/* A chaque fois qu'une action est bien faite,
 	 * on remet l'action actuelle par défaut.

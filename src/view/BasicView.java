@@ -38,4 +38,52 @@ public class BasicView extends AllView {
 		notifyObserver();
 	}
 
+	@Override
+	public void setCurrentAction(ActionType actionType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ActionType getCurrentAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JFrame getFrame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void switchToDefaultAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public InformationPanel getInformationPanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GamePanel getGamePanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActionBar getActionBar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Game getGame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

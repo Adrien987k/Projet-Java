@@ -22,16 +22,11 @@ public class ActionButton extends JButton implements MouseListener {
 	public static final int X = 100;
 	public static final int Y = 100;
 	
-	private Agent informationAgent = new Agent();
-	private Agent timeAgent = new Agent();
-	private Agent addLemmingAgent = new Agent();
-	private Agent genocideAgent = new Agent();
-	
+	private ActionBar actionBar;
 	
 
 	private ActionType actionType;
 	
-	  /*pour rajouter un logo différent pour chque bouton*/
 	  private ImageIcon icon;
 
 	  @Deprecated
@@ -41,7 +36,7 @@ public class ActionButton extends JButton implements MouseListener {
 	    this.actionType	= actionType;
 	    addMouseListener(this);
 	  }
-	  
+	  @Deprecated
 	  public ActionButton(ActionType actionType, String imagePath){
 		    super();
 		    //setBackground(actionType.getColor());
@@ -57,12 +52,23 @@ public class ActionButton extends JButton implements MouseListener {
 		    
 		    addMouseListener(this);
 		  }
-	  
-	public void notifiyAgents() {
-		getTimeAgent().notifyObserver();
-		getAddLemmingAgent().notifyObserver();
-		getGenocideAgent().notifyObserver();
-	}
+	  public ActionButton(ActionBar actionBar, ActionType actionType, String imagePath){
+		    super();
+		    //setBackground(actionType.getColor());
+		    this.actionBar = actionBar;
+		    this.actionType	= actionType;
+		    setPreferredSize(new Dimension(X,Y));
+		    try {
+		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
+		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
+		        setIcon(icon);
+		      } catch (IOException e) {
+		        setText(getActionTitle());
+		      }
+		    
+		    addMouseListener(this);
+		  }
+
 	public String getActionTitle() {
 		return actionType.getTitle();
 	}
@@ -74,50 +80,29 @@ public class ActionButton extends JButton implements MouseListener {
 	public ActionType getActionType() {
 		return actionType;
 	}
-
-	public Agent getAddLemmingAgent() {
-		return addLemmingAgent;
-	}
-	public Agent getInformationAgent() {
-		return informationAgent;
-	}
-	public Agent getTimeAgent() {
-		return timeAgent;
-	}
-	public Agent getGenocideAgent() {
-		return genocideAgent;
+	
+	public ActionBar getActionBar() {
+		return actionBar;
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		informationAgent.addChange(new ChangeAction(actionType));
-		informationAgent.notifyObserver();
-//		setBackground(getActionType().getColor().brighter());
+		AllView view = getActionBar().getView();
+		view.getInformationPanel().getActionDescription().setText(getActionType().getDescription());
+		//TODO mettre en surbrillance
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		//setBackground(getActionType().getColor());
-		
+		//TODO enlever la surbrillance
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void mousePressed(MouseEvent e) {}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
+	public void mouseReleased(MouseEvent e) {}
 }

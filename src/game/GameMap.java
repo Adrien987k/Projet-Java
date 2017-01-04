@@ -13,7 +13,6 @@ import view.Agent;
 import view.ChangeCase;
 import view.ChangeData;
 import view.ChangeMemory;
-import view.ChangeStateHere;
 import view.MyObservable;
 import view.MyObserver;
 import view.Type;
@@ -32,35 +31,9 @@ public class GameMap extends MyObservable implements MyObserver {
 	private boolean running = false;
 	private int cursorStart = 0;
 	private int cursorGeneration = 0;
+	
 	private Agent caseAgent = new Agent();
 	private Agent dataAgent = new Agent();
-	private Agent mouseAgent = new Agent() {
-		@Override
-		public void update(List<? extends AbsChange> changes) {
-			for(AbsChange c: changes) {
-				changeStateHere(((ChangeStateHere) c).getCoordinate(), ((ChangeStateHere) c).getState());
-			}
-		}
-	};
-	private Agent timeAgent = new Agent() {
-		@Override
-		public void update(List<? extends AbsChange> changes) {
-			pause();
-		}
-	};
-	private Agent genocideAgent = new Agent() {
-		@Override
-		public void update(List<? extends AbsChange> changes) {
-			killAllLemmings();
-		}
-	};
-	private Agent addLemmingAgent = new Agent() {       
-		@Override
-		public void update(List<? extends AbsChange> changes) {
-			if(getNbRemainingLemming() > 0)
-					generateLemming();
-		}
-	};
 	
 	private int nbRemainingLemming;
 	private int nbFreeLemming = 0;
@@ -209,6 +182,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	public void update(List<? extends AbsChange> changes) {
 		@SuppressWarnings("unchecked")
 		ArrayList<ChangeMemory> Mchanges = (ArrayList<ChangeMemory>) changes;
+		
 		for(ChangeMemory c : Mchanges){
 			if(c.getComponent() != null){
 				Coordinate last = c.getComponent().getCoordinate();
@@ -220,12 +194,14 @@ public class GameMap extends MyObservable implements MyObserver {
 			if(c.getComponentNext() != null){
 				Coordinate next = c.getCoordinate();
 				Component componentNext = c.getComponentNext();
+				
 				List<Component> nextArea = getArea(next);
 				nextArea.add(componentNext);
 				componentNext.setCoordinate(next);
 				getCaseAgent().addChangeToAgent(new ChangeCase(next));				
 			}
 		}
+		notifyAgents();
 	}
 	
 	public IFactory getFactory(){
@@ -270,8 +246,8 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	public void notifyEveryone() {
-		notifyAgents();
 		notifyObserver();
+		notifyAgents();
 	}
 	
 	public void notifyAgents() {
@@ -285,19 +261,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	public Agent getDataAgent() {
 		return dataAgent;
 	}
-	public Agent getMouseAgent() {
-		return mouseAgent;
-	}
-	public Agent getTimeAgent() {
-		return timeAgent;
-	}
-	public Agent getAddLemmingAgent() {
-		return addLemmingAgent;
-	}
-	public Agent getGenocideAgent() {
-		return genocideAgent;
-	}
-	
+
 	public AbsChange createDataChange() {
 		return new ChangeData(getNbDeadLemming(),getNbFreeLemming(),getNbRemainingLemming());
 	}
@@ -314,7 +278,13 @@ public class GameMap extends MyObservable implements MyObserver {
 		return nbDeadLemming;
 	}
 	
-	private void killAllLemmings() {
+	public void addLemming() {
+		if(getNbRemainingLemming() > 0)
+			generateLemming();
+	}
+		
+	
+	public void killAllLemmings() {
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
 				for(Component c : gridComponents[i][j]){
@@ -324,7 +294,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 	}
 	
-	private boolean changeStateHere(Coordinate c,State state) {
+	public boolean changeStateHere(Coordinate c,State state) {
 		List<Component> area = getArea(c);
 		for(Component component: area) {
 			if(component.changeStateIf(state))
@@ -332,8 +302,10 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 		return false;
 	}
+}
+	
 
 	
 	
 	
-}
+

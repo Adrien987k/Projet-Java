@@ -89,6 +89,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 			cd = c.getCoordinate();
 			types = c.getChangeType();
 			
+			//TODO: faire comme avec les couleurs, pas beosin de test
 			for(Type t : types) {
 				if(t == Type.SIMPLE_DESTRUCTIBLE)
 					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
@@ -113,8 +114,11 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		System.out.println("x: " + e.getY()/scale + " y: "+ e.getX()/scale);
 		State currentState = getView().getCurrentAction().getState();
 		if(currentState != null){
+			getView().getGame().getGameMap().changeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale), currentState);
+			/*
 			getMouseAgent().addChangeToAgent(new ChangeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale), currentState));
 			getMouseAgent().notifyObserver();
+			*/
 		}	
 		//getView().switchToDefaultAction();
 	}
