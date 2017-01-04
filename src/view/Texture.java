@@ -17,6 +17,7 @@ public enum Texture {
 	TP("data\\img\\defaultTexturePack\\blocksTexture\\tp.jpg"),
 	BOMBER("data\\img\\defaultTexturePack\\blocksTexture\\bomber.jpg"),
 	WALKER("data\\img\\defaultTexturePack\\blocksTexture\\walker.jpg"),
+	LEMMING("data\\img\\defaultTexturePack\\blocksTexture\\lemming.jpg"),
 	CARPENTER("data\\img\\defaultTexturePack\\blocksTexture\\carpenter.jpg"),
 	TUNNELER("data\\img\\defaultTexturePack\\blocksTexture\\tunneler.jpg"),
 	DIGGER("data\\img\\defaultTexturePack\\blocksTexture\\digger.jpg"),
