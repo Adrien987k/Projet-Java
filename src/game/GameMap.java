@@ -200,7 +200,6 @@ public class GameMap extends MyObservable implements MyObserver {
 			if(c.getComponentNext() != null){
 				Coordinate next = c.getCoordinate();
 				Component componentNext = c.getComponentNext();
-				
 				List<Component> nextArea = getArea(next);
 				nextArea.add(componentNext);
 				componentNext.setCoordinate(next);

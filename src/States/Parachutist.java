@@ -35,6 +35,10 @@ public class Parachutist extends AbsState {
 				canFall = false;
 			}
 			if(component.isKilling()) dieIfFalling = true;
+			if(!component.canBeSkipped()){
+				canFall = true;
+				continue;
+			}
 		}
 		if(canFall){
 			if(!hasAlreadyFell){
