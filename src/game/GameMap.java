@@ -30,7 +30,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	private int speed;
 	private int nbLemmings;
 	private List<Coordinate> starts = new ArrayList<>();
-	private boolean running = false;
+	private boolean running = true;
 	private int cursorStart = 0;
 	private int cursorGeneration = 0;
 	private Agent caseAgent = new Agent();
@@ -113,9 +113,9 @@ public class GameMap extends MyObservable implements MyObserver {
 		init();
 		if(speed <= 0) speed = defaultSpeed;
 		currentSpeed = speed;
-		running = true;
 		while(running) {
 			step();
+			updateRunning();
 			try {
 				while(getIsFreeze()) {
 					Thread.sleep(currentSpeed);
@@ -125,6 +125,10 @@ public class GameMap extends MyObservable implements MyObserver {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private void updateRunning(){
+		if(nbFreeLemming + nbDeadLemming == nbLemmings) running = false;
 	}
 	
 	private void step() {

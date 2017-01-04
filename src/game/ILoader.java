@@ -2,6 +2,6 @@ package game;
 
 public interface ILoader {
 	
-	public GameMap loadFile(String file);
+	public Grid loadFile(String file);
 	
 }

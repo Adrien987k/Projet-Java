@@ -63,6 +63,10 @@ public class Climber extends AbsState	{
 		if(walkDiag()) return true;
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
 		List<Component> top = lemming.checkSide(Direction.UP());
+		if(foward.isEmpty()) {
+			lemming.destroy();
+			return true;
+		}
 		boolean canGoUp = false;
 		boolean canGoFoward = true;
 		for(Component fcomponent : foward){

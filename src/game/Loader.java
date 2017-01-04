@@ -11,54 +11,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import factory.IFactory;
-
 public class Loader implements ILoader {
 	
 	//On stoque les grids pour ne pas avoir a reloader les fichiers
 	private Map<String, Grid> grids = new HashMap<>();
-	private IFactory factory;
 	
-	public Loader(IFactory factory){
-		this.factory = factory;
-	}
-	
-	public Loader(IFactory factory, String filePath){
-		this.factory = factory;
-		grids.put(filePath, loadGrid(filePath));
+	public Loader(){
+		
 	}
 	
 	@Override
-	public GameMap loadFile(String filePath){
+	public Grid loadFile(String filePath){
 		if(!grids.containsKey(filePath)) grids.put(filePath, loadGrid(filePath));
-		Grid grid = grids.get(filePath);
-		GameMap result = new GameMap(factory, grid);
-		return result;
+		return grids.get(filePath);
+		
 	}
 	
-	/*private List<ArrayList<String>> loadGrid(String filePath) {
-		Path path = Paths.get(filePath);
-		List<String> lines = null; 
-		try {
-			lines = Files.readAllLines(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		List<ArrayList<String>> grid = new ArrayList<>();
-		String[] caracters;
-		int i = 0;
-		for(String line : lines){
-			caracters = line.split(" ");
-			for(String c : caracters){
-				grid.get(i).add(c);
-			}
-			i++;
-		}
-		return grid;
-	}*/
-	
-	//TODO Cette méthode pourra être utiliser si le fichier contient plus 
-	//d'info que juste la grille.
 	private Grid loadGrid(String filePath) {
 		Path path = Paths.get(filePath);
 		int lineCount = 0;

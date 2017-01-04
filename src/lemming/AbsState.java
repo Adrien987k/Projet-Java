@@ -73,6 +73,10 @@ public abstract class AbsState {
 	public boolean walk(){
 		if(walkDiag()) return true;
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
+		if(foward.isEmpty()) {
+			lemming.destroy();
+			return true;
+		}
 		for(Component fcomponent : foward){
 			if(fcomponent.isKilling()){
 				fcomponent.killLemming(lemming);

@@ -91,6 +91,10 @@ public class Lemming extends Component {
 	@Override
 	public void step() {
 		hasJustInvert = false;
+		System.out.println(getCoordinate().getX() + " " + getCoordinate().getY());
+		if(getGameMap().isOut(getCoordinate())){
+			destroy();
+		}
 		state.step();
 	}
 	
