@@ -61,6 +61,19 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		texture.put(Type.SIMPLE_INDESTRUCTIBLE,Texture.SI);
 		texture.put(Type.AGAIN,Texture.AGAIN);
 		texture.put(Type.START,Texture.START);
+		texture.put(Type.END,Texture.END);
+		texture.put(Type.TP,Texture.TP);
+		texture.put(Type.BOMB,Texture.BOMB);
+		texture.put(Type.LAVA,Texture.LAVA);
+		texture.put(Type.VOID,Texture.VOID);
+		texture.put(Type.WALKER,Texture.WALKER);
+		texture.put(Type.BOMBER,Texture.BOMBER);
+		texture.put(Type.CARPENTER,Texture.CARPENTER);
+		texture.put(Type.DIGGER,Texture.DIGGER);
+		texture.put(Type.TUNNELER,Texture.TUNNELER);
+		texture.put(Type.PARACHUTIST,Texture.PARACHUTIST);
+		texture.put(Type.CLIMBER,Texture.CLIMBER);
+		
 		addMouseListener(this);
 	}
 
@@ -81,7 +94,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	}
 	
 	@Override
-	public void render(List<ChangeGraphics> changes){
+	public void render(List<ChangeGraphics> changes) {
 		g = img.getGraphics();
 		Coordinate cd;
 		List<Type> types;
@@ -91,18 +104,20 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 			
 			//TODO: faire comme avec les couleurs, pas beosin de test
 			for(Type t : types) {
-				if(t == Type.SIMPLE_DESTRUCTIBLE)
+				g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
+				/*	if(t == Type.SIMPLE_DESTRUCTIBLE)
 					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
 				else if(t == Type.SIMPLE_INDESTRUCTIBLE)
 					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
 				else if(t == Type.AGAIN)
 					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
-				else if(t == Type.START)
+				else if(t == Type.WALKER ||t == Type.BOMBER|| t == Type.LAVA || t == Type.END || t == Type.TP|| t == Type.BOMB || t == Type.START)
 					g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
 				else {
 					g.setColor(color.get(t));
 					g.fillRect(cd.getY() * scale, cd.getX() * scale, scale, scale);
 				}
+				*/
 			}
 		}
 		g.dispose();

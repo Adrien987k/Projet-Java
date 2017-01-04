@@ -26,16 +26,16 @@ public class ActionBar extends JPanel {
 		actionBar.setLayout(new GridLayout(2,7));		
 		
 		ActionButton button;
-		actionBar.addButton(actionBar, ActionType.SET_BLOCKER, view,"data\\img\\blocker.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_CARPENTER, view,"data\\img\\carpenter.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_DIGGER, view,"data\\img\\digger.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_PARACHUTIST, view,"data\\img\\parachutist.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_TUNNELER, view,"data\\img\\tunneler.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view,"data\\img\\bomber.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_BLOCKER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\blocker.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_CARPENTER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\carpenter.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_DIGGER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\digger.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_PARACHUTIST, view,"data\\img\\defaultTexturePack\\actionBarIcon\\parachutist.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_TUNNELER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\tunneler.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\bomber.jpg");
 		//TODO bouton maudit
-		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view,"data\\img\\climber.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\climber.jpg");
 		
-		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"data\\img\\addLemming.jpg");
+		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\addLemming.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -44,7 +44,7 @@ public class ActionBar extends JPanel {
 		});
 		actionBar.add(button);
 		
-		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"data\\img\\armaggedon.jpg");
+		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\armaggedon.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,7 +53,7 @@ public class ActionBar extends JPanel {
 		});
 		actionBar.add(button);
 
-		button = new ActionButton(actionBar,ActionType.PAUSE,"data\\img\\pause.jpg");
+		button = new ActionButton(actionBar,ActionType.PAUSE,"data\\img\\defaultTexturePack\\actionBarIcon\\pause.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void actionPerformed(ActionEvent e) {
