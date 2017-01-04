@@ -18,9 +18,15 @@ public class Climber extends AbsState	{
 
 	@Override
 	public void step() {
+		boolean hasWalked = true;
 		boolean hasMoved = collision();
 		if(!hasMoved) hasMoved |= fall();
-		if(!hasMoved) walk();
+		if(!hasMoved){
+			hasWalked = walk();
+		}
+		if(!hasWalked){
+			lemming.changeState(State.PARACHUTIST);
+		}
 	}
 	
 	@Override
@@ -56,24 +62,34 @@ public class Climber extends AbsState	{
 	public boolean walk(){
 		if(walkDiag()) return true;
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
+		List<Component> top = lemming.checkSide(Direction.UP());
 		boolean canGoUp = false;
+		boolean canGoFoward = true;
 		for(Component fcomponent : foward){
 			if(fcomponent.isKilling()){
 				fcomponent.killLemming(lemming);
 				return true;
 			}
-			if(!fcomponent.isVoid()) canGoUp = true;
+			if(!fcomponent.isVoid()){
+				canGoUp = true;
+				canGoFoward = false;
+			}
 			if(!fcomponent.canBeSkipped()) {
 				canGoUp = false;
 				continue;
 			}
 		}
+		for(Component tcomponent : top){
+			if(!tcomponent.isVoid()) canGoUp = false;
+		}
 		if(canGoUp){
-			lemming.setRealDirection(Direction.UP());
 			move(Direction.UP());
 			return true;
 		}
-		move(lemming.getDesiredDirection());
+		if(canGoFoward) {
+			move(lemming.getDesiredDirection());
+			return true;
+		}
 		return false;
 	}
 	
