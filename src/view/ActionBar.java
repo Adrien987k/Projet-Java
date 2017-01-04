@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JPanel;
 
-public class ActionBar extends JPanel {
+public class ActionBar extends JPanel{
 	/**
 	 * 
 	 */
@@ -32,14 +32,18 @@ public class ActionBar extends JPanel {
 		actionBar.addButton(actionBar, ActionType.SET_PARACHUTIST, view,"data\\img\\defaultTexturePack\\actionBarIcon\\parachutist.jpg");
 		actionBar.addButton(actionBar, ActionType.SET_TUNNELER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\tunneler.jpg");
 		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\bomber.jpg");
-		//TODO bouton maudit
 		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\climber.jpg");
 		
 		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\addLemming.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void instantEffect() {
 				view.getGame().getGameMap().addLemming();
+			}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				super.actionPerformed(e);
+				super.getActionButton().isLast(false);
 			}
 		});
 		actionBar.add(button);
@@ -47,8 +51,13 @@ public class ActionBar extends JPanel {
 		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\armaggedon.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void instantEffect() {
 				view.getGame().getGameMap().killAllLemmings();
+			}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				super.actionPerformed(e);
+				super.getActionButton().isLast(false);
 			}
 		});
 		actionBar.add(button);
@@ -56,8 +65,13 @@ public class ActionBar extends JPanel {
 		button = new ActionButton(actionBar,ActionType.PAUSE,"data\\img\\defaultTexturePack\\actionBarIcon\\pause.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
+			public void instantEffect() {
+				super.view.getGame().getGameMap().pause();
+			}
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				view.getGame().getGameMap().pause();
+				super.actionPerformed(e);
+				super.getActionButton().isLast(false);
 			}
 		});
 		actionBar.add(button);

@@ -21,7 +21,7 @@ public class Game extends MyObservable implements MyObserver {
 	private GameMap gameMap;
 	private IFactory factory;
 	
-	private static final int SCALE = 100;
+	private static final int SCALE = 50;
 	private static final int DEFAULT_SPEED = 25;
 	
 	public Game() {

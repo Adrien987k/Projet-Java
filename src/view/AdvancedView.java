@@ -21,6 +21,7 @@ import game.Game;
 
 public class AdvancedView extends AllView {
 	
+	@SuppressWarnings("unused")
 	private static final ActionType DEFAULT_ACTION = ActionType.NONE;
 
 	private Game game;
@@ -28,10 +29,12 @@ public class AdvancedView extends AllView {
 	private GamePanel gamePanel;
 	private ActionBar actionBar;
 	private InformationPanel informationPanel;
-	private ActionType currentAction;
+	private ActionType lastActionSelected;
+	private ActionButton lastActionButtonSelected;
 	
-	
+
 	public AdvancedView(int x, int y, Game game, int scale) {
+		super();
 		frame = createAdvancedView(x, y, game, scale);
 		this.game = game;
 		establishConnexions(game);
@@ -76,13 +79,10 @@ public class AdvancedView extends AllView {
 		button.addActionListener(new ButtonListener(this,button));
 		return button;
 	}
+
 	@Override
-	public void setCurrentAction(ActionType actionType) {
-		currentAction = actionType;
-	}
-	@Override
-	public ActionType getCurrentAction() {
-		return currentAction;
+	public ActionType getLastActionSelected() {
+		return lastActionSelected;
 	}
 	@Override
 	public JFrame getFrame() {
@@ -104,15 +104,26 @@ public class AdvancedView extends AllView {
 	public Game getGame() {
 		return game;
 	}
-	/* A chaque fois qu'une action est bien faite,
-	 * on remet l'action actuelle par défaut.
-	 */
+	
 	@Override
 	public void switchToDefaultAction() {
-		setCurrentAction(DEFAULT_ACTION);
+		setLastActionButtonSelected(null);
+		setLastActionSelected(ActionType.NONE);
 		informationPanel.getActionDescription().setText(ActionType.NONE.getDescription());
-	}                    
+	}              
+	
+	@Override
+	public void setLastActionSelected(ActionType lastActionSelected) {
+		this.lastActionSelected = lastActionSelected;
+	}
 
+	public ActionButton getLastActionButtonSelected() {
+		return lastActionButtonSelected;
+	}
+	public void setLastActionButtonSelected(ActionButton lastActionButtonSelected) {
+		this.lastActionButtonSelected = lastActionButtonSelected;
+	}
+	
 	@Override
 	public void update(List<? extends AbsChange> changes) {
 		addAllChanges(changes);

@@ -31,7 +31,11 @@ public abstract class AbsState {
 			if(!component.isVoid() && !component.isKilling()){
 				canFall = false;
 			}
-			if(component.isKilling()) dieIfFalling = true; 
+			if(component.isKilling()) dieIfFalling = true;
+			if(!component.canBeSkipped()) {
+				canFall = true;
+				continue;
+			}
 		}
 		if(canFall && !dieIfFalling){
 			lemming.decFalling();
@@ -83,8 +87,17 @@ public abstract class AbsState {
 				return true;
 			} else if(fcomponent.isInverting()){
 				lemming.invertDirection();
-				move(lemming.getDesiredDirection());
-				return true;
+				List<Component> fowardInvert = lemming.checkSide(lemming.getDesiredDirection());
+				boolean canGoInvert = true;
+				for(Component fiComponent : fowardInvert){
+					if(!fiComponent.isVoid()) canGoInvert = false;
+				}
+				if(canGoInvert){					
+					move(lemming.getDesiredDirection());
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 		move(lemming.getDesiredDirection());
