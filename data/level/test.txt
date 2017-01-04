@@ -1,5 +1,13 @@
-10
-1000
+nbLemmings 10
+speed 1000
+objective 5
+blocker 1
+bomber 1
+carpenter 1
+climber 1
+digger 3
+parachutist 5
+tunneler 2
 V V V V V V V V V V SD SI V SI V V V V V V V V V V V V V SI
 V V V V V V V V V V SD SI V SI V V V V V V V V V V V V V SI
 S V V V V V V V V V SD SI V SI V V V V V V V V V V V V V SI

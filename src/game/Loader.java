@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,21 +29,48 @@ public class Loader implements ILoader {
 		
 	}
 	
+	private String getKeyNumberN(Map<String, Integer> map, int n){
+		int compteur = 0;
+		Iterator<String> mapI = map.keySet().iterator();
+		while(mapI.hasNext()){
+			if(compteur == n){
+				return (String) mapI.next();
+			} else {
+				mapI.next();
+				compteur++;
+			}
+		}
+		throw new IllegalArgumentException("getNumberN : N trop grand");
+	}
+	
 	private Grid loadGrid(String filePath) {
 		Path path = Paths.get(filePath);
 		int lineCount = 0;
 		List<ArrayList<String>> data = new ArrayList<>();
-		int nbLemmings = 0;
-		int speed = 0;
+		Map<String, Integer> levelParameters = new LinkedHashMap<>();
+		levelParameters.put("nbLemmings", 0);
+		levelParameters.put("speed", 0);
+		levelParameters.put("objective", 0);
+		levelParameters.put("blocker", 0);
+		levelParameters.put("bomber", 0);
+		levelParameters.put("carpenter", 0);
+		levelParameters.put("climber", 0);
+		levelParameters.put("digger", 0);
+		levelParameters.put("parachutist", 0);
+		levelParameters.put("tunneler", 0);
 		int i = 0;
 		String[] caracters;
+		boolean formatOk = true;
 		try (BufferedReader reader = Files.newBufferedReader(path, 
 									StandardCharsets.UTF_8)){
 				String line = null;
 				while ((line = reader.readLine()) != null) {
-					if(lineCount == 0) nbLemmings = Integer.parseInt(line);
-					else if(lineCount == 1) speed = Integer.parseInt(line);
-					else{
+					caracters = line.split(" ");
+					if(lineCount < levelParameters.size()){
+						String string = getKeyNumberN(levelParameters, lineCount);
+						if(!caracters[0].equals(string)) formatOk = false;
+						levelParameters.replace(string, Integer.parseInt(caracters[1]));
+					} else {
 						data.add(new ArrayList<String>());
 						caracters = line.split(" ");
 						for(String c : caracters){
@@ -51,10 +80,11 @@ public class Loader implements ILoader {
 					}
 					lineCount++;
 				}
+				if(!formatOk) throw new IllegalArgumentException("Format de fichier non reconnu");
 		} catch(IOException ioe){
 			ioe.printStackTrace();
 		}
-		Grid result = new Grid(data, nbLemmings, speed);
+		Grid result = new Grid(data, levelParameters);
 		return result;
 	}
 

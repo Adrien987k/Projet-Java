@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import States.State;
 import block.TP;
@@ -25,9 +26,10 @@ public class GameMap extends MyObservable implements MyObserver {
 	private boolean isFreeze = false;		
 	private IFactory factory;
 	private ArrayList<Component>[][] gridComponents;
-	private int currentSpeed;
 	private int speed;
-	private int nbLemmings;
+	private int currentSpeed;
+	private Map<String, Integer> levelParameters;
+	
 	private List<Coordinate> starts = new ArrayList<>();
 	private boolean running = true;
 	private int cursorStart = 0;
@@ -43,10 +45,46 @@ public class GameMap extends MyObservable implements MyObserver {
 	public GameMap(IFactory factory, Grid grid){
 		this.factory = factory;
 		gridComponents = processGrid(grid.getData());
-		nbLemmings = grid.getNbLemmings();
-		nbRemainingLemming = nbLemmings;
-		speed = grid.getSpeed();
+		levelParameters = grid.getLevelParameters();
+		nbRemainingLemming = getNbLemmings();
+		speed = levelParameters.get("speed");
 		registerObserver(this);
+	}
+	
+	public int getNbLemmings(){
+		return levelParameters.get("nbLemmings");
+	}
+
+	public int getObjective(){
+		return levelParameters.get("objective");
+	}
+	
+	public int getNbBlocker(){
+		return levelParameters.get("blocker");
+	}
+	
+	public int getNbBomber(){
+		return levelParameters.get("bomber");
+	}
+	
+	public int getNbCarpenter(){
+		return levelParameters.get("carpenter");
+	}
+	
+	public int getNbClimber(){
+		return levelParameters.get("climber");
+	}
+	
+	public int getNbDigger(){
+		return levelParameters.get("digger");
+	}
+	
+	public int getParachutist(){
+		return levelParameters.get("parachutist");
+	}
+	
+	public int getTunneler(){
+		return levelParameters.get("tunneler");
 	}
 	
 	private ArrayList<Component>[][] processGrid(List<ArrayList<String>> data){
@@ -101,7 +139,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	private void updateRunning(){
-		if(nbFreeLemming + nbDeadLemming == nbLemmings) running = false;
+		if(nbFreeLemming + nbDeadLemming == getNbLemmings()) running = false;
 	}
 	
 	private void step() {

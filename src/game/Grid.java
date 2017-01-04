@@ -1,32 +1,26 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Grid {
 	
 	private List<ArrayList<String>> data = new ArrayList<>();
-	private int nbLemmings;
-	private int speed;
+	private Map<String, Integer> levelParameters = new HashMap<>();
 	
-	public Grid(List<ArrayList<String>> data, int nbLemmings, int speed){
+	public Grid(List<ArrayList<String>> data, Map<String, Integer> levelParameters){
 		this.data = data;
-		this.nbLemmings = nbLemmings;
-		this.speed = speed;
+		this.levelParameters = levelParameters;
+	}
+	
+	public Map<String, Integer> getLevelParameters(){
+		return levelParameters;
 	}
 
 	public List<ArrayList<String>> getData() {
 		return data;
 	}
-
-	public int getNbLemmings() {
-		return nbLemmings;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
 	
-	
-
 }
