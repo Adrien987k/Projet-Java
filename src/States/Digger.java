@@ -31,7 +31,6 @@ public class Digger extends AbsState {
 		}
 		if(nbBlockToDig == 0 || (hasWalked && hasDug)){
 			lemming.changeState(State.WALKER);
-			return;
 		}
 	}
 	
