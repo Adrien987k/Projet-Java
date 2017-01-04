@@ -11,6 +11,7 @@ public abstract class AbsState {
 	
 	public AbsState(Lemming lemming) {
 		this.lemming = lemming;
+		lemming.resetFalling();
 	}
 	
 	public boolean collision(){
@@ -33,9 +34,8 @@ public abstract class AbsState {
 			if(component.isKilling()) dieIfFalling = true; 
 		}
 		if(canFall && !dieIfFalling){
-			lemming.setRealDirection(Direction.DOWN());
 			lemming.decFalling();
-			move();
+			move(Direction.DOWN());
 			return true;
 		}
 		if(lemming.getFalling() <= 0 || dieIfFalling){
@@ -46,11 +46,13 @@ public abstract class AbsState {
 		return false;
 	}
 	
-	public boolean walk(){
+	public boolean walkDiag(){
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
 		List<Component> diagonal = lemming.checkSide(lemming.getDesiredDirection().checkAdd(Direction.UP()));
+		List<Component> top = lemming.checkSide(Direction.UP());
 		boolean diagIsVoid = true;
 		boolean fowardIsNotVoid = false;
+		boolean topIsVoid = true;
 		for(Component dcomponent : diagonal){
 			if(!dcomponent.isVoid()) diagIsVoid = false;
 		}
@@ -58,9 +60,21 @@ public abstract class AbsState {
 			if(!fcomponent.isVoid()) fowardIsNotVoid = true;
 			if(!fcomponent.canBeSkipped()) diagIsVoid = false;
 		}
-		if(diagIsVoid && fowardIsNotVoid){
-			lemming.setRealDirection(lemming.getDesiredDirection().checkAdd(Direction.UP()));
-			move();
+		for(Component tcomponent : top){
+			if(!tcomponent.isVoid()) topIsVoid = false;
+		}
+		if(diagIsVoid && fowardIsNotVoid && topIsVoid){
+			move(lemming.getDesiredDirection().checkAdd(Direction.UP()));
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean walk(){
+		if(walkDiag()) return true;
+		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
+		if(foward.isEmpty()) {
+			lemming.destroy();
 			return true;
 		}
 		for(Component fcomponent : foward){
@@ -68,23 +82,23 @@ public abstract class AbsState {
 				fcomponent.killLemming(lemming);
 				return true;
 			} else if(fcomponent.isInverting()){
-				lemming.getDesiredDirection().invert();
-				lemming.setRealDirection(lemming.getDesiredDirection());
-				move();
+				lemming.invertDirection();
+				move(lemming.getDesiredDirection());
 				return true;
 			}
 		}
-		lemming.setRealDirection(lemming.getDesiredDirection());
-		move();
+		move(lemming.getDesiredDirection());
 		return false;
 	}
 	
-	public void move() {
+	public void move(Direction realDirection) {
+		lemming.setRealDirection(realDirection);
 		lemming.getGameMap().move(lemming.getCoordinate().checkDirection(lemming.getRealDirection()), lemming);
 	}
 	
 	public abstract void step();
 	public abstract Type getTypeByState();
+	public abstract Priority getPriority();
 	
 	public boolean isInverting(){
 		return false;

@@ -20,6 +20,7 @@ import view.Type;
 public class GameMap extends MyObservable implements MyObserver {
 	
 	public static final int LEMMING_GENERATION_RATE = 10;
+	public static final int NOTIFY_RATE = 1;
 	
 	private boolean isFreeze = false;		
 	private IFactory factory;
@@ -28,7 +29,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	private int speed;
 	private int nbLemmings;
 	private List<Coordinate> starts = new ArrayList<>();
-	private boolean running = false;
+	private boolean running = true;
 	private int cursorStart = 0;
 	private int cursorGeneration = 0;
 	
@@ -85,11 +86,9 @@ public class GameMap extends MyObservable implements MyObserver {
 		init();
 		if(speed <= 0) speed = defaultSpeed;
 		currentSpeed = speed;
-		running = true;
 		while(running) {
-			notifyEveryone();
 			step();
-			notifyEveryone();
+			updateRunning();
 			try {
 				while(getIsFreeze()) {
 					Thread.sleep(currentSpeed);
@@ -101,8 +100,11 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 	}
 	
+	private void updateRunning(){
+		if(nbFreeLemming + nbDeadLemming == nbLemmings) running = false;
+	}
+	
 	private void step() {
-		
 		cursorGeneration++;
 		if(cursorGeneration == LEMMING_GENERATION_RATE && nbRemainingLemming > 0){
 			generateLemming();
@@ -116,10 +118,9 @@ public class GameMap extends MyObservable implements MyObserver {
 			}
 		}
 		getDataAgent().addChangeToAgent(createDataChange());
-
-		notifyEveryone();
-		
-
+		for(int i = 0; i < NOTIFY_RATE; i++){			
+			notifyEveryone();
+		}
 	}
 	
 	private void init() {
@@ -183,6 +184,11 @@ public class GameMap extends MyObservable implements MyObserver {
 		@SuppressWarnings("unchecked")
 		ArrayList<ChangeMemory> Mchanges = (ArrayList<ChangeMemory>) changes;
 		
+		//On trie les changements en mettant les suppresions en premier.
+		Mchanges.sort((c1, c2) -> {
+			if(c1.getComponentNext() == null && c2.getComponentNext() != null) return 1;
+			else return -1;
+					});
 		for(ChangeMemory c : Mchanges){
 			if(c.getComponent() != null){
 				Coordinate last = c.getComponent().getCoordinate();
@@ -238,7 +244,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	
 	public List<Type> priorityOrder(Coordinate coordinate) {
 		List<Type> list = new ArrayList<>();
-		getArea(coordinate).sort((e1,e2) -> e1.getPriority() - e2.getPriority());
+		getArea(coordinate).sort((e1,e2) -> e1.getPriority().getValue() - e2.getPriority().getValue());
 		for(Component component: getArea(coordinate)) {
 			list.add(component.getType());
 		}

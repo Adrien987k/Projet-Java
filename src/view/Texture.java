@@ -7,10 +7,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public enum Texture {
-	SD("sd.jpg"),
-	SI("si.jpg"),
-	START("start.jpg"),
-	AGAIN("again.jpg");
+	SD("data\\img\\sd.jpg"),
+	SI("data\\img\\si.jpg"),
+	START("data\\img\\start.jpg"),
+	AGAIN("data\\img\\again.jpg");
 	
 	private Image image;
 	

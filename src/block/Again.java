@@ -1,8 +1,9 @@
 package block;
 
-import game.GameMap;
-import view.Type;
 import component.Coordinate;
+import game.GameMap;
+import lemming.Priority;
+import view.Type;
 
 public class Again extends AbsDestructible {
 
@@ -11,7 +12,7 @@ public class Again extends AbsDestructible {
 	private int nbBlockToGenerate = NB_GENERATION;
 	
 	public Again(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate, PRIORITY_BLOCK, Type.AGAIN, gameMap);
+		super(coordinate, Priority.PRIORITY_BLOCK, Type.AGAIN, gameMap);
 		
 	}
 

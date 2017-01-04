@@ -7,6 +7,7 @@ import component.Component;
 import lemming.AbsState;
 import lemming.Direction;
 import lemming.Lemming;
+import lemming.Priority;
 import view.Type;
 
 public class Parachutist extends AbsState {
@@ -41,10 +42,9 @@ public class Parachutist extends AbsState {
 					lemming.destroy();
 					return true;
 				}
-				lemming.setRealDirection(Direction.DOWN());
 				lemming.decFalling();
 				hasAlreadyFell = true;
-				move();
+				move(Direction.DOWN());
 			} else {
 				hasAlreadyFell = false;
 			}
@@ -57,4 +57,10 @@ public class Parachutist extends AbsState {
 	public Type getTypeByState() {
 		return Type.PARACHUTIST;
 	}
+	
+	@Override
+	public Priority getPriority(){
+		return Priority.PRIORITY_LEMMING_MEDIUM;
+	}
+	
 }

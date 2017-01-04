@@ -5,6 +5,7 @@ import java.util.List;
 import component.Component;
 import lemming.AbsState;
 import lemming.Lemming;
+import lemming.Priority;
 import view.Type;
 
 public class Tunneler extends AbsState {
@@ -45,4 +46,10 @@ public class Tunneler extends AbsState {
 	public Type getTypeByState() {
 		return Type.TUNNELER;
 	}
+	
+	@Override
+	public Priority getPriority(){
+		return Priority.PRIORITY_LEMMING_MEDIUM;
+	}
+	
 }	

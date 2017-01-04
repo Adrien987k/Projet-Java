@@ -18,9 +18,10 @@ public class Lemming extends Component {
 	private Direction desiredDirection;
 	private int falling = DEFAULT_FALLING;
 	private boolean free = false;
+	private boolean hasJustInvert = false;
 	
 	public Lemming(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate, PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
+		super(coordinate, Priority.PRIORITY_LEMMING_WEAK, Type.WALKER, gameMap);
 		state = Factory.makeState(State.WALKER, this);
 		desiredDirection = Direction.RIGHT();
 	}
@@ -63,6 +64,7 @@ public class Lemming extends Component {
 	public void changeState(State state) {
 		this.state = Factory.makeState(state, this);
 		setType(this.state.getTypeByState());
+		setPriority(this.state.getPriority());
 	}
 	
 	public AbsState getState(){
@@ -77,8 +79,22 @@ public class Lemming extends Component {
 		free = true;
 	}
 	
+	public void invertDirection(){
+		getDesiredDirection().invert();
+		hasJustInvert = true;
+	}
+	
+	public boolean getHasJustInvert(){
+		return hasJustInvert;
+	}
+	
 	@Override
 	public void step() {
+		hasJustInvert = false;
+		System.out.println(getCoordinate().getX() + " " + getCoordinate().getY());
+		if(getGameMap().isOut(getCoordinate())){
+			destroy();
+		}
 		state.step();
 	}
 	

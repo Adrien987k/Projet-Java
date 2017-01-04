@@ -3,19 +3,15 @@ package component;
 import States.State;
 import game.GameMap;
 import lemming.Lemming;
+import lemming.Priority;
 import view.Type;
 
 public abstract class Component {
 	
-	public static final int PRIORITY_BLOCK = 0;
-	public static final int PRIORITY_LEMMING_WEAK = 1;
-	public static final int PRIORITY_LEMMING_MEDIUM = 2;
-	public static final int PRIORITY_LEMMING_HIGH = 3;
-	
 	private GameMap gameMap;
 	
 	private Coordinate coordinate;
-	private int priority;
+	private Priority priority;
 	private Type type;
 	
 	protected boolean isLethal = false;
@@ -24,7 +20,7 @@ public abstract class Component {
 		coordinate = new Coordinate();
 	}
 	
-	public Component(Coordinate coordinate, int priority, Type type, GameMap gameMap) {
+	public Component(Coordinate coordinate, Priority priority, Type type, GameMap gameMap) {
 		this.coordinate = coordinate;
 		this.priority = priority;
 		this.type = type;
@@ -39,8 +35,12 @@ public abstract class Component {
 		this.coordinate = coordinate;
 	}
 	
-	public int getPriority(){
+	public Priority getPriority(){
 		return priority;
+	}
+	
+	public void setPriority(Priority priority){
+		this.priority = priority;
 	}
 	
 	public void setType(Type type) {
@@ -63,7 +63,6 @@ public abstract class Component {
 		return isLethal;
 	}	
 	
-	public abstract void kill();
 	
 	public boolean changeStateIf(State state) {
 		return false;
@@ -74,6 +73,7 @@ public abstract class Component {
 	public abstract boolean collision(Lemming lemming);
 	public abstract boolean isVoid();
 	public abstract boolean isInverting();
+	public abstract void kill();
 	public abstract void killLemming(Lemming lemming);
 	public abstract boolean isDestructible();
 	public abstract boolean canBeMined();

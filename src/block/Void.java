@@ -1,14 +1,14 @@
 package block;
 
-import game.GameMap;
-import view.Type;
-
 import component.Coordinate;
+import game.GameMap;
+import lemming.Priority;
+import view.Type;
 
 public class Void extends AbsBlock {
 
 	public Void(Coordinate coordinate, GameMap gameMap) {
-		super(coordinate, PRIORITY_BLOCK, Type.VOID, gameMap);
+		super(coordinate, Priority.PRIORITY_BLOCK, Type.VOID, gameMap);
 	}
 	
 	@Override

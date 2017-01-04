@@ -26,16 +26,16 @@ public class ActionBar extends JPanel {
 		actionBar.setLayout(new GridLayout(2,7));		
 		
 		ActionButton button;
-		actionBar.addButton(actionBar, ActionType.SET_BLOCKER, view,"blocker.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_CARPENTER, view,"carpenter.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_DIGGER, view,"digger.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_PARACHUTIST, view,"parachutist.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_TUNNELER, view,"tunneler.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view,"bomber.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_BLOCKER, view,"data\\img\\blocker.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_CARPENTER, view,"data\\img\\carpenter.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_DIGGER, view,"data\\img\\digger.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_PARACHUTIST, view,"data\\img\\parachutist.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_TUNNELER, view,"data\\img\\tunneler.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view,"data\\img\\bomber.jpg");
 		//TODO bouton maudit
-		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view,"climber.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view,"data\\img\\climber.jpg");
 		
-		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"addLemming.jpg");
+		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"data\\img\\addLemming.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -44,7 +44,7 @@ public class ActionBar extends JPanel {
 		});
 		actionBar.add(button);
 		
-		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"armaggedon.jpg");
+		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"data\\img\\armaggedon.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,7 +53,7 @@ public class ActionBar extends JPanel {
 		});
 		actionBar.add(button);
 
-		button = new ActionButton(actionBar,ActionType.PAUSE,"pause.jpg");
+		button = new ActionButton(actionBar,ActionType.PAUSE,"data\\img\\pause.jpg");
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void actionPerformed(ActionEvent e) {

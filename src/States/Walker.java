@@ -2,6 +2,7 @@ package States;
 
 import lemming.AbsState;
 import lemming.Lemming;
+import lemming.Priority;
 import view.Type;
 
 public class Walker extends AbsState {
@@ -20,6 +21,11 @@ public class Walker extends AbsState {
 	@Override
 	public Type getTypeByState() {
 		return Type.WALKER;
+	}
+	
+	@Override
+	public Priority getPriority(){
+		return Priority.PRIORITY_LEMMING_WEAK;
 	}
 
 }

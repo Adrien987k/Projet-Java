@@ -1,14 +1,15 @@
 package block;
 
-import game.GameMap;
-import lemming.Lemming;
-import view.Type;
 import component.Component;
 import component.Coordinate;
+import game.GameMap;
+import lemming.Lemming;
+import lemming.Priority;
+import view.Type;
 
 public abstract class AbsBlock extends Component {
 	
-	public AbsBlock(Coordinate coordinate, int priority, Type type, GameMap gameMap) {
+	public AbsBlock(Coordinate coordinate, Priority priority, Type type, GameMap gameMap) {
 		super(coordinate, priority, type, gameMap);
 	}
 	
