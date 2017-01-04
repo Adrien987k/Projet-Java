@@ -68,6 +68,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		texture.put(Type.VOID,Texture.VOID);
 		texture.put(Type.WALKER,Texture.WALKER);
 		texture.put(Type.BOMBER,Texture.BOMBER);
+		texture.put(Type.BLOCKER,Texture.BLOCKER);
 		texture.put(Type.CARPENTER,Texture.CARPENTER);
 		texture.put(Type.DIGGER,Texture.DIGGER);
 		texture.put(Type.TUNNELER,Texture.TUNNELER);
