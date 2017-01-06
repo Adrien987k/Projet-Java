@@ -45,7 +45,7 @@ public class ScoreBoard {
 		else
 			setMessage("Failure !");
 		
-		return "Dead lemmings: " + getNbDeadLemmings() + "\n Free lemmings:" + getNbFreeLemmings() + "\n"+ message;
+		return "Dead lemmings: " + getNbDeadLemmings() + "\nFree lemmings:" + getNbFreeLemmings() + "\n"+ message;
 	}
 	
 	
