@@ -13,6 +13,7 @@ public class ChangeMemory extends AbsMemoryChange{
 		this.component = component;
 		this.componentNext = componentNext;
 	}
+	
 	public ChangeMemory(Coordinate next, Component component){
 		super(next);
 		this.component = component;

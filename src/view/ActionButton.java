@@ -4,18 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class ActionButton extends JButton implements MouseListener {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final Color DEFAULT_COLOR = Color.WHITE;
 	public static final int X = 100;
@@ -32,70 +26,41 @@ public class ActionButton extends JButton implements MouseListener {
 	public ActionButton() {
 		//Use for the default_button, 
 		//when no button has been selected (when the game starts)
-		//when the selected button turned off because the user can't use it anymore
-		
+		//when the selected button turned off because the user can't use it anymore	
 	}
-	  @Deprecated
-	  public ActionButton(ActionType actionType){
-	    super(actionType.getTitle());
-	    setBackground(actionType.getColor());
-	    this.actionType	= actionType;
+	
+	private void loadActionType(ActionType actionType){
+		this.actionType	= actionType;
+	    setPreferredSize(new Dimension(X,Y));
+		   
+	    icon = Texture.createIcon(actionType.getIconPath());
+	    if(icon == null) setText(getActionTitle());
+		    
+	    setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
+	    setIcon(icon);
+		    
 	    addMouseListener(this);
-	  }
-	  @Deprecated
-	  public ActionButton(ActionType actionType, String imagePath){
-		    super();
-		    //setBackground(actionType.getColor());
-		    this.actionType	= actionType;
-		    setPreferredSize(new Dimension(X,Y));
-		    try {
-		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
-		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
-		        setIcon(icon);
-		      } catch (IOException e) {
-		        setText(getActionTitle());
-		      }
-		    
-		    addMouseListener(this);
-		  }
-	  @Deprecated
-	  public ActionButton(ActionBar actionBar, ActionType actionType, String imagePath){
-		    super();
-		    //setBackground(actionType.getColor());
-		    this.actionBar = actionBar;
-		    this.actionType	= actionType;
-		    setPreferredSize(new Dimension(X,Y));
-		    setBackground(DEFAULT_COLOR);
-		    try {
-		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
-		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
-		        setIcon(icon);
-		      } catch (IOException e) {
-		        setText(getActionTitle());
-		      }
-		    
-		    addMouseListener(this);
-		  }
-	  public ActionButton(ActionBar actionBar, ActionType actionType, String imagePath, int uses){
-		    super();
-		    //setBackground(actionType.getColor());
-		    this.actionBar = actionBar;
-		    this.actionType	= actionType;
-		    this.usesLeft = uses;
-		    if(usesLeft == 0)
-		    	setEnabled(false);
-		    setPreferredSize(new Dimension(X,Y));
-		    setBackground(DEFAULT_COLOR);
-		    try {
-		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
-		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
-		        setIcon(icon);
-		      } catch (IOException e) {
-		        setText(getActionTitle());
-		      }
+	}
+	
+	public ActionButton(ActionType actionType){
+	    super();
+	    loadActionType(actionType);
+	}
 
-		    addMouseListener(this);
-		  }
+	public ActionButton(ActionBar actionBar, ActionType actionType){
+	    super();
+	    this.actionBar = actionBar;
+	    loadActionType(actionType);
+	 }
+	  
+	 public ActionButton(ActionBar actionBar, ActionType actionType, int uses){
+	    super();
+	    this.actionBar = actionBar;
+	    this.usesLeft = uses;
+	    if(usesLeft == 0)
+	    	setEnabled(false);
+	    loadActionType(actionType);
+	}
 
 	public void decUsesLeft() {
 		if(getUsesLeft() > 0)
@@ -126,6 +91,7 @@ public class ActionButton extends JButton implements MouseListener {
 	public int getUsesLeft() {
 		return usesLeft;
 	}
+	
 	public void setUsesLeft(int usesLeft) {
 		this.usesLeft = usesLeft;
 	}
@@ -133,9 +99,11 @@ public class ActionButton extends JButton implements MouseListener {
 	public Color getCurrentColor() {
 		return currentColor;
 	}
+	
 	public Color setCurrentColor(Color color) {
 		return this.currentColor = color;
 	}	
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {}
 
@@ -162,4 +130,5 @@ public class ActionButton extends JButton implements MouseListener {
 		else setCurrentColor(DEFAULT_COLOR);
 		setBackground(getCurrentColor());
 	}
+	
 }

@@ -62,35 +62,32 @@ public class AdvancedView extends AllView {
 		//getInformationPanel().getDescriptionAgent().registerObserver(informationPanel);
 	
 	}
-	
-	/* Créer un bouton effectuant l'action donnée en paramètre */
-	@Deprecated
-	public ActionButton createActionButton(ActionType actionType) {
-		ActionButton button = new ActionButton(actionType);
-		button.addActionListener(new ButtonListener(this,button));
-		return button;
-	}
 
 	@Override
 	public ActionType getLastActionSelected() {
 		return lastActionSelected;
 	}
+	
 	@Override
 	public JFrame getFrame() {
 		return frame;
 	}
+	
 	@Override
 	public InformationPanel getInformationPanel() {
 		return informationPanel;
 	}
+	
 	@Override
 	public GamePanel getGamePanel() {
 		return gamePanel;
 	}
+	
 	@Override
 	public ActionBar getActionBar() {
 		return actionBar;
 	}
+	
 	@Override
 	public Game getGame() {
 		return game;
@@ -111,6 +108,7 @@ public class AdvancedView extends AllView {
 	public ActionButton getLastActionButtonSelected() {
 		return lastActionButtonSelected;
 	}
+	
 	public void setLastActionButtonSelected(ActionButton lastActionButtonSelected) {
 		this.lastActionButtonSelected = lastActionButtonSelected;
 	}

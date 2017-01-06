@@ -9,9 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InformationPanel extends JPanel implements MyObserver {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JLabel actionDescription;
 	private JLabel deadLemmings;
@@ -32,7 +30,6 @@ public class InformationPanel extends JPanel implements MyObserver {
 		this.view = view;
 	}
 	
-	
 	public static InformationPanel createDefaultInformationPanel(AllView view ) {
 		InformationPanel informationPanel = new InformationPanel(view);
 		informationPanel.setLayout(new GridLayout(10,1));
@@ -48,6 +45,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 
 		return informationPanel;
 	}
+	
 	public AllView getView() {
 		return view;
 	}
@@ -58,6 +56,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 	public JLabel getDeadLemmings() {
 		return deadLemmings;
 	}
+	
 	public void setDeadLemmings(int deadLemmings) {
 		this.deadLemmings.setText("Lemmings dead: " + Integer.toString(deadLemmings));
 	}
@@ -65,6 +64,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 	public JLabel getFreeLemmings() {
 		return freeLemmings;
 	}
+	
 	public void setFreeLemmings(int freeLemmings) {
 		this.freeLemmings.setText("Lemmings free: " + Integer.toString(freeLemmings));
 	}
@@ -72,6 +72,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 	public JLabel getRemainingLemmings() {
 		return remainingLemmings;
 	}
+	
 	public void setRemainingLemmings(int remainingLemmings) {
 		this.remainingLemmings.setText("Lemmings remmaining: " + Integer.toString(remainingLemmings)); 
 	}
@@ -79,6 +80,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 	public int getNbDeadLemmings() {
 		return nbDeadLemmings;
 	}
+	
 	public void setNbDeadLemmings(int nbDeadLemmings) {
 		this.nbDeadLemmings = nbDeadLemmings;
 	}
