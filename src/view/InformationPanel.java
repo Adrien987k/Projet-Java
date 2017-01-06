@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class InformationPanel extends JPanel implements MyObserver {
@@ -105,6 +106,19 @@ public class InformationPanel extends JPanel implements MyObserver {
 			setDeadLemmings(((ChangeData) change).getNbDeadLemmings());
 			setFreeLemmings(((ChangeData) change).getNbFreeLemmings());
 			setRemainingLemmings(((ChangeData) change).getNbRemainingLemmings());
+			if(!((ChangeData) change).getRunning()) {
+				
+				boolean victory = false;
+				if(((ChangeData) change).getLevelParameters().get("objective").intValue() <= getNbFreeLemmings() )
+					victory = true;
+
+				
+				JOptionPane.showMessageDialog(null, new ScoreBoard(
+														getNbDeadLemmings(),
+														getNbFreeLemmings(),
+														victory));
+								
+			}
 		}
 	}
 	

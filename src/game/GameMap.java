@@ -113,6 +113,8 @@ public class GameMap extends MyObservable implements MyObserver {
 				e.printStackTrace();
 			}
 		}
+		getDataAgent().addChangeToAgent(createDataChange());
+		getDataAgent().notifyObserver();
 	}
 	
 	private void updateRunning(){
@@ -283,7 +285,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 
 	public AbsChange createDataChange() {
-		return new ChangeData(getNbDeadLemming(),getNbFreeLemming(),getNbRemainingLemming());
+		return new ChangeData(getNbDeadLemming(),getNbFreeLemming(),getNbRemainingLemming(),getRunning(),getLevelParameters());
 	}
 
 	public int getNbRemainingLemming() {
@@ -298,6 +300,13 @@ public class GameMap extends MyObservable implements MyObserver {
 		return nbDeadLemming;
 	}
 	
+	public boolean getRunning() {
+		return running;
+	}
+	
+	public Map<String,Integer> getLevelParameters() {
+		return levelParameters;
+	}
 	public void addLemming() {
 		if(getNbRemainingLemming() > 0)
 			generateLemming();

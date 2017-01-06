@@ -7,6 +7,7 @@ public class ChangeData extends AbsChange {
 		private int nbDeadLemmings;
 		private int nbFreeLemmings;
 		private int nbRemainingLemmings;
+		private boolean running;
 		private Map<String,Integer> levelParameters;
 		
 		public ChangeData(int nbDeadLemmings, int nbFreeLemmings, int nbRemainingLemmings) {
@@ -20,6 +21,14 @@ public class ChangeData extends AbsChange {
 			this.nbDeadLemmings = nbDeadLemmings;
 			this.nbFreeLemmings = nbFreeLemmings;
 			this.nbRemainingLemmings = nbRemainingLemmings;
+			this.levelParameters = levelparameters;
+		}
+		public ChangeData(int nbDeadLemmings, int nbFreeLemmings, int nbRemainingLemmings, boolean running, Map<String,Integer> levelparameters) {
+			super();
+			this.nbDeadLemmings = nbDeadLemmings;
+			this.nbFreeLemmings = nbFreeLemmings;
+			this.nbRemainingLemmings = nbRemainingLemmings;
+			this.running = running;
 			this.levelParameters = levelparameters;
 		}
 
@@ -53,5 +62,9 @@ public class ChangeData extends AbsChange {
 		
 		public void setNbRemainingLemmings(int nbRemainingLemmings) {
 			this.nbRemainingLemmings = nbRemainingLemmings;
+		}
+		
+		public boolean getRunning() {
+			return running;
 		}
 }
