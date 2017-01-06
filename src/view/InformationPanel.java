@@ -103,21 +103,26 @@ public class InformationPanel extends JPanel implements MyObserver {
 	@Override
 	public void update(List<? extends AbsChange> changes) {
 		for(AbsChange change:changes) {
+			
 			setDeadLemmings(((ChangeData) change).getNbDeadLemmings());
+			setNbDeadLemmings(((ChangeData) change).getNbDeadLemmings());
 			setFreeLemmings(((ChangeData) change).getNbFreeLemmings());
+			setNbFreeLemmings(((ChangeData) change).getNbFreeLemmings());
 			setRemainingLemmings(((ChangeData) change).getNbRemainingLemmings());
+			
 			if(!((ChangeData) change).getRunning()) {
-				
-				boolean victory = false;
+				boolean isVictory = false;
 				if(((ChangeData) change).getLevelParameters().get("objective").intValue() <= getNbFreeLemmings() )
-					victory = true;
-
+					isVictory = true;
 				
-				JOptionPane.showMessageDialog(null, new ScoreBoard(
-														getNbDeadLemmings(),
-														getNbFreeLemmings(),
-														victory));
-								
+				JOptionPane.showMessageDialog(null, 
+												new ScoreBoard(
+													getNbDeadLemmings(), 
+													getNbFreeLemmings(), 
+													isVictory)
+												);
+				
+					
 			}
 		}
 	}
