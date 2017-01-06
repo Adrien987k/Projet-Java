@@ -11,7 +11,6 @@ public abstract class AbsState {
 	
 	public AbsState(Lemming lemming) {
 		this.lemming = lemming;
-		lemming.resetFalling();
 	}
 	
 	public boolean collision(){

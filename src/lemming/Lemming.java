@@ -56,7 +56,6 @@ public class Lemming extends Component {
 	
 	 @Override
 	 public boolean changeStateIf(State state) {
-		 System.out.println("changeStateIf");
 		 changeState(state);
 		 return true;
 	 }
