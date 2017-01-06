@@ -47,10 +47,7 @@ public class AdvancedView extends AllView {
 		frame.setMinimumSize(new Dimension(game.getWidth() + informationPanel.getWidth(),
 								game.getHeight() + actionBar.getHeight()));
 		frame.pack();
-<<<<<<< HEAD
-=======
-		frame.setLocationRelativeTo(null);
->>>>>>> refs/remotes/origin/master
+
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);	
 		gamePanel.requestFocusInWindow();
