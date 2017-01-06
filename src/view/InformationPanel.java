@@ -118,16 +118,17 @@ public class InformationPanel extends JPanel implements MyObserver {
 				
 				//valeur de retour du choix
 				int option = JOptionPane.showOptionDialog(null, 
-						new ScoreBoard(
-								getNbDeadLemmings(), 
-								getNbFreeLemmings(), 
-								isVictory),
-			    	      "Game Over",
+						new ScoreBoard(getNbDeadLemmings(), getNbFreeLemmings(), isVictory),
+			    	      isVictory ? "Victory !" : "Game Over",
 			    	      JOptionPane.DEFAULT_OPTION,
 			    	      JOptionPane.PLAIN_MESSAGE,
 			    	      null,
 			    	      options,
 			    	      options[1]);
+				if(option == 1) {
+					view.getGame().closeGame();
+					view.getFrame().dispose();
+				}
 
 			}
 		}

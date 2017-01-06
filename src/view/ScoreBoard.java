@@ -1,6 +1,7 @@
 package view;
 
 public class ScoreBoard {
+	
 	private int nbDeadLemmings;
 	private int nbFreeLemmings;
 	private boolean isVictory;	
@@ -15,28 +16,34 @@ public class ScoreBoard {
 	public int getNbDeadLemmings() {
 		return nbDeadLemmings;
 	}
+	
 	public void setNbDeadLemmings(int nbDeadLemmings) {
 		this.nbDeadLemmings = nbDeadLemmings;
 	}
+	
 	public int getNbFreeLemmings() {
 		return nbFreeLemmings;
 	}
+	
 	public void setNbFreeLemmings(int nbFreeLemmings) {
 		this.nbFreeLemmings = nbFreeLemmings;
 	}
+	
 	public boolean isVictory() {
 		return isVictory;
 	}
+	
 	public void setVictory(boolean isVictory) {
 		this.isVictory = isVictory;
 	}
+	
 	public String getMessage() {
 		return message;
 	}
+	
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 
 	@Override
 	public String toString() {

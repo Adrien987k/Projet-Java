@@ -16,27 +16,37 @@ import view.MyObserver;
 
 public class Game extends MyObservable implements MyObserver {
 	
-	private ILoader loader;
-	private AllView view;
-	private GameMap gameMap;
-	private IFactory factory;
-	
 	private static final int SCALE = 50;
 	private static final int DEFAULT_SPEED = 25;
+	private static final int NB_LEVEL = 3;
 	
-	public Game() {
-		factory = new Factory();
-		loader = new Loader();
-		Grid grid = loader.loadFile("data\\level\\test.txt");
+	private ILoader loader = new Loader();
+	private AllView view;
+	private GameMap gameMap;
+	private IFactory factory = new Factory();
+	private int actualLevel = 1;
+	
+	private void loadLevel(String filePath){
+		Grid grid = loader.loadFile(filePath);
 		gameMap = new GameMap(factory, grid);
 		gameMap.getCaseAgent().registerObserver(this);
 		
 		view = new AdvancedView(this, SCALE);
 		gameMap.getDataAgent().registerObserver(getView().getInformationPanel());
+		gameMap.run(DEFAULT_SPEED);
+		
+		view.getFrame().dispose();
 	}
 	
-	public void run() {
-		gameMap.run(DEFAULT_SPEED);
+	public void closeGame(){
+		actualLevel = NB_LEVEL + 1;
+	}
+	
+	public Game() {
+		while(actualLevel <= NB_LEVEL){		
+			loadLevel("data\\level\\level" + actualLevel + ".txt");
+			actualLevel++;
+		}
 	}
 	
 	@Override

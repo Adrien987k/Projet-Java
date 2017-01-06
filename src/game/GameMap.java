@@ -52,7 +52,6 @@ public class GameMap extends MyObservable implements MyObserver {
 	}
 	
 	public int getLevelParameterByToken(String fileToken){
-		System.out.println(fileToken);
 		return levelParameters.get(fileToken);
 	}
 	

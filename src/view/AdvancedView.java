@@ -59,10 +59,6 @@ public class AdvancedView extends AllView {
 	
 	public void establishConnexions(Game game) {
 		game.registerObserver(this);
-		
-		//actionBar.getDescriptionAgent().registerObserver(getInformationPanel().getDescriptionAgent());
-		//getInformationPanel().getDescriptionAgent().registerObserver(informationPanel);
-	
 	}
 
 	@Override

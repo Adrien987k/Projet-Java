@@ -50,6 +50,10 @@ public class Lemming extends Component {
 		return falling;
 	}
 	
+	public void incFalling(){
+		falling++;
+	}
+	
 	public void resetFalling(){
 		falling = DEFAULT_FALLING;
 	}
