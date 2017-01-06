@@ -114,15 +114,21 @@ public class InformationPanel extends JPanel implements MyObserver {
 				boolean isVictory = false;
 				if(((ChangeData) change).getLevelParameters().get("objective").intValue() <= getNbFreeLemmings() )
 					isVictory = true;
+				String[] options = new String[] {"Next level","Quit game"};
 				
-				JOptionPane.showMessageDialog(null, 
-												new ScoreBoard(
-													getNbDeadLemmings(), 
-													getNbFreeLemmings(), 
-													isVictory)
-												);
-				
-					
+				//valeur de retour du choix
+				int option = JOptionPane.showOptionDialog(null, 
+						new ScoreBoard(
+								getNbDeadLemmings(), 
+								getNbFreeLemmings(), 
+								isVictory),
+			    	      "Game Over",
+			    	      JOptionPane.DEFAULT_OPTION,
+			    	      JOptionPane.PLAIN_MESSAGE,
+			    	      null,
+			    	      options,
+			    	      options[1]);
+
 			}
 		}
 	}
