@@ -31,7 +31,7 @@ public class Game extends MyObservable implements MyObserver {
 		gameMap = new GameMap(factory, grid);
 		gameMap.getCaseAgent().registerObserver(this);
 		
-		view = new AdvancedView(0, 0, this, SCALE);
+		view = new AdvancedView(this, SCALE);
 		gameMap.getDataAgent().registerObserver(getView().getInformationPanel());
 	}
 	

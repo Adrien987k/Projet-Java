@@ -24,14 +24,14 @@ public class AdvancedView extends AllView {
 	private ActionButton lastActionButtonSelected;
 	
 	
-	public AdvancedView(int x, int y, Game game, int scale) {
+	public AdvancedView(Game game, int scale) {
 		super();
 		this.game = game;
-		frame = createAdvancedView(x, y, game, scale);
+		frame = createAdvancedView(game, scale);
 		establishConnexions(game);
 	}
 	
-	private JFrame createAdvancedView(int x, int y, Game game, int scale) {
+	private JFrame createAdvancedView(Game game, int scale) {
 		frame = new JFrame("Lemmings");
 		gamePanel = new GamePanel(game, scale,this);
 		registerObserver(gamePanel);
@@ -47,10 +47,10 @@ public class AdvancedView extends AllView {
 		frame.setMinimumSize(new Dimension(game.getWidth() + informationPanel.getWidth(),
 								game.getHeight() + actionBar.getHeight()));
 		frame.pack();
-		frame.setLocation(x, y);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);	
 		gamePanel.requestFocusInWindow();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		return frame;
 	}
