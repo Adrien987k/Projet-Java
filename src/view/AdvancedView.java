@@ -26,8 +26,8 @@ public class AdvancedView extends AllView {
 	
 	public AdvancedView(int x, int y, Game game, int scale) {
 		super();
-		frame = createAdvancedView(x, y, game, scale);
 		this.game = game;
+		frame = createAdvancedView(x, y, game, scale);
 		establishConnexions(game);
 	}
 	

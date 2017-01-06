@@ -51,40 +51,17 @@ public class GameMap extends MyObservable implements MyObserver {
 		registerObserver(this);
 	}
 	
+	public int getLevelParameterByToken(String fileToken){
+		System.out.println(fileToken);
+		return levelParameters.get(fileToken);
+	}
+	
 	public int getNbLemmings(){
 		return levelParameters.get("nbLemmings");
 	}
 
 	public int getObjective(){
 		return levelParameters.get("objective");
-	}
-	
-	public int getNbBlocker(){
-		return levelParameters.get("blocker");
-	}
-	
-	public int getNbBomber(){
-		return levelParameters.get("bomber");
-	}
-	
-	public int getNbCarpenter(){
-		return levelParameters.get("carpenter");
-	}
-	
-	public int getNbClimber(){
-		return levelParameters.get("climber");
-	}
-	
-	public int getNbDigger(){
-		return levelParameters.get("digger");
-	}
-	
-	public int getNbParachutist(){
-		return levelParameters.get("parachutist");
-	}
-	
-	public int getNbTunneler(){
-		return levelParameters.get("tunneler");
 	}
 	
 	private ArrayList<Component>[][] processGrid(List<ArrayList<String>> data){

@@ -7,12 +7,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
 public class ActionBar extends JPanel{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
+	
+	public static final int NO_USE = -1;
+	
 	private AllView view;
-
 	
 	public ActionBar(AllView view) {
 		this.view = view;
@@ -24,10 +24,7 @@ public class ActionBar extends JPanel{
 	 */
 	public static ActionBar createDefaultActionBar(AllView view) {
 		ActionBar actionBar = new ActionBar(view);
-		actionBar.setLayout(new GridLayout(2,7));
-		
-		
-		
+		actionBar.setLayout(new GridLayout(2, 7));
 		
 		ActionButton button;
 		actionBar.addButton(actionBar, ActionType.SET_BLOCKER, view);
@@ -38,8 +35,8 @@ public class ActionBar extends JPanel{
 		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view);
 		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view);
 		
-		button = new ActionButton(actionBar, ActionType.ADD_LEMMING, -1);
-		button.addActionListener(new ButtonListener(view,button) {
+		button = new ActionButton(actionBar, ActionType.ADD_LEMMING, NO_USE);
+		button.addActionListener(new ButtonListener(view, button) {
 			@Override
 			public void instantEffect() {
 				view.getGame().getGameMap().addLemming();
@@ -52,8 +49,8 @@ public class ActionBar extends JPanel{
 		});
 		actionBar.add(button);
 		
-		button = new ActionButton(actionBar,ActionType.KILL_LEMMING, -1);
-		button.addActionListener(new ButtonListener(view,button) {
+		button = new ActionButton(actionBar, ActionType.KILL_LEMMING, NO_USE);
+		button.addActionListener(new ButtonListener(view, button) {
 			@Override
 			public void instantEffect() {
 				view.getGame().getGameMap().killAllLemmings();
@@ -66,8 +63,8 @@ public class ActionBar extends JPanel{
 		});
 		actionBar.add(button);
 
-		button = new ActionButton(actionBar,ActionType.PAUSE, -1);
-		button.addActionListener(new ButtonListener(view,button) {
+		button = new ActionButton(actionBar, ActionType.PAUSE, NO_USE);
+		button.addActionListener(new ButtonListener(view, button) {
 			@Override
 			public void instantEffect() {
 				super.view.getGame().getGameMap().pause();
@@ -86,8 +83,10 @@ public class ActionBar extends JPanel{
 	}
 	
 	public void addButton(ActionBar actionBar, ActionType actionType, AllView view) {
-		ActionButton button = new ActionButton(actionBar, actionType, 2);
-		button.addActionListener(new ButtonListener(view,button));
+		String fileToken = actionType.getState().getFileToken();
+		int uses = view.getGame().getGameMap().getLevelParameterByToken(fileToken);
+		ActionButton button = new ActionButton(actionBar, actionType, uses);
+		button.addActionListener(new ButtonListener(view, button));
 		add(button);
 	}
 

@@ -13,6 +13,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import States.State;
+
 public class Loader implements ILoader {
 	
 	//On stoque les grids pour ne pas avoir a reloader les fichiers
@@ -51,16 +53,18 @@ public class Loader implements ILoader {
 		levelParameters.put("nbLemmings", 0);
 		levelParameters.put("speed", 0);
 		levelParameters.put("objective", 0);
-		levelParameters.put("blocker", 0);
-		levelParameters.put("bomber", 0);
-		levelParameters.put("carpenter", 0);
-		levelParameters.put("climber", 0);
-		levelParameters.put("digger", 0);
-		levelParameters.put("parachutist", 0);
-		levelParameters.put("tunneler", 0);
+		
+		for(State state : State.values()){
+			String token = state.getFileToken();
+			if(!token.equals("")) {
+				levelParameters.put(token, 0);
+			}
+		}
+		
 		int i = 0;
 		String[] caracters;
 		boolean formatOk = true;
+		
 		try (BufferedReader reader = Files.newBufferedReader(path, 
 									StandardCharsets.UTF_8)){
 				String line = null;
@@ -80,12 +84,16 @@ public class Loader implements ILoader {
 					}
 					lineCount++;
 				}
+				
 				if(!formatOk) throw new IllegalArgumentException("Format de fichier non reconnu");
+		
 		} catch(IOException ioe){
 			ioe.printStackTrace();
 		}
+		
 		Grid result = new Grid(data, levelParameters);
 		return result;
+		
 	}
 
 }

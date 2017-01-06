@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -56,24 +53,24 @@ public class ActionButton extends JButton implements MouseListener {
 	    setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
 	    setIcon(icon);
 		    
-		    addMouseListener(this);
-		  }
+	    addMouseListener(this);
+	}
 	
-		public ActionButton(ActionBar actionBar, ActionType actionType){
-		    super();
-		    this.actionBar = actionBar;
-		    loadActionType(actionType);
-		 }
+	public ActionButton(ActionBar actionBar, ActionType actionType){
+	    super();
+	    this.actionBar = actionBar;
+	    loadActionType(actionType);
+	}
 		  
-		 public ActionButton(ActionBar actionBar, ActionType actionType, int uses){
-		    super();
-		    this.actionBar = actionBar;
-		    this.usesLeft = uses;
-		    if(usesLeft == 0)
-		    	setEnabled(false);
-		    setBackground(DEFAULT_COLOR);
-		    loadActionType(actionType);
-		}
+	public ActionButton(ActionBar actionBar, ActionType actionType, int uses){
+	    super();
+	    this.actionBar = actionBar;
+	    this.usesLeft = uses;
+	    if(usesLeft == 0)
+	    	setEnabled(false);
+	    setBackground(DEFAULT_COLOR);
+	    loadActionType(actionType);
+	}
 		 
 	public void decUsesLeft() {
 		if(getUsesLeft() > 0)
@@ -83,7 +80,7 @@ public class ActionButton extends JButton implements MouseListener {
 			isLast(false);
 			setEnabled(false);
 		}
-		setText(""+getUsesLeft());
+		setText("" + getUsesLeft());
 	}
 	
 	public String getActionTitle() {
@@ -137,7 +134,7 @@ public class ActionButton extends JButton implements MouseListener {
 	public void mouseReleased(MouseEvent e) {}
 	
 	public void isLast(boolean isLast) {
-		if(isLast) setCurrentColor(Color.YELLOW);
+		if(isLast) setCurrentColor(actionType.getColor());
 		else setCurrentColor(DEFAULT_COLOR);
 		setBackground(getCurrentColor());
 	}
