@@ -1,5 +1,3 @@
-//TODO ajouter des compteurs d'actions restantes
-
 package view;
 
 import java.awt.BorderLayout;
@@ -14,6 +12,7 @@ public class ActionBar extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private AllView view;
+
 	
 	public ActionBar(AllView view) {
 		this.view = view;
@@ -25,7 +24,9 @@ public class ActionBar extends JPanel{
 	 */
 	public static ActionBar createDefaultActionBar(AllView view) {
 		ActionBar actionBar = new ActionBar(view);
-		actionBar.setLayout(new GridLayout(2,7));		
+		actionBar.setLayout(new GridLayout(2,7));
+		
+		
 		
 		
 		ActionButton button;
@@ -37,7 +38,7 @@ public class ActionBar extends JPanel{
 		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\bomber.jpg");
 		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\climber.jpg");
 		
-		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\addLemming.jpg",1);
+		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\addLemming.jpg",-1);
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void instantEffect() {
@@ -51,7 +52,7 @@ public class ActionBar extends JPanel{
 		});
 		actionBar.add(button);
 		
-		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\armaggedon.jpg",1);
+		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\armaggedon.jpg",-1);
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void instantEffect() {
@@ -65,7 +66,7 @@ public class ActionBar extends JPanel{
 		});
 		actionBar.add(button);
 
-		button = new ActionButton(actionBar,ActionType.PAUSE,"data\\img\\defaultTexturePack\\actionBarIcon\\pause.jpg",1);
+		button = new ActionButton(actionBar,ActionType.PAUSE,"data\\img\\defaultTexturePack\\actionBarIcon\\pause.jpg",-1);
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void instantEffect() {
@@ -80,6 +81,7 @@ public class ActionBar extends JPanel{
 		actionBar.add(button);
 
 		actionBar.getView().getFrame().add(actionBar, BorderLayout.SOUTH);
+		
 		return actionBar;
 	}
 	

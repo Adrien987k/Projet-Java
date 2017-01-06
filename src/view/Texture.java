@@ -33,7 +33,6 @@ public enum Texture {
 		try {
 			this.image = ImageIO.read(new File(imagePath));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

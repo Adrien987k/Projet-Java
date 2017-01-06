@@ -30,9 +30,11 @@ public class ActionButton extends JButton implements MouseListener {
 	private ImageIcon icon;
 
 	public ActionButton() {
-		//Use for the default_button, 
-		//when no button has been selected (when the game starts)
-		//when the selected button turned off because the user can't use it anymore
+		/*
+		 * Use for the default_button,
+		 * when no button has been selected (when the game starts)
+		 * when the selected button turned off because the user can't use it anymore
+		 */
 		
 	}
 	  @Deprecated
@@ -90,6 +92,9 @@ public class ActionButton extends JButton implements MouseListener {
 		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
 		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
 		        setIcon(icon);
+		        if(getUsesLeft() > 0) {
+		        	setText(""+getUsesLeft());
+		        }
 		      } catch (IOException e) {
 		        setText(getActionTitle());
 		      }
@@ -100,11 +105,12 @@ public class ActionButton extends JButton implements MouseListener {
 	public void decUsesLeft() {
 		if(getUsesLeft() > 0)
 			setUsesLeft(getUsesLeft() -1);
-		if(getUsesLeft() <= 0) { 
+		if(getUsesLeft() == 0) { 
 			getActionBar().getView().switchToDefaultAction();
 			isLast(false);
 			setEnabled(false);
 		}
+		setText(""+getUsesLeft());
 	}
 	
 	public String getActionTitle() {

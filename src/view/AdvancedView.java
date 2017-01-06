@@ -23,7 +23,7 @@ public class AdvancedView extends AllView {
 	private ActionType lastActionSelected;
 	private ActionButton lastActionButtonSelected;
 	
-
+	
 	public AdvancedView(int x, int y, Game game, int scale) {
 		super();
 		frame = createAdvancedView(x, y, game, scale);
@@ -39,6 +39,7 @@ public class AdvancedView extends AllView {
 		
 		actionBar = ActionBar.createDefaultActionBar(this);
 		frame.add(actionBar,BorderLayout.SOUTH);
+		
 		informationPanel = InformationPanel.createDefaultInformationPanel(this);
 		frame.add(informationPanel,BorderLayout.EAST);
 		
