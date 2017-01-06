@@ -110,7 +110,8 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		System.out.println("x: " + e.getY()/scale + " y: "+ e.getX()/scale);
 		State currentState = getView().getLastActionSelected().getState();
 		if(currentState != null){
-			getView().getGame().getGameMap().changeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale), currentState);
+			if(getView().getGame().getGameMap().changeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale), currentState))
+				getView().getLastActionButtonSelected().decUsesLeft();
 		}
 	}
 

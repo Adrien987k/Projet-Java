@@ -1,13 +1,3 @@
-
-/*
-//TODO: Créer une classe pour la barre d'action et la barre d'info
- * Ajouter la mise à jour des descriptions quand on passe la souris dessus
- * Trouver une méthode pour éviter le switch
- * Regarder si c'est possible d'utiliser Observable/Observer
- * 	pour gamePanel + actionBar + infoBar en même temps
- * Revoir peut être les changements pour y ajouter ceux avec des actionType
- * 	ou les infoData
-*/
 package view;
 
 import java.awt.BorderLayout;
@@ -23,6 +13,7 @@ public class AdvancedView extends AllView {
 	
 	@SuppressWarnings("unused")
 	private static final ActionType DEFAULT_ACTION = ActionType.NONE;
+	private static final ActionButton DEFAULT_BUTTON = new ActionButton();
 
 	private Game game;
 	private JFrame frame;
@@ -107,7 +98,7 @@ public class AdvancedView extends AllView {
 	
 	@Override
 	public void switchToDefaultAction() {
-		setLastActionButtonSelected(null);
+		setLastActionButtonSelected(DEFAULT_BUTTON);
 		setLastActionSelected(ActionType.NONE);
 		informationPanel.getActionDescription().setText(ActionType.NONE.getDescription());
 	}              

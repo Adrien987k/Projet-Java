@@ -25,9 +25,16 @@ public class ActionButton extends JButton implements MouseListener {
 	
 
 	private ActionType actionType;
+	private int usesLeft;
 	private Color currentColor = DEFAULT_COLOR;
 	private ImageIcon icon;
 
+	public ActionButton() {
+		//Use for the default_button, 
+		//when no button has been selected (when the game starts)
+		//when the selected button turned off because the user can't use it anymore
+		
+	}
 	  @Deprecated
 	  public ActionButton(ActionType actionType){
 	    super(actionType.getTitle());
@@ -51,6 +58,7 @@ public class ActionButton extends JButton implements MouseListener {
 		    
 		    addMouseListener(this);
 		  }
+	  @Deprecated
 	  public ActionButton(ActionBar actionBar, ActionType actionType, String imagePath){
 		    super();
 		    //setBackground(actionType.getColor());
@@ -68,7 +76,37 @@ public class ActionButton extends JButton implements MouseListener {
 		    
 		    addMouseListener(this);
 		  }
+	  public ActionButton(ActionBar actionBar, ActionType actionType, String imagePath, int uses){
+		    super();
+		    //setBackground(actionType.getColor());
+		    this.actionBar = actionBar;
+		    this.actionType	= actionType;
+		    this.usesLeft = uses;
+		    if(usesLeft == 0)
+		    	setEnabled(false);
+		    setPreferredSize(new Dimension(X,Y));
+		    setBackground(DEFAULT_COLOR);
+		    try {
+		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
+		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
+		        setIcon(icon);
+		      } catch (IOException e) {
+		        setText(getActionTitle());
+		      }
 
+		    addMouseListener(this);
+		  }
+
+	public void decUsesLeft() {
+		if(getUsesLeft() > 0)
+			setUsesLeft(getUsesLeft() -1);
+		if(getUsesLeft() <= 0) { 
+			getActionBar().getView().switchToDefaultAction();
+			isLast(false);
+			setEnabled(false);
+		}
+	}
+	
 	public String getActionTitle() {
 		return actionType.getTitle();
 	}
@@ -83,6 +121,13 @@ public class ActionButton extends JButton implements MouseListener {
 	
 	public ActionBar getActionBar() {
 		return actionBar;
+	} 
+	
+	public int getUsesLeft() {
+		return usesLeft;
+	}
+	public void setUsesLeft(int usesLeft) {
+		this.usesLeft = usesLeft;
 	}
 	
 	public Color getCurrentColor() {

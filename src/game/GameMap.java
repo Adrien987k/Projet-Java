@@ -79,11 +79,11 @@ public class GameMap extends MyObservable implements MyObserver {
 		return levelParameters.get("digger");
 	}
 	
-	public int getParachutist(){
+	public int getNbParachutist(){
 		return levelParameters.get("parachutist");
 	}
 	
-	public int getTunneler(){
+	public int getNbTunneler(){
 		return levelParameters.get("tunneler");
 	}
 	
@@ -339,6 +339,12 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 	}
 	
+	//TODO optionnel
+	/*
+	 * On pourrait parcourir une première pour asigner l'état
+	 * à un lemming qui n'en a pas encore.
+	 * S'il y en a pas, on le donne au premier lemming qu'on trouve
+	 */
 	public boolean changeStateHere(Coordinate c,State state) {
 		List<Component> area = getArea(c);
 		for(Component component: area) {
