@@ -5,39 +5,28 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
-public enum Texture {
-	SD("data\\img\\defaultTexturePack\\blocksTexture\\sd.jpg"),
-	SI("data\\img\\defaultTexturePack\\blocksTexture\\si.jpg"),
-	AGAIN("data\\img\\defaultTexturePack\\blocksTexture\\again.jpg"),
-	START("data\\img\\defaultTexturePack\\blocksTexture\\start.jpg"),
-	END("data\\img\\defaultTexturePack\\blocksTexture\\end.jpg"),
-	BOMB("data\\img\\defaultTexturePack\\blocksTexture\\bomb.jpg"),
-	LAVA("data\\img\\defaultTexturePack\\blocksTexture\\lava.jpg"),
-	TP("data\\img\\defaultTexturePack\\blocksTexture\\tp.jpg"),
-	BOMBER("data\\img\\defaultTexturePack\\blocksTexture\\bomber.jpg"),
-	BLOCKER("data\\img\\defaultTexturePack\\blocksTexture\\blocker.jpg"),
-	WALKER("data\\img\\defaultTexturePack\\blocksTexture\\walker.jpg"),
-	LEMMING("data\\img\\defaultTexturePack\\blocksTexture\\lemming.jpg"),
-	CARPENTER("data\\img\\defaultTexturePack\\blocksTexture\\carpenter.jpg"),
-	TUNNELER("data\\img\\defaultTexturePack\\blocksTexture\\tunneler.jpg"),
-	DIGGER("data\\img\\defaultTexturePack\\blocksTexture\\digger.jpg"),
-	CLIMBER("data\\img\\defaultTexturePack\\blocksTexture\\climber.jpg"),
-	PARACHUTIST("data\\img\\defaultTexturePack\\blocksTexture\\parachutist.jpg"),
-	VOID("data\\img\\defaultTexturePack\\blocksTexture\\void.jpg");
+public class Texture {
 	
-	private Image image;
-	
-	private Texture(String imagePath) {
-		
+	public static Image createTexture(String imagePath){
+		Image image = null;
 		try {
-			this.image = ImageIO.read(new File(imagePath));
+			image = ImageIO.read(new File(imagePath));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public Image getImage() {
 		return image;
 	}
+	
+	public static ImageIcon createIcon(String iconPath){
+		ImageIcon icon = null;
+	    try {
+	        icon = new ImageIcon(ImageIO.read(new File(iconPath)));
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return icon;
+	}
+	
 }

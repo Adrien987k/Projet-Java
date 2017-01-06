@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.util.EnumMap;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -17,14 +16,13 @@ import States.State;
 import component.Coordinate;
 import game.Game;
 
-public class GamePanel extends JComponent implements MyObserver, Renderer, MouseListener, MouseMotionListener{
+public class GamePanel extends JComponent implements MyObserver, Renderer, MouseListener, MouseMotionListener {
 	
 	private static final long serialVersionUID = 1L;
 
 	private BufferedImage img;
 	private Graphics g;
 	private AllView view;
-	private EnumMap<Type,Texture> texture;
 	private Point cursorPoint;
 	private int scale;
 
@@ -35,25 +33,6 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		int height = game.getHeight() * scale;
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		setPreferredSize(new Dimension(width, height));
-		
-		texture = new EnumMap<>(Type.class);
-		texture.put(Type.SIMPLE_DESTRUCTIBLE,Texture.SD);
-		texture.put(Type.SIMPLE_INDESTRUCTIBLE,Texture.SI);
-		texture.put(Type.AGAIN,Texture.AGAIN);
-		texture.put(Type.START,Texture.START);
-		texture.put(Type.END,Texture.END);
-		texture.put(Type.TP,Texture.TP);
-		texture.put(Type.BOMB,Texture.BOMB);
-		texture.put(Type.LAVA,Texture.LAVA);
-		texture.put(Type.VOID,Texture.VOID);
-		texture.put(Type.WALKER,Texture.WALKER);
-		texture.put(Type.BOMBER,Texture.BOMBER);
-		texture.put(Type.BLOCKER,Texture.BLOCKER);
-		texture.put(Type.CARPENTER,Texture.CARPENTER);
-		texture.put(Type.DIGGER,Texture.DIGGER);
-		texture.put(Type.TUNNELER,Texture.TUNNELER);
-		texture.put(Type.PARACHUTIST,Texture.PARACHUTIST);
-		texture.put(Type.CLIMBER,Texture.CLIMBER);
 		
 		cursorPoint = new Point(0,0);
 		
@@ -89,7 +68,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 			types = c.getChangeType();
 			
 			for(Type t : types) {
-				g.drawImage(texture.get(t).getImage(), cd.getY() * scale, cd.getX() * scale, scale, scale,null);
+				g.drawImage(Texture.createTexture(t.getImagePath()) ,cd.getY() * scale, cd.getX() * scale, scale, scale,null);
 			}
 		}
 		g.dispose();

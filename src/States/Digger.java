@@ -24,8 +24,8 @@ public class Digger extends AbsState {
 	public void step() {
 		boolean hasWalked = false;
 		boolean hasMoved = collision();
-		if(!hasMoved) hasMoved |= dig();
 		if(!hasMoved) hasMoved |= fall();
+		if(!hasMoved) hasMoved |= dig();
 		if(!hasMoved){
 			hasWalked = walk();
 		}

@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class ButtonListener implements ActionListener {
-	AllView view;
-	ActionButton actionButton;
+	
+	protected AllView view;
+	private ActionButton actionButton;
+	
 	public ButtonListener(AllView view,ActionButton actionButton) {
 		this.view = view;
 		this.actionButton = actionButton;

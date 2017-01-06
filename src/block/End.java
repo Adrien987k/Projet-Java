@@ -20,7 +20,6 @@ public class End extends AbsDoor {
 	
 	@Override
 	public boolean canBeSkipped(){
-		System.out.println("TEST");
 		return false;
 	}
 	

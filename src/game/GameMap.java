@@ -21,7 +21,7 @@ import view.Type;
 public class GameMap extends MyObservable implements MyObserver {
 	
 	public static final int LEMMING_GENERATION_RATE = 10;
-	public static final int NOTIFY_RATE = 1;
+	public static final int NOTIFY_RATE = 5;
 	
 	private boolean isFreeze = false;		
 	private IFactory factory;
@@ -125,9 +125,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		if(speed <= 0) speed = defaultSpeed;
 		currentSpeed = speed;
 		while(running) {
-			notifyEveryone();
 			step();
-			notifyEveryone();
 			updateRunning();
 			try {
 				while(getIsFreeze()) {
@@ -332,31 +330,21 @@ public class GameMap extends MyObservable implements MyObserver {
 	public void killAllLemmings() {
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
-				for(Component c : gridComponents[i][j]){
-					c.kill();
+				for(Component component : gridComponents[i][j]){
+					component.kill();
 				}
 			}
 		}
 	}
 	
-	//TODO optionnel
-	/*
-	 * On pourrait parcourir une première pour asigner l'état
-	 * à un lemming qui n'en a pas encore.
-	 * S'il y en a pas, on le donne au premier lemming qu'on trouve
-	 */
-	public boolean changeStateHere(Coordinate c,State state) {
+	public boolean changeStateHere(Coordinate c, State state) {
 		List<Component> area = getArea(c);
 		for(Component component: area) {
-			if(component.changeStateIf(state))
+			if(component.changeStateIf(state)){
 				return true;
+			}
 		}
 		return false;
 	}
+	
 }
-	
-
-	
-	
-	
-

@@ -37,71 +37,44 @@ public class ActionButton extends JButton implements MouseListener {
 		 */
 		
 	}
-	  @Deprecated
-	  public ActionButton(ActionType actionType){
-	    super(actionType.getTitle());
-	    setBackground(actionType.getColor());
-	    this.actionType	= actionType;
-	    addMouseListener(this);
-	  }
-	  @Deprecated
-	  public ActionButton(ActionType actionType, String imagePath){
-		    super();
-		    //setBackground(actionType.getColor());
-		    this.actionType	= actionType;
-		    setPreferredSize(new Dimension(X,Y));
-		    try {
-		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
-		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
-		        setIcon(icon);
-		      } catch (IOException e) {
-		        setText(getActionTitle());
-		      }
+	
+	private void loadActionType(ActionType actionType){
+		this.actionType	= actionType;
+	    setPreferredSize(new Dimension(X,Y));
+		   
+	    icon = Texture.createIcon(actionType.getIconPath());
+	    
+	    if(getUsesLeft() > 0) {
+	    	if(icon == null)
+	    		setText(getActionTitle() + " " + getUsesLeft());
+	    	else
+	    		setText("" + getUsesLeft());
+	    } else {
+	    	if(icon == null)
+	    		setText(getActionTitle());
+	    }
+	    setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
+	    setIcon(icon);
 		    
 		    addMouseListener(this);
 		  }
-	  @Deprecated
-	  public ActionButton(ActionBar actionBar, ActionType actionType, String imagePath){
+	
+		public ActionButton(ActionBar actionBar, ActionType actionType){
 		    super();
-		    //setBackground(actionType.getColor());
 		    this.actionBar = actionBar;
-		    this.actionType	= actionType;
-		    setPreferredSize(new Dimension(X,Y));
-		    setBackground(DEFAULT_COLOR);
-		    try {
-		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
-		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
-		        setIcon(icon);
-		      } catch (IOException e) {
-		        setText(getActionTitle());
-		      }
-		    
-		    addMouseListener(this);
-		  }
-	  public ActionButton(ActionBar actionBar, ActionType actionType, String imagePath, int uses){
+		    loadActionType(actionType);
+		 }
+		  
+		 public ActionButton(ActionBar actionBar, ActionType actionType, int uses){
 		    super();
-		    //setBackground(actionType.getColor());
 		    this.actionBar = actionBar;
-		    this.actionType	= actionType;
 		    this.usesLeft = uses;
 		    if(usesLeft == 0)
 		    	setEnabled(false);
-		    setPreferredSize(new Dimension(X,Y));
 		    setBackground(DEFAULT_COLOR);
-		    try {
-		        this.icon = new ImageIcon(ImageIO.read(new File(imagePath)));
-		        setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
-		        setIcon(icon);
-		        if(getUsesLeft() > 0) {
-		        	setText(""+getUsesLeft());
-		        }
-		      } catch (IOException e) {
-		        setText(getActionTitle());
-		      }
-
-		    addMouseListener(this);
-		  }
-
+		    loadActionType(actionType);
+		}
+		 
 	public void decUsesLeft() {
 		if(getUsesLeft() > 0)
 			setUsesLeft(getUsesLeft() -1);

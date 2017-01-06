@@ -30,15 +30,15 @@ public class ActionBar extends JPanel{
 		
 		
 		ActionButton button;
-		actionBar.addButton(actionBar, ActionType.SET_BLOCKER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\blocker.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_CARPENTER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\carpenter.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_DIGGER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\digger.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_PARACHUTIST, view,"data\\img\\defaultTexturePack\\actionBarIcon\\parachutist.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_TUNNELER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\tunneler.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\bomber.jpg");
-		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view,"data\\img\\defaultTexturePack\\actionBarIcon\\climber.jpg");
+		actionBar.addButton(actionBar, ActionType.SET_BLOCKER, view);
+		actionBar.addButton(actionBar, ActionType.SET_CARPENTER, view);
+		actionBar.addButton(actionBar, ActionType.SET_DIGGER, view);
+		actionBar.addButton(actionBar, ActionType.SET_PARACHUTIST, view);
+		actionBar.addButton(actionBar, ActionType.SET_TUNNELER, view);
+		actionBar.addButton(actionBar, ActionType.SET_BOMBER, view);
+		actionBar.addButton(actionBar, ActionType.SET_CLIMBER, view);
 		
-		button = new ActionButton(actionBar,ActionType.ADD_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\addLemming.jpg",-1);
+		button = new ActionButton(actionBar, ActionType.ADD_LEMMING, -1);
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void instantEffect() {
@@ -52,7 +52,7 @@ public class ActionBar extends JPanel{
 		});
 		actionBar.add(button);
 		
-		button = new ActionButton(actionBar,ActionType.KILL_LEMMING,"data\\img\\defaultTexturePack\\actionBarIcon\\armaggedon.jpg",-1);
+		button = new ActionButton(actionBar,ActionType.KILL_LEMMING, -1);
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void instantEffect() {
@@ -66,7 +66,7 @@ public class ActionBar extends JPanel{
 		});
 		actionBar.add(button);
 
-		button = new ActionButton(actionBar,ActionType.PAUSE,"data\\img\\defaultTexturePack\\actionBarIcon\\pause.jpg",-1);
+		button = new ActionButton(actionBar,ActionType.PAUSE, -1);
 		button.addActionListener(new ButtonListener(view,button) {
 			@Override
 			public void instantEffect() {
@@ -85,20 +85,8 @@ public class ActionBar extends JPanel{
 		return actionBar;
 	}
 	
-	@Deprecated
-	public void addButton(ActionType actionType, AllView view) {
-		ActionButton button = new ActionButton(actionType);
-		button.addActionListener(new ButtonListener(view,button));
-		add(button);
-	}
-	@Deprecated
-	public void addButton(ActionType actionType, AllView view, String imagePath) {
-		ActionButton button = new ActionButton(actionType,imagePath);
-		button.addActionListener(new ButtonListener(view,button));
-		add(button);
-	}
-	public void addButton(ActionBar actionBar, ActionType actionType, AllView view, String imagePath) {
-		ActionButton button = new ActionButton(actionBar, actionType,imagePath,2);
+	public void addButton(ActionBar actionBar, ActionType actionType, AllView view) {
+		ActionButton button = new ActionButton(actionBar, actionType, 2);
 		button.addActionListener(new ButtonListener(view,button));
 		add(button);
 	}
