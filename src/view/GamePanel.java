@@ -49,7 +49,7 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, null);
 		g.setColor(Color.GREEN);
-		g.drawRect((int)cursorPoint.getY(), (int)cursorPoint.getX(), scale, scale);
+		g.drawRect((int) cursorPoint.getY(), (int) cursorPoint.getX(), scale, scale);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -60,17 +60,23 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	
 	@Override
 	public void render(List<ChangeGraphics> changes) {
-		g = img.getGraphics();
-		Coordinate cd;
+		Coordinate coordinate;
 		List<Type> types;
 		for(ChangeGraphics c : changes) {
-			cd = c.getCoordinate();
+			coordinate = c.getCoordinate();
 			types = c.getChangeType();
 			
-			for(Type t : types) {
-				g.drawImage(Texture.createTexture(t.getImagePath()) ,cd.getY() * scale, cd.getX() * scale, scale, scale,null);
+			for(Type type : types) {
+				draw(type, coordinate);
 			}
 		}
+	}
+	
+	public void draw(Type type, Coordinate coordinate){
+		g = img.getGraphics();
+		g.drawImage(Texture.createTexture(type.getImagePath()),
+				coordinate.getY() * scale, coordinate.getX() * scale, scale, scale, null);
+
 		g.dispose();
 		repaint();
 	}
@@ -86,7 +92,6 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("x: " + e.getY()/scale + " y: "+ e.getX()/scale);
 		State currentState = getView().getLastActionSelected().getState();
 		if(currentState != null){
 			if(getView().getGame().getGameMap().changeStateHere(new Coordinate(e.getY()/scale,e.getX()/scale), currentState))

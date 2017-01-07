@@ -23,6 +23,7 @@ public class GameMap extends MyObservable implements MyObserver {
 	public static final int LEMMING_GENERATION_RATE = 10;
 	public static final int NOTIFY_RATE = 5;
 	
+	private Game game;
 	private boolean isFreeze = false;		
 	private IFactory factory;
 	private ArrayList<Component>[][] gridComponents;
@@ -42,8 +43,9 @@ public class GameMap extends MyObservable implements MyObserver {
 	private int nbFreeLemming = 0;
 	private int nbDeadLemming = 0;
 	
-	public GameMap(IFactory factory, Grid grid){
+	public GameMap(IFactory factory, Grid grid, Game game){
 		this.factory = factory;
+		this.game = game;
 		gridComponents = processGrid(grid.getData());
 		levelParameters = grid.getLevelParameters();
 		nbRemainingLemming = getNbLemmings();
@@ -61,6 +63,10 @@ public class GameMap extends MyObservable implements MyObserver {
 
 	public int getObjective(){
 		return levelParameters.get("objective");
+	}
+	
+	public Game getGame(){
+		return game;
 	}
 	
 	private ArrayList<Component>[][] processGrid(List<ArrayList<String>> data){

@@ -1,5 +1,5 @@
 nbLemmings 10
-speed 600
+speed 1000
 objective 5
 blocker 1
 bomber 1

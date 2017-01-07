@@ -28,7 +28,7 @@ public class Game extends MyObservable implements MyObserver {
 	
 	private void loadLevel(String filePath){
 		Grid grid = loader.loadFile(filePath);
-		gameMap = new GameMap(factory, grid);
+		gameMap = new GameMap(factory, grid, this);
 		gameMap.getCaseAgent().registerObserver(this);
 		
 		view = new AdvancedView(this, SCALE);

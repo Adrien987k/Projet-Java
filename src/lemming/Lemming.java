@@ -51,7 +51,7 @@ public class Lemming extends Component {
 	}
 	
 	public void incFalling(){
-		falling++;
+		if(falling < DEFAULT_FALLING) falling++;
 	}
 	
 	public void resetFalling(){
@@ -61,6 +61,7 @@ public class Lemming extends Component {
 	 @Override
 	 public boolean changeStateIf(State state) {
 		 changeState(state);
+		 getGameMap().getGame().getView().getGamePanel().draw(state.getType(), getCoordinate());
 		 return true;
 	 }
 	
