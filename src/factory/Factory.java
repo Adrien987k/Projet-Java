@@ -1,6 +1,7 @@
 package factory;
 
 import game.GameMap;
+
 import lemming.AbsState;
 import lemming.Lemming;
 import view.Type;
@@ -26,12 +27,25 @@ import block.Void;
 import component.Component;
 import component.Coordinate;
 
+/**
+ * A basic factory use to create all the component of the map
+ * 
+ * @author Adrien
+ *
+ */
 public class Factory implements IFactory {
 	
+	/**
+	 * Empty constructor because we create only one instance of this class
+	 * and it should always be exactly the same
+	 */
 	public Factory() {
 		
 	}
 	
+	/**
+	 * Return the created component
+	 */
 	@Override
 	public Component make(Type t, Coordinate coord, GameMap gameMap) {
 		switch(t){
@@ -40,10 +54,16 @@ public class Factory implements IFactory {
 		}
 	}
 	
+	/**
+	 * Return a new lemming with the specified parameters
+	 */
 	private Lemming makeLemming(Coordinate coord, GameMap gameMap) {
 		return new Lemming(coord, gameMap);
 	}
 	
+	/**
+	 * Return a new block with the specified parameters
+	 */
 	private AbsBlock makeBlock(Type t, Coordinate coord, GameMap gameMap) {
 		switch(t){
 			case SIMPLE_DESTRUCTIBLE: return new SimpleD(coord, gameMap);
@@ -59,6 +79,9 @@ public class Factory implements IFactory {
 		}
 	}
 	
+	/**
+	 * Create a state with the specified element of Enum State and add it to the lemming
+	 */
 	public static AbsState makeState(State state, Lemming lemming) {
 		switch(state) {
 			case WALKER: return new Walker(lemming);

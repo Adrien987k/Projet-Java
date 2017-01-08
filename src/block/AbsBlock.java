@@ -1,5 +1,6 @@
 package block;
 
+import States.State;
 import component.Component;
 import component.Coordinate;
 import game.GameMap;
@@ -8,7 +9,7 @@ import lemming.Priority;
 import view.Type;
 
 /**
- * Higher class of the Block hierarchy
+ * Higher class of the blocks hierarchy
  * 
  * @author Adrien
  *
@@ -68,11 +69,19 @@ public abstract class AbsBlock extends Component {
 	}
 	
 	/**
-	 * 
+	 * Do nothing because by default a block do not have an effect on a lemming
 	 */
 	@Override
 	public void killLemming(Lemming lemming){
 		
+	}
+	
+	/**
+	 * Return false because a block do not have a state
+	 */
+	@Override
+	public boolean changeStateIf(State state){
+		return false;
 	}
 	
 	/**

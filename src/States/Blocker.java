@@ -5,12 +5,25 @@ import lemming.Lemming;
 import lemming.Priority;
 import view.Type;
 
+/**
+ * The Blocker invert the direction of other lemming
+ * 
+ * @author Adrien
+ *
+ */
 public class Blocker extends AbsState {
-
+	
+	/**
+	 * 
+	 * @param lemming   The lemming it belong to
+	 */
 	public Blocker(Lemming lemming) {
 		super(lemming);
 	}
-
+	
+	/**
+	 * At each step a blocker can collide or fall or do nothing
+	 */
 	@Override
 	public void step() {
 		boolean hasMoved = collision();
@@ -27,6 +40,9 @@ public class Blocker extends AbsState {
 		return Priority.PRIORITY_LEMMING_HIGH;
 	}
 	
+	/**
+	 * Return true because a blocker invert the direction of other lemming
+	 */
 	@Override
 	public boolean isInverting(){
 		return true;

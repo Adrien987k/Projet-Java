@@ -12,18 +12,42 @@ import view.Type;
 import component.Component;
 import component.Coordinate;
 
+/**
+ * The bomber can explode
+ * 
+ * @author Adrien
+ *
+ */
 public class Bomber extends AbsState {
 	
+	/**
+	 * The number of step before a bomber explode
+	 */
 	public static final int NB_STEPS_BEFORE_BOOM = 3;
+	
+	/**
+	 * The explosion's range
+	 */
 	public static final int BOMBER_EXPLOSION_RANGE = 2;
 	
+	/**
+	 * The remaining number of step before explosion
+	 */
 	private int nbStepsBeforeBoom = NB_STEPS_BEFORE_BOOM;
 	private boolean hasBeenDestroy = false;
 
+	/**
+	 * 
+	 * @param lemming   The lemming it belong to
+	 */
 	public Bomber(Lemming lemming) {
 		super(lemming);
 	}
-
+	
+	/**
+	 * If he can explode a bomber explode
+	 * Otherwise he collide with an other component or he fall or he walk
+	 */
 	@Override
 	public void step() {
 		nbStepsBeforeBoom--;
@@ -38,6 +62,9 @@ public class Bomber extends AbsState {
 		if(!hasMoved) walk();
 	}
 	
+	/**
+	 * An explosion destroy all component included in the explosion's range
+	 */
 	public void boom(){
 		List<Component> area;
 		int posX = lemming.getCoordinate().getX();

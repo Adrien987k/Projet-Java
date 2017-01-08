@@ -6,26 +6,55 @@ import lemming.Lemming;
 import lemming.Priority;
 import view.Type;
 
+/**
+ * Higher class of the component hierarchy
+ * A component is an entity that can be placed on the map
+ * 
+ * @author Adrien
+ *
+ */
 public abstract class Component {
 	
+	/**
+	 * The map it belong to
+	 */
 	private GameMap gameMap;
 	
+	/**
+	 * Coordinate on the map
+	 */
 	private Coordinate coordinate;
+	
+	/**
+	 * Display priority
+	 */
 	private Priority priority;
+	
+	/**
+	 * Type of component
+	 */
 	private Type type;
 	
+	/**
+	 * Indicate if this component can kill other component
+	 */
 	protected boolean isLethal = false;
 	
-	public Component() {
-		coordinate = new Coordinate();
-	}
-	
+	/**
+	 * 
+	 * @param coordinate   Coordinate on the map
+	 * @param priority 	   Display priority
+	 * @param type         Type of component
+	 * @param gameMap      The map it belong to 
+	 */
 	public Component(Coordinate coordinate, Priority priority, Type type, GameMap gameMap) {
 		this.coordinate = coordinate;
 		this.priority = priority;
 		this.type = type;
 		this.gameMap = gameMap;
 	}
+	
+	/*GETTERS AND SETTERS*/
 	
 	public Coordinate getCoordinate(){
 		return coordinate;
@@ -43,12 +72,12 @@ public abstract class Component {
 		this.priority = priority;
 	}
 	
-	public void setType(Type type) {
-		this.type = type;
-	}
-	
 	public Type getType() {
 		return type;
+	}
+	
+	public void setType(Type type) {
+		this.type = type;
 	}
 	
 	public GameMap getGameMap(){
@@ -63,21 +92,69 @@ public abstract class Component {
 		return isLethal;
 	}	
 	
+	/*AND OF GETTERS AND SETTERS*/
 	
-	public boolean changeStateIf(State state) {
-		return false;
-	}
-	
+	/**
+	 * The code to execute for this component at each step of the game
+	 */
 	public abstract void step();
-	public abstract void destroy();
-	public abstract boolean collision(Lemming lemming);
-	public abstract boolean isVoid();
-	public abstract boolean isInverting();
-	public abstract void kill();
-	public abstract void killLemming(Lemming lemming);
-	public abstract boolean isDestructible();
-	public abstract boolean canBeMined();
-	public abstract boolean canBeSkipped();	
 	
+	/**
+	 * The code to execute when this component is destroy
+	 */
+	public abstract void destroy();
+	
+	/**
+	 * The code to execute when this component collide with a lemming
+	 * 
+	 * @param lemming   the lemming it collide with
+	 * @return          return true if a collision occurred
+	 */
+	public abstract boolean collision(Lemming lemming);
+	
+	/**
+	 * The code to execute when this component is kills
+	 */
+	public abstract void kill();
+	
+	/**
+	 * The code to execute when this component have to kill a lemming
+	 * 
+	 * @param lemming   the lemming to kill
+	 */
+	public abstract void killLemming(Lemming lemming);
+	
+	/**
+	 * Change the state of this component
+	 * 
+	 * @param state     the new state
+	 * @return          return true if the state has been change
+	 */
+	public abstract boolean changeStateIf(State state);
+	
+	/**
+	 * Return true if this component cannot be cross
+	 */
+	public abstract boolean isVoid();
+	
+	/**
+	 * Return true if this component invert the direction of moving other component when they get through it
+	 */
+	public abstract boolean isInverting();
+	
+	/**
+	 * Return true if this component can be destroy
+	 */
+	public abstract boolean isDestructible();
+	
+	/**
+	 * Return true if this component can be mined
+	 */
+	public abstract boolean canBeMined();
+	
+	/**
+	 * Return true if this component cannot be avoid
+	 */
+	public abstract boolean canBeSkipped();
 	
 }

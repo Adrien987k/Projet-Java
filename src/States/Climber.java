@@ -10,12 +10,26 @@ import lemming.Lemming;
 import lemming.Priority;
 import view.Type;
 
+/**
+ * A climber can climb the walls
+ * 
+ * @author Adrien
+ *
+ */
 public class Climber extends AbsState	{
 	
+	/**
+	 * 
+	 * @param lemming   The lemming it belong to
+	 */
 	public Climber(Lemming lemming) {
 		super(lemming);
 	}
-
+	
+	/**
+	 * A Cliber can collide or fall or walk
+	 * If he cannot climb again and he stuck while climbing he became a parachutist 
+	 */
 	@Override
 	public void step() {
 		boolean hasWalked = true;
@@ -29,6 +43,10 @@ public class Climber extends AbsState	{
 		}
 	}
 	
+	/**
+	 * The method fall is override because a climber cannot fall when there is a solid block in front of him
+	 * Therefore the fall method is slightly different
+	 */
 	@Override
 	public boolean fall(){
 		List<Component> down = lemming.checkSide(Direction.DOWN());
@@ -58,15 +76,15 @@ public class Climber extends AbsState	{
 		return false;
 	}
 	
+	/**
+	 * The method walk is override because the climber can walk on the wall
+	 * Therefore the behavior of this method is very different
+	 */
 	@Override
 	public boolean walk(){
 		if(walkDiag()) return true;
 		List<Component> foward = lemming.checkSide(lemming.getDesiredDirection());
 		List<Component> top = lemming.checkSide(Direction.UP());
-		if(foward.isEmpty()) {
-			lemming.destroy();
-			return true;
-		}
 		boolean canGoUp = false;
 		boolean canGoFoward = true;
 		for(Component fcomponent : foward){

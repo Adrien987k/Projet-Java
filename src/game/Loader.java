@@ -15,15 +15,29 @@ import java.util.Map;
 
 import States.State;
 
+/**
+ * The loader use in the game 
+ * 
+ * @author Adrien
+ *
+ */
 public class Loader implements ILoader {
 	
-	//On stoque les grids pour ne pas avoir a reloader les fichiers
+	/**
+	 * Contain all the grids already loaded
+	 */
 	private Map<String, Grid> grids = new HashMap<>();
 	
+	/**
+	 * Empty because the loader there is only one instance of the loader in the game
+	 */
 	public Loader(){
 		
 	}
 	
+	/**
+	 * Load the grid
+	 */
 	@Override
 	public Grid loadFile(String filePath){
 		if(!grids.containsKey(filePath)) grids.put(filePath, loadGrid(filePath));
@@ -31,6 +45,10 @@ public class Loader implements ILoader {
 		
 	}
 	
+	/**
+	 * Search the key of the map at the position n
+	 * 
+	 */
 	private String getKeyNumberN(Map<String, Integer> map, int n){
 		int compteur = 0;
 		Iterator<String> mapI = map.keySet().iterator();
@@ -45,6 +63,9 @@ public class Loader implements ILoader {
 		throw new IllegalArgumentException("getNumberN : N trop grand");
 	}
 	
+	/**
+	 * Create the grid by reading the information of the file
+	 */
 	private Grid loadGrid(String filePath) {
 		Path path = Paths.get(filePath);
 		int lineCount = 0;

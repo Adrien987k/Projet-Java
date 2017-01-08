@@ -2,6 +2,12 @@ package States;
 
 import view.Type;
 
+/**
+ * Enumeration for the different states for the lemmings
+ * 
+ * @author Adrien
+ *
+ */
 public enum State {
 	
 	BLOCKER("blocker", Type.BLOCKER),
@@ -13,7 +19,14 @@ public enum State {
 	TUNNELER("tunneler", Type.TUNNELER),
 	WALKER("", Type.WALKER);
 	
+	/**
+	 * The token use in the file to indicate the number of use of this state in the level
+	 */
 	private String fileToken;
+	
+	/**
+	 * The type corresponding
+	 */
 	private Type type;
 	
 	State(String fileToken, Type type){

@@ -10,14 +10,31 @@ import lemming.Lemming;
 import lemming.Priority;
 import view.Type;
 
+/**
+ * A Parachutist cannot die after falling
+ * He fall slowly
+ * 
+ * @author Adrien
+ *
+ */
 public class Parachutist extends AbsState {
 	
+	/**
+	 * Indicate if the lemming has fell at the last step
+	 */
 	private boolean hasAlreadyFell = false;
 	
+	/**
+	 * 
+	 * @param lemming   The lemming it belong to
+	 */
 	public Parachutist(Lemming lemming) {
 		super(lemming);
 	}
 
+	/**
+	 * A Parachutist can collide or fall or walk
+	 */
 	@Override
 	public void step() {
 		boolean hasMoved = collision();
@@ -25,6 +42,10 @@ public class Parachutist extends AbsState {
 		if(!hasMoved) walk();
 	}
 	
+	/**
+	 * The method fall is override because a parachutist cannot die after falling
+	 * and fall only one step on two
+	 */
 	@Override
 	public boolean fall(){
 		List<Component> down = lemming.checkSide(Direction.DOWN());
