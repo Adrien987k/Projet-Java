@@ -39,10 +39,11 @@ public class Again extends AbsDestructible {
 	 */
 	@Override
 	public void destroy(){
-		super.destroy();
 		if(nbBlockToGenerate > 0){
 			getGameMap().add(getCoordinate(), this);
 			nbBlockToGenerate--;
+		} else {
+			super.destroy();
 		}
 	}
 
