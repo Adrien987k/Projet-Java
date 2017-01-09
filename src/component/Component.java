@@ -92,7 +92,7 @@ public abstract class Component {
 		return isLethal;
 	}	
 	
-	/*AND OF GETTERS AND SETTERS*/
+	/*END OF GETTERS AND SETTERS*/
 	
 	/**
 	 * The code to execute for this component at each step of the game

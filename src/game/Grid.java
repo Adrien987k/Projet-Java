@@ -43,6 +43,6 @@ public class Grid {
 		return data;
 	}
 	
-	/*AND OF GETTERS AND SETTERS*/
+	/*END OF GETTERS AND SETTERS*/
 	
 }

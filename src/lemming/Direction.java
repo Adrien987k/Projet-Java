@@ -50,7 +50,7 @@ public class Direction {
 		return y;
 	}
 	
-	/*AND OF GETTERS AND SETTERS*/
+	/*END OF GETTERS AND SETTERS*/
 	
 	/**
 	 * Invert this direction

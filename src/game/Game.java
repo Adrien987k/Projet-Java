@@ -111,7 +111,7 @@ public class Game extends MyObservable implements MyObserver {
 		return gameMap;
 	}
 	
-	/*AND OF GETTERS AND SETTERS*/
+	/*END OF GETTERS AND SETTERS*/
 	
 	/**
 	 * Send all the changes received from the engine to the graphical interface

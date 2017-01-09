@@ -45,7 +45,7 @@ public class Coordinate {
 		this.y = y;
 	}
 	
-	/*AND OF GETTERS AND SETTERS*/
+	/*END OF GETTERS AND SETTERS*/
 	
 	/**
 	 * Add the specified direction to a copy of this and return the result

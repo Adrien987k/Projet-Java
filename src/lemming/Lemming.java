@@ -113,7 +113,7 @@ public class Lemming extends Component {
 		return hasJustInvert;
 	}
 	
-	/*GETTERS AND SETTERS*/
+	/*END GETTERS AND SETTERS*/
 	
 	/**
 	 * Change the state of the lemming by the specified state
