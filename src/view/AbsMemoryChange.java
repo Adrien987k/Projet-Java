@@ -4,7 +4,7 @@ import component.Coordinate;
 
 public class AbsMemoryChange extends AbsChange {
 
-	protected Coordinate next;
+	private Coordinate next;
 
 	public AbsMemoryChange(Coordinate next){
 		super();

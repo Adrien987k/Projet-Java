@@ -11,6 +11,7 @@ import component.Coordinate;
 import factory.IFactory;
 import view.AbsChange;
 import view.Agent;
+import view.Change;
 import view.ChangeCase;
 import view.ChangeData;
 import view.ChangeMemory;
@@ -283,7 +284,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		boolean cursorTp = false;
 		for(int i = 0; i < gridComponents.length; i++) {
 			for(int j = 0; j < gridComponents[0].length; j++) {
-				getCaseAgent().addChangeToAgent(new ChangeCase(new Coordinate(i, j)));
+				getCaseAgent().addChangeToAgent(new Change(new Coordinate(i, j)));
 				/*Collect coordinates of start*/
 				if(gridComponents[i][j].get(0).getType() == Type.START){
 					starts.add(new Coordinate(i, j));
@@ -350,49 +351,48 @@ public class GameMap extends MyObservable implements MyObserver {
 	 * Add a new component at the specified coordinate to the map
 	 */
 	public void add(Coordinate coordinate, Component component){
-		addChange(new ChangeMemory(coordinate, null, component));
+		addChange(new Change(coordinate, null, component));
 	}
 	
 	/**
 	 * Remove the specified component of the map
 	 */
 	public void remove(Component component){
-		addChange(new ChangeMemory(component.getCoordinate(), component, null));
+		addChange(new Change(component.getCoordinate(), component, null));
 	}
 	
 	/**
 	 * Move the specified component to an other coordinate
 	 */
 	public void move(Coordinate coordinate, Component component){
-		addChange(new ChangeMemory(coordinate, component, component));
+		addChange(new Change(coordinate, component, component));
 	}
 	
 	/**
 	 * Transform the specified component to an other
 	 */
 	public void change(Component component, Component componentNext){
-		addChange(new ChangeMemory(component.getCoordinate(), component, componentNext));
+		addChange(new Change(component.getCoordinate(), component, componentNext));
 	}
 
 	/**
 	 * Execute all the changes added with methods add / remove / move / change
 	 */
 	@Override
-	public void update(List<? extends AbsChange> changes) {
-		@SuppressWarnings("unchecked")
-		ArrayList<ChangeMemory> Mchanges = (ArrayList<ChangeMemory>) changes;
+	public void update(List<Change> changes) {
+		
 		/*Sort all the changes putting the suppressions first*/
-		Mchanges.sort((c1, c2) -> {
+		changes.sort((c1, c2) -> {
 			if(c1.getComponentNext() == null && c2.getComponentNext() != null) return 1;
 			else return -1;
 					});
-		for(ChangeMemory c : Mchanges){
+		for(Change c : changes){
 			if(c.getComponent() != null){
 				Coordinate last = c.getComponent().getCoordinate();
 				Component component = c.getComponent();
 				List<Component> lastArea = getArea(last);
 				lastArea.remove(component);
-				getCaseAgent().addChangeToAgent(new ChangeCase(last));
+				getCaseAgent().addChangeToAgent(new Change(last));
 			}
 			if(c.getComponentNext() != null){
 				Coordinate next = c.getCoordinate();
@@ -400,7 +400,7 @@ public class GameMap extends MyObservable implements MyObserver {
 				List<Component> nextArea = getArea(next);
 				nextArea.add(componentNext);
 				componentNext.setCoordinate(next);
-				getCaseAgent().addChangeToAgent(new ChangeCase(next));				
+				getCaseAgent().addChangeToAgent(new Change(next));				
 			}
 		}
 		notifyAgents();
@@ -455,8 +455,8 @@ public class GameMap extends MyObservable implements MyObserver {
 	/**
 	 * Create and return an object containing current data of the game
 	 */
-	public AbsChange createDataChange() {
-		return new ChangeData(getNbDeadLemming(),getNbFreeLemming(),getNbRemainingLemming(),getRunning(),getLevelParameters());
+	public Change createDataChange() {
+		return new Change(getNbDeadLemming(),getNbFreeLemming(),getNbRemainingLemming(),getRunning(),getLevelParameters());
 	}
 
 	/**

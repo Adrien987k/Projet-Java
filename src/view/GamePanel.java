@@ -52,17 +52,16 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		g.drawRect((int) cursorPoint.getY(), (int) cursorPoint.getX(), scale, scale);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void update(List<? extends AbsChange> changes) {
-		render((List<ChangeGraphics>) changes);
+	public void update(List<Change> changes) {
+		render(changes);
 	}
 	
 	@Override
-	public void render(List<ChangeGraphics> changes) {
+	public void render(List<Change> changes) {
 		Coordinate coordinate;
 		List<Type> types;
-		for(ChangeGraphics c : changes) {
+		for(Change c : changes) {
 			coordinate = c.getCoordinate();
 			types = c.getChangeType();
 			

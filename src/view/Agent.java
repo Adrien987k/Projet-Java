@@ -2,7 +2,7 @@ package view;
 
 public class Agent extends MyObservable {
 	
-	public void addChangeToAgent(AbsChange change) {
+	public void addChangeToAgent(Change change) {
 		addChange(change);
 	}
 	

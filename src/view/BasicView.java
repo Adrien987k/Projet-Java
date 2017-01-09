@@ -33,7 +33,7 @@ public class BasicView extends AllView {
 	
 	
 	@Override
-	public void update(List<? extends AbsChange> changes) {
+	public void update(List<Change> changes) {
 		addAllChanges(changes);
 		notifyObserver();
 	}

@@ -6,10 +6,9 @@ import java.util.List;
 import component.Coordinate;
 import factory.Factory;
 import factory.IFactory;
-import view.AbsChange;
-import view.AbsMemoryChange;
 import view.AdvancedView;
 import view.AllView;
+import view.Change;
 import view.ChangeGraphics;
 import view.MyObservable;
 import view.MyObserver;
@@ -118,17 +117,17 @@ public class Game extends MyObservable implements MyObserver {
 	 * Send all the changes received from the engine to the graphical interface
 	 */
 	@Override
-	public void update(List<? extends AbsChange> changes) {
+	public void update(List<Change> changes) {
 		List<Coordinate> coordinates = new ArrayList<>();
 		boolean alreadyExist = false;
-		for(AbsChange c : changes) {
+		for(Change c : changes) {
 			alreadyExist = false;
-			Coordinate here = ( (AbsMemoryChange) c).getCoordinate();
+			Coordinate here = c.getCoordinate();
 			for(Coordinate d : coordinates){
 				if(c.equals(d)) alreadyExist = true;
 			}
 			if(!alreadyExist) 
-				addChange(new ChangeGraphics(here, gameMap.priorityOrder(here)));
+				addChange(new Change(here, gameMap.priorityOrder(here)));
 		}
 		notifyObserver();
 	}

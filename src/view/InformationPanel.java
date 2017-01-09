@@ -101,18 +101,18 @@ public class InformationPanel extends JPanel implements MyObserver {
 	}
 
 	@Override
-	public void update(List<? extends AbsChange> changes) {
-		for(AbsChange change:changes) {
+	public void update(List<Change> changes) {
+		for(Change change:changes) {
 			
-			setDeadLemmings(((ChangeData) change).getNbDeadLemmings());
-			setNbDeadLemmings(((ChangeData) change).getNbDeadLemmings());
-			setFreeLemmings(((ChangeData) change).getNbFreeLemmings());
-			setNbFreeLemmings(((ChangeData) change).getNbFreeLemmings());
-			setRemainingLemmings(((ChangeData) change).getNbRemainingLemmings());
+			setDeadLemmings(change.getNbDeadLemmings());
+			setNbDeadLemmings(change.getNbDeadLemmings());
+			setFreeLemmings(change.getNbFreeLemmings());
+			setNbFreeLemmings(change.getNbFreeLemmings());
+			setRemainingLemmings(change.getNbRemainingLemmings());
 			
-			if(!((ChangeData) change).getRunning()) {
+			if(!( change.getRunning())) {
 				boolean isVictory = false;
-				if(((ChangeData) change).getLevelParameters().get("objective").intValue() <= getNbFreeLemmings() )
+				if(change.getLevelParameters().get("objective").intValue() <= getNbFreeLemmings() )
 					isVictory = true;
 				String[] options = new String[] {"Next level","Quit game"};
 				
