@@ -67,9 +67,10 @@ public class Game extends MyObservable implements MyObserver {
 		Grid grid = loader.loadFile(filePath);
 		gameMap = new GameMap(factory, grid, this);
 		gameMap.getCaseAgent().registerObserver(this);
-		
+
 		view = new AdvancedView(this, SCALE);
 		gameMap.getDataAgent().registerObserver(getView().getInformationPanel());
+		view.getGamePanel().drawBackground();
 		gameMap.run(DEFAULT_SPEED);
 		
 		view.getFrame().dispose();

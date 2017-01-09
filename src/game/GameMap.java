@@ -301,6 +301,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		}
 		getDataAgent().addChangeToAgent(createDataChange());
 		notifyEveryone();
+		getGame().getView().getGamePanel().notInit();
 	}
 	
 	/**

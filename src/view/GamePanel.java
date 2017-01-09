@@ -47,6 +47,10 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	 * Pixel magnification setting
 	 */
 	private int scale;
+	
+	private int width;
+	private int height;
+	private boolean init = true;
 
 	/**
 	 * Creates the gamePanel in the specified view with the specified scale
@@ -59,8 +63,8 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	public GamePanel(Game game, int scale, AllView view) {
 		this.view = view;
 		this.scale = scale;
-		int width = game.getWidth() * scale;
-		int height = game.getHeight() * scale;
+		width = game.getWidth() * scale;
+		height = game.getHeight() * scale;
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		setPreferredSize(new Dimension(width, height));
 		
@@ -76,6 +80,10 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 	 */
 	public AllView getView() {
 		return view;
+	}
+	
+	public void notInit(){
+		init = false;
 	}
 		
 	/**
@@ -123,6 +131,15 @@ public class GamePanel extends JComponent implements MyObserver, Renderer, Mouse
 		g = img.getGraphics();
 		g.drawImage(Texture.createTexture(type.getImagePath()),
 				coordinate.getY() * scale, coordinate.getX() * scale, scale, scale, null);
+		
+		g.dispose();
+		if(!init) repaint();
+	}
+	
+	public void drawBackground(){
+		g = img.getGraphics();
+		g.drawImage(Texture.createTexture("data\\img\\defaultTexturePack\\wallpaper.png"),
+				0, 0 , width, height, null);
 
 		g.dispose();
 		repaint();
