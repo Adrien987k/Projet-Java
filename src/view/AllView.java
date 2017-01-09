@@ -4,6 +4,12 @@ import javax.swing.JFrame;
 
 import game.Game;
 
+/**
+ * AllView is an abstract GUI.
+ * It has everything that the game requires to be played corectly the game.
+ * @author Arnaud
+ *
+ */
 public abstract class AllView extends MyObservable implements View {
 	
 	protected Game game;
