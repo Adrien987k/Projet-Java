@@ -9,21 +9,35 @@ import javax.swing.WindowConstants;
 
 import game.Game;
 
+/**
+ * AdvancedView is GUI wich provide a complete set up to play correctly the game. 
+ * @author Arnaud
+ *
+ */
 public class AdvancedView extends AllView {
 	
+	/**
+	 * The default action.
+	 * Can be used instead of null when there is no action selected
+	 * 	or when you need an actionless field.
+	 */
 	@SuppressWarnings("unused")
 	private static final ActionType DEFAULT_ACTION = ActionType.NONE;
+	
+	/**
+	 * The default button.
+	 * Can be used instead of null when there is no button selected,
+	 * 	when the game starts
+	 * 	or when the previous button has been disabled.
+	 */
 	private static final ActionButton DEFAULT_BUTTON = new ActionButton();
-
-	private Game game;
-	private JFrame frame;
-	private GamePanel gamePanel;
-	private ActionBar actionBar;
-	private InformationPanel informationPanel;
-	private ActionType lastActionSelected;
-	private ActionButton lastActionButtonSelected;
 	
-	
+	/**
+	 * Create a default advance view for the specified game with the specified scale.
+	 * @param game The game it belongs to.
+	 * @param scale The scale of the display.
+	 * 			Larger is the parameter, large is the size of the window.
+	 */
 	public AdvancedView(Game game, int scale) {
 		super();
 		this.game = game;
@@ -31,6 +45,15 @@ public class AdvancedView extends AllView {
 		establishConnexions(game);
 	}
 	
+	/**
+	 * Create the window for the specified game and the specified scale.
+	 * The frame created will contain all the GUI, such as a game panel,
+	 * 	an action bar and an information panel.
+	 * @param game The game it belongs to.
+	 * @param scale	The scale of the display.
+	 * 			Larger is the parameter, large is the size of the window.
+	 * @return The created frame.
+	 */
 	private JFrame createAdvancedView(Game game, int scale) {
 		frame = new JFrame("Lemmings");
 		gamePanel = new GamePanel(game, scale,this);
@@ -56,40 +79,15 @@ public class AdvancedView extends AllView {
 		return frame;
 	}
 	
-	
+	/**
+	 * Associate all required links between observers and observables.
+	 * 	In this particular case, the game observes this object.
+	 * @param game
+	 */
 	public void establishConnexions(Game game) {
 		game.registerObserver(this);
 	}
-
-	@Override
-	public ActionType getLastActionSelected() {
-		return lastActionSelected;
-	}
 	
-	@Override
-	public JFrame getFrame() {
-		return frame;
-	}
-	
-	@Override
-	public InformationPanel getInformationPanel() {
-		return informationPanel;
-	}
-	
-	@Override
-	public GamePanel getGamePanel() {
-		return gamePanel;
-	}
-	
-	@Override
-	public ActionBar getActionBar() {
-		return actionBar;
-	}
-	
-	@Override
-	public Game getGame() {
-		return game;
-	}
 	
 	@Override
 	public void switchToDefaultAction() {
@@ -98,19 +96,7 @@ public class AdvancedView extends AllView {
 		informationPanel.getActionDescription().setText(ActionType.NONE.getDescription());
 	}              
 	
-	@Override
-	public void setLastActionSelected(ActionType lastActionSelected) {
-		this.lastActionSelected = lastActionSelected;
-	}
 
-	public ActionButton getLastActionButtonSelected() {
-		return lastActionButtonSelected;
-	}
-	
-	public void setLastActionButtonSelected(ActionButton lastActionButtonSelected) {
-		this.lastActionButtonSelected = lastActionButtonSelected;
-	}
-	
 	@Override
 	public void update(List<Change> changes) {
 		addAllChanges(changes);

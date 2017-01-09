@@ -6,14 +6,43 @@ import game.Game;
 
 public abstract class AllView extends MyObservable implements View {
 	
-	public abstract void setLastActionButtonSelected(ActionButton lastActionButtonSelected);
-	public abstract ActionType getLastActionSelected();
-	public abstract void setLastActionSelected(ActionType actionType);
-	public abstract ActionButton getLastActionButtonSelected();
-	public abstract JFrame getFrame();
+	protected Game game;
+	protected JFrame frame;
+	protected GamePanel gamePanel;
+	protected ActionBar actionBar;
+	protected InformationPanel informationPanel;
+	protected ActionType lastActionSelected;
+	protected ActionButton lastActionButtonSelected;
+	
+	
 	public abstract void switchToDefaultAction();
-	public abstract InformationPanel getInformationPanel();
-	public abstract GamePanel getGamePanel();
-	public abstract ActionBar getActionBar();
-	public abstract Game getGame();
+	
+	public void setLastActionButtonSelected(ActionButton lastActionButtonSelected) {
+		this.lastActionButtonSelected = lastActionButtonSelected;
+	}
+	public void setLastActionSelected(ActionType actionType) {
+		this.lastActionSelected = actionType;
+	}
+	
+	public ActionType getLastActionSelected() {
+		return lastActionSelected;
+	}
+	public ActionButton getLastActionButtonSelected() {
+		return lastActionButtonSelected;
+	}
+	public JFrame getFrame() {
+		return frame;
+	}
+	public InformationPanel getInformationPanel() {
+		return informationPanel;
+	}
+	public GamePanel getGamePanel() {
+		return gamePanel;
+	}
+	public ActionBar getActionBar() {
+		return actionBar;
+	}
+	public Game getGame() {
+		return game;
+	}
 }

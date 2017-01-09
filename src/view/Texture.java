@@ -7,8 +7,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+/**
+ * This class is used to load texture file from the file system with a Path given in parameters.
+ * @author Arnaud
+ *
+ */
 public class Texture {
 	
+	/**
+	 * 
+	 * @param imagePath
+	 * @return The image loaded from the specified path 
+	 */
 	public static Image createTexture(String imagePath){
 		Image image = null;
 		try {
@@ -19,6 +29,11 @@ public class Texture {
 		return image;
 	}
 	
+	/**
+	 * 
+	 * @param iconPath
+	 * @return The icon loaded from the specified path 
+	 */
 	public static ImageIcon createIcon(String iconPath){
 		ImageIcon icon = null;
 	    try {

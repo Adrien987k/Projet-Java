@@ -9,6 +9,15 @@ import States.State;
  * Permet de connaitre le type et les effets de l'action.
  * Utile notamment pour stocker la dernière action séléctionnée.
  */
+
+/**
+ * The actionType is used with ActionButton to determine
+ *  his action title & description, his icon, his color and his action.
+ * 
+ * 
+ * @author Arnaud
+ *
+ */
 public enum ActionType {
 	NONE("None","<html> No action selected"),
 	SET_BOMBER("Set Bomber",
@@ -85,6 +94,8 @@ public enum ActionType {
 		this.iconPath = iconPath;
 	}
 	
+	/*GETTERS AND SETTER*/
+	
 	public void SetDefaultColor() {
 		color = DEFAULT_COLOR;
 	}
@@ -108,5 +119,7 @@ public enum ActionType {
 	public String getIconPath(){
 		return iconPath;
 	}
+	
+	/*END OF GETTERS AND SETTER*/
 	
 }

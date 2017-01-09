@@ -6,6 +6,13 @@ import java.util.Map;
 import component.Component;
 import component.Coordinate;
 
+/**
+ * Change is a structure of data wich contains various informations used by Observer/Observable.
+ * Each observable creates a change with his 
+ * @author Arnaud
+ *
+ */
+
 public class Change {
 	private Coordinate coordinate;
 	private ActionType actionType;

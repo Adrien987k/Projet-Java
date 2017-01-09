@@ -2,6 +2,7 @@ package view;
 
 import java.util.Map;
 
+@Deprecated
 public class ChangeData extends AbsChange {
 	
 		private int nbDeadLemmings;

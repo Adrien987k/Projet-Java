@@ -7,10 +7,15 @@ import javax.swing.WindowConstants;
 
 import game.Game;
 
+/**
+ * BasicView is a primitive, it's not enought to play correctly to the game.
+ * This view doesn't have any action bar or information panel.
+ * It only displays the game panel with the map.
+ * @author Arnaud
+ *
+ */
+@Deprecated
 public class BasicView extends AllView {
-	
-	private JFrame frame;
-	private GamePanel gamePanel;
 	
 	public BasicView(int x, int y, Game game, int scale) {
 		frame = createBasicView(x, y, game, scale);

@@ -1,5 +1,6 @@
 package view;
 
+@Deprecated
 public class ChangeAction extends AbsGraphicsChange {
 
 	private ActionType actionType;

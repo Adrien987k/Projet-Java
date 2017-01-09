@@ -1,6 +1,12 @@
 package view;
 
+/**
+ * ScoreBoard is a class with various informations to create a scoreboard at the end of the game.
+ * @author Arnaud
+ *
+ */
 public class ScoreBoard {
+	
 	
 	private int nbDeadLemmings;
 	private int nbFreeLemmings;
@@ -45,6 +51,9 @@ public class ScoreBoard {
 		this.message = message;
 	}
 
+	/**
+	 * This method is called in a box to display the score and if the player has won or lost
+	 */
 	@Override
 	public String toString() {
 		if(isVictory())

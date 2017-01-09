@@ -9,28 +9,71 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * InformationPanel is a panel used to display various informations about the game and recents actions.
+ * @author Arnaud
+ *
+ */
 public class InformationPanel extends JPanel implements MyObserver {
 	
 	private static final long serialVersionUID = 1L;
+	/**
+	 * The description of the button pointed by the mouse
+	 */
 	private JLabel actionDescription;
+	/**
+	 * The label corresponding to the number of dead lemmings
+	 */
 	private JLabel deadLemmings;
+	/**
+	 * The label corresponding to the number of free lemmings
+	 */
 	private JLabel freeLemmings;
+	/**
+	 * the label corresponding to the number of remaining leemmings
+	 */
 	private JLabel remainingLemmings;
+	/**
+	 * The view it belongs to;
+	 */
 	private AllView view;
 	
+	/**
+	 * The number of dead leemmings
+	 */
 	private int nbDeadLemmings = 0;
+	/**
+	 * the number of free leemmings
+	 */
 	private int nbFreeLemmings = 0;
+	/**
+	 * the number of remaining leemmings
+	 */
 	private int nbRemainingLemmings = 0;
 	
-
+	/**
+	 * The prefered width of the panel
+	 */
 	public static final int DEFAULT_WIDTH = 300;
+	/**
+	 * The prefered length of the panel
+	 */
 	public static final int DEFAULT_LENGTH = 500;
 	
+	/**
+	 * Creates an empty panel.
+	 * @param view
+	 */
 	public InformationPanel(AllView view) {
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_LENGTH));
 		this.view = view;
 	}
 	
+	/**
+	 * Creates a default information panel wich displays various informations to improve game ergonomy.
+	 * @param view The view it belongs to.
+	 * @return The created information panel.
+	 */
 	public static InformationPanel createDefaultInformationPanel(AllView view ) {
 		InformationPanel informationPanel = new InformationPanel(view);
 		informationPanel.setLayout(new GridLayout(10,1));
@@ -47,6 +90,7 @@ public class InformationPanel extends JPanel implements MyObserver {
 		return informationPanel;
 	}
 	
+	/* GETTERS AND SETTERS */
 	public AllView getView() {
 		return view;
 	}
@@ -100,6 +144,12 @@ public class InformationPanel extends JPanel implements MyObserver {
 		this.nbRemainingLemmings = nbRemainingLemmings;
 	}
 
+	/* END OF GETTERS AND SETTERS */
+	
+	/**
+	 * Update informations given by Agents in GameMap.
+	 * If the game is ended, display an optionDialog to quit the game or to load the next level.
+	 */
 	@Override
 	public void update(List<Change> changes) {
 		for(Change change:changes) {

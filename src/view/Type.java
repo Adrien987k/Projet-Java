@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * Type is a enumeration wich contains path to texture image and id for each items wich can be displayed.
+ * @author Arnaud
+ *
+ */
 public enum Type {
 	
 	LEMMING("LL", "data\\img\\defaultTexturePack\\blocksTexture\\lemmingR.png"),
@@ -20,10 +25,17 @@ public enum Type {
 	START("S", "data\\img\\defaultTexturePack\\blocksTexture\\start.jpg"),
 	END("E", "data\\img\\defaultTexturePack\\blocksTexture\\end.jpg"),
 	VOID("V", "data\\img\\defaultTexturePack\\blocksTexture\\void.jpg");
-	
+		
+	/**
+	 * The file encoding, or more simpler the id, of the texture.
+	 */
 	private String fileEncoding;
-	private String imagePath;
 	
+	/**
+	 * The path of the image.
+	 */
+	private String imagePath;
+
 	Type(String fileEncoding, String imagePath){
 		this.fileEncoding = fileEncoding;
 		this.imagePath = imagePath;

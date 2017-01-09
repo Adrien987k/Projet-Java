@@ -3,6 +3,7 @@ package view;
 import States.State;
 import component.Coordinate;
 
+@Deprecated
 public class ChangeStateHere extends AbsMemoryChange {
 	private State state;
 	

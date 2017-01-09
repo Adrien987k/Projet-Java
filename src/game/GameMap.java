@@ -9,12 +9,8 @@ import block.TP;
 import component.Component;
 import component.Coordinate;
 import factory.IFactory;
-import view.AbsChange;
 import view.Agent;
 import view.Change;
-import view.ChangeCase;
-import view.ChangeData;
-import view.ChangeMemory;
 import view.MyObservable;
 import view.MyObserver;
 import view.Type;
@@ -208,7 +204,7 @@ public class GameMap extends MyObservable implements MyObserver {
 		nbDeadLemming++;
 	}
 	
-	/*AND OF GETTERS AND SETTER*/
+	/*END OF GETTERS AND SETTER*/
 	
 	/**
 	 * Take the gird data loaded in the file and transform it into a grid of component

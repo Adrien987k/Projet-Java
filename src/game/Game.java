@@ -9,7 +9,6 @@ import factory.IFactory;
 import view.AdvancedView;
 import view.AllView;
 import view.Change;
-import view.ChangeGraphics;
 import view.MyObservable;
 import view.MyObserver;
 
